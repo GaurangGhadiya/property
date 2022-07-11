@@ -5,10 +5,10 @@
     height: 650px;
 }
 
-
 .css-heg063-MuiTabs-flexContainer {
     justify-content: center;
 }
+
 .css-heg063-MuiTabs-flexContainer button {
     width: 50%;
     text-transform: capitalize;
@@ -21,9 +21,11 @@
 .css-1aquho2-MuiTabs-indicator {
     background-color: #249EA0 !important;
 }
-.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked{
+
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
     color: #249EA0 !important;
 }
+
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     border: none !important;
 }
@@ -33,13 +35,19 @@
     border-radius: 8px !important;
     padding: 12px 14px !important;
 }
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 8px !important;
+    height: 50px !important;
+}
 
 .input_filed {
     display: flex;
     flex-direction: column;
 }
 
-.input_filed label ,.css-u4tvz2-MuiFormLabel-root{
+.input_filed label,
+.css-u4tvz2-MuiFormLabel-root {
     font-family: 'Inter' !important;
     font-style: normal !important;
     font-weight: 600 !important;
@@ -78,11 +86,13 @@
 .social .common_btn:nth-child(1) {
     margin-right: 10px;
 }
-.phone{
+
+.phone {
     display: flex;
     width: 100%;
 }
-.phone select{
+
+.phone select {
     padding: 14px !important;
     border: 1px solid #D9D9D9 !important;
     border-top-right-radius: 0px !important;
@@ -90,37 +100,46 @@
     border-bottom-left-radius: 8px !important;
     border-bottom-right-radius: 0px !important;
 }
-.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+
+.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
     width: 100%;
 }
-.phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+
+.phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
     border-top-right-radius: 8px !important;
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 8px !important;
 }
-.css-1nrlq1o-MuiFormControl-root{
+
+.css-1nrlq1o-MuiFormControl-root {
     width: 100%;
 }
-.css-dmmspl-MuiFormGroup-root{
+
+.css-dmmspl-MuiFormGroup-root {
     flex-direction: row !important;
     width: 100%;
 }
-.css-dmmspl-MuiFormGroup-root label{
+
+.css-dmmspl-MuiFormGroup-root label {
     width: 45%;
 }
-.css-uqwprf-MuiGrid-root{
+
+.css-uqwprf-MuiGrid-root {
     height: 650px !important;
     overflow-y: scroll;
 }
-.css-mhc70k-MuiGrid-root>.MuiGrid-item{
+
+.css-mhc70k-MuiGrid-root>.MuiGrid-item {
     padding-top: 0px !important;
     margin-top: 16px;
 }
-.agree{
+
+.agree {
     margin-top: 10px;
 }
-.agree .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label{
+
+.agree .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -128,29 +147,53 @@
     line-height: 22px;
     color: #7E7E7E;
 }
-.agree .css-j204z7-MuiFormControlLabel-root{
+
+.agree .css-j204z7-MuiFormControlLabel-root {
     align-items: flex-start !important;
 }
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate{
+
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked,
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
     color: #249EA0 !important;
 }
-.css-i4bv87-MuiSvgIcon-root{
+
+.css-i4bv87-MuiSvgIcon-root {
     width: 1.2em !important;
     height: 1.2em !important;
 }
-.css-i4bv87-MuiSvgIcon-root{
+
+.css-i4bv87-MuiSvgIcon-root {
     position: relative;
     top: -8px;
 }
-.terms{
+
+.terms {
     margin-top: 10px;
     text-align: center;
     font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-color: #7E7E7E;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #7E7E7E;
 }
-.terms span{
+
+.terms span {
     color: #249EA0 !important;
+}
+.datepicker .css-i4bv87-MuiSvgIcon-root{
+    top: 0 !important;
+}
+
+.delar_title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1D2222;
+    padding: 20px 0px;
+    border-bottom:  2px solid #D9D9D9;
+}
+.delarphone select{
+    padding: 11px !important;
 }
