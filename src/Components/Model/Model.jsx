@@ -220,7 +220,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                                     <TextField hiddenLabel id="outlined-basic" variant="outlined" />
                                 </div></Grid>
                                 <Grid item xs={12}>
-                                    <Button className='common_btn' onClick={handleClose}>Submit</Button>
+                                    <Button className='common_btn' onClick={() => {handleClose(); setToggle(0);}}>Submit</Button>
                                 </Grid>
                             </Grid>
                         </Grid>}
