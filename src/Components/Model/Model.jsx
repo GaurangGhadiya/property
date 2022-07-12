@@ -86,10 +86,10 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
             >
                 <Box sx={style}>
                     <Grid container spacing={2}>
-                        <Grid item xs={5} sm={5}>
-                            <img className='me-2 w-100 h-100' src={process.env.PUBLIC_URL + '/Images/login.png'} />
+                        <Grid item xs={12} sm={5}>
+                            <img className='me-2 w-100 h-100 img' src={process.env.PUBLIC_URL + '/Images/login.png'} />
                         </Grid>
-                        {toggle === 0 && <Grid item xs={7} sm={7}>
+                        {toggle === 0 && <Grid item xs={12} sm={7}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                     <Tab label="Login" {...a11yProps(0)} />
@@ -220,7 +220,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                                     <TextField hiddenLabel id="outlined-basic" variant="outlined" />
                                 </div></Grid>
                                 <Grid item xs={12}>
-                                    <Button className='common_btn' onClick={() => {handleClose(); setToggle(0);}}>Submit</Button>
+                                    <Button className='common_btn' onClick={handleClose}>Submit</Button>
                                 </Grid>
                             </Grid>
                         </Grid>}
