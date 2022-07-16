@@ -24,7 +24,7 @@
     background-color: #249EA0 !important;
 }
 
-.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked, .css-1a5icme.Mui-checked {
     color: #249EA0 !important;
 }
 
@@ -103,11 +103,11 @@
     border-bottom-right-radius: 0px !important;
 }
 
-.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root, .css-i44wyl {
     width: 100%;
 }
 
-.phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+.phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input, .phone .css-1x5jdmq {
     border-top-right-radius: 8px !important;
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
@@ -122,12 +122,15 @@
     flex-direction: row !important;
     width: 100%;
 }
-
-.css-dmmspl-MuiFormGroup-root label {
+#simple-tabpanel-1{
+    overflow-y: scroll;
+    height: 548px;
+}
+.MuiFormGroup-root label {
     width: 45%;
 }
 
-.css-uqwprf-MuiGrid-root,.css-5n8ohs-MuiGrid-root {
+.css-uqwprf-MuiGrid-root, .css-5n8ohs-MuiGrid-root {
     height: 595px !important;
     overflow-y: auto;
 }
@@ -155,7 +158,8 @@
 }
 
 .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked,
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate,
+.css-zun73v.Mui-checked, .css-zun73v.MuiCheckbox-indeterminate {
     color: #249EA0 !important;
 }
 
