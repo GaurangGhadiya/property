@@ -103,10 +103,15 @@
     border-bottom-right-radius: 0px !important;
 }
 
-.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root, .css-i44wyl {
+.phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root, .phone .css-i44wyl {
     width: 100%;
 }
-
+.phone .css-i44wyl{
+    width: 60%;
+}
+.css-13sljp9{
+    width: 100%;
+}
 .phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input, .phone .css-1x5jdmq {
     border-top-right-radius: 8px !important;
     border-top-left-radius: 0px !important;
@@ -144,7 +149,7 @@
     margin-top: 10px;
 }
 
-.agree .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+.agree .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label, .agree .css-9l3uo3 {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
