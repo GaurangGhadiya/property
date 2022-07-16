@@ -106,7 +106,7 @@
 .phone .css-1u3bzj6-MuiFormControl-root-MuiTextField-root, .phone .css-i44wyl {
     width: 100%;
 }
-.phone .css-i44wyl{
+.home_banner .input_filed .phone .css-i44wyl{
     width: 60%;
 }
 .css-13sljp9{
@@ -173,9 +173,13 @@
     height: 1.2em !important;
 }
 
-.agree .css-i4bv87-MuiSvgIcon-root, .agree .css-vubbuv {
+.agree .css-i4bv87-MuiSvgIcon-root {
     position: relative;
     top: -8px;
+}
+.agree .css-vubbuv{
+    position: relative;
+    top: -18px;
 }
 
 .terms {
