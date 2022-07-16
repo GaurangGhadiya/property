@@ -11,8 +11,8 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
-// import { dealerauth } from "../../dealerFirebase";
+import { auth } from '../../userFirebase';
+import { dealerauth } from "../../dealerFirebase";
 import { ErrorToast, SuccessToast } from '../Toast';
 
 
@@ -59,6 +59,7 @@ function a11yProps(index) {
 const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     const [value, setValue] = React.useState(0);
     const [join, setJoin] = useState("User")
+    const [joinLogin, setJoinLogin] = useState("User")
     const [toggle, setToggle] = useState(0)
     const [value2, setValue2] = React.useState(
         new Date('2014-08-18T21:11:54'),
@@ -104,16 +105,22 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
     }
     const userSignIn = () => {
         // console.log("signUp", signUp);
-        signInWithEmailAndPassword(auth, signIn.email, signIn.password).then(async res =>{
+        signInWithEmailAndPassword(
+          joinLogin === "User" ? auth : dealerauth,
+          signIn.email,
+          signIn.password
+        )
+          .then(async (res) => {
             console.log(res);
             // const user = res?.user
-        //    await updateProfile(user, {displayName :signUp?.name})
-            handleClose()
-            SuccessToast("Sign In sucessFull!")
-        }).catch(e => {
+            //    await updateProfile(user, {displayName :signUp?.name})
+            handleClose();
+            SuccessToast("Sign In sucessFull!");
+          })
+          .catch((e) => {
             console.log(e);
-            ErrorToast("something want wrong")
-        })
+            ErrorToast("something want wrong");
+          });
     }
     const handleChange2 = (newValue) => {
         setValue2(newValue);
@@ -126,44 +133,53 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
         console.log("eee", e.target.value);
         setJoin(e.target.value)
     }
+    const joinus2 = (e) => {
+        console.log("eee", e.target.value);
+        setJoinLogin(e.target.value)
+    }
     const DelarOpen = () => {
-        //  createUserWithEmailAndPassword(
-        //    dealerauth,
-        //    signUp.email,
-        //    signUp.password
-        //  )
-        //    .then(async (res) => {
-        //      console.log(res);
-        //      const user = res?.user;
-        //      await updateProfile(user, { displayName: signUp?.name });
-        //      setToggle(1);
+        console.log("dealer select");
+         createUserWithEmailAndPassword(
+           dealerauth,
+           signUp.email,
+           signUp.password
+         )
+           .then(async (res) => {
+             console.log("delear sign up",res);
+             const user = res?.user;
+             await updateProfile(user, { displayName: signUp?.name });
+             setToggle(1);
 
-        //      //  handleClose();
-        //      SuccessToast(" dealer sSign Up sucessFull!");
-        //    })
-        //    .catch((e) => {
-        //      console.log(e);
-        //      ErrorToast("something want wrong");
-        //    });
+            //   handleClose();
+             SuccessToast(" dealer sSign Up sucessFull!");
+           })
+           .catch((e) => {
+             console.log(e);
+             ErrorToast("something want wrong");
+           });
     }
 
     const googleLogin = () => {
         const provider = new GoogleAuthProvider()
-        signInWithPopup(auth, provider).then(res => {
+        signInWithPopup(joinLogin === "User" ? auth : dealerauth, provider)
+          .then((res) => {
             console.log("google login", res);
-              handleClose();
-        }).catch(e => {
+            handleClose();
+          })
+          .catch((e) => {
             console.log(e);
-        })
+          });
     }
     const fbLogin = () => {
         const provider = new FacebookAuthProvider()
-        signInWithPopup(auth, provider).then(res => {
+        signInWithPopup(dealerauth, provider)
+          .then((res) => {
             console.log("fb login", res);
-              handleClose();
-        }).catch(e => {
+            handleClose();
+          })
+          .catch((e) => {
             console.log(e);
-        })
+          });
     }
 
 
@@ -197,7 +213,7 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
                   </Box>
                   <TabPanel value={value} index={0}>
                     <div className="input_filed">
-                      <label htmlFor="email">Email or Mobile</label>
+                      <label htmlFor="email">Email</label>
                       <TextField
                         hiddenLabel
                         id="outlined-basic"
@@ -219,6 +235,29 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
                     <div className="remeber">
                       <h6>Forgot password?</h6>
                     </div>
+                    <FormControl className="mt-2">
+                      <FormLabel id="demo-radio-buttons-group-label">
+                        Login As
+                      </FormLabel>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="User"
+                        name="join"
+                        value={joinLogin}
+                        onChange={joinus2}
+                      >
+                        <FormControlLabel
+                          value="User"
+                          control={<Radio />}
+                          label="User"
+                        />
+                        <FormControlLabel
+                          value="Dealer"
+                          control={<Radio />}
+                          label="Dealer"
+                        />
+                      </RadioGroup>
+                    </FormControl>
                     <Button className="common_btn" onClick={userSignIn}>
                       Login
                     </Button>

@@ -5,7 +5,8 @@ import ProtectedRoutes from './Routes/ProtectedRoutes';
 import Home from './Pages/Home';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import { Toaster } from 'react-hot-toast';
-import { auth } from './firebase';
+import { auth } from './userFirebase';
+import { dealerauth } from "./dealerFirebase";
 import { useEffect, useState } from 'react';
 import Header from './Components/Header/Header';
 import Product_Detail from './Pages/Product_Detail';
@@ -22,10 +23,19 @@ function App() {
   }
   console.log(user);
  })
+
+ dealerauth.onAuthStateChanged((user) => {
+   if (user) {
+     localStorage.setItem("userData", JSON.stringify(user));
+     setIsAuth(user);
+   }
+   console.log(user);
+ });
   }, [])
 
     const logout = () => {
       auth.signOut();
+      dealerauth.signOut();
       window.location.reload()
     };
   

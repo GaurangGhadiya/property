@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import "./Header.scss"
 import Model from '../Model/Model';
-import { auth } from '../../firebase';
+import { auth } from '../../userFirebase';
 
 
 const drawerWidth = 240;
