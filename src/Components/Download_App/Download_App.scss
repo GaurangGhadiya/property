@@ -1,0 +1,76 @@
+.Download_App {
+    background: linear-gradient(276.91deg, #329FA0 -0.74%, #005F60 100%);
+    border-radius: 15px;
+    height: 400px;
+    margin-top: 80px;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #FFFFFF;
+    padding-left: 100px;
+}
+.Download_App .app_content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.Download_App .mobile_img{
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+}
+.Download_App h1 {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 58px;
+}
+
+.Download_App h6 {
+    font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+}
+
+.Download_App button {
+    margin-top: 40px;
+    color: white;
+    width: 12%;
+    background: #FF9C00;
+    border-radius: 8px;
+}
+
+@media only screen and (max-width: 900px) {
+    .Download_App {
+        background-size: cover;
+    }
+    .Download_App .mobile_img{
+        width: 300px;
+        margin-top: 20px;
+    }
+    .Download_App button {
+        width: 32%;
+    }
+    .Download_App {
+        margin-top: 30px;
+        padding-left: 30px;
+        padding-top: 20px;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    
+
+    .Download_App h1 {
+        font-size: 35px;
+        line-height: 40px;
+    }
+
+    .Download_App button {
+        margin-top: 20px;
+    }
+}

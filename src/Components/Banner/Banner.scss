@@ -1,0 +1,112 @@
+.home_banner {
+    background: linear-gradient(90deg, #249EA0 42.9%, rgba(36, 158, 160, 0) 100%), url("../../../public/Images/home-banner.png");
+    height: 500px;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+}
+.white_space{
+    background-color: white;
+    height: 50px;
+    transform: rotate(-1.2deg);
+    margin-top: -32px;
+    overflow: hidden !important;
+    width: 100%;
+}
+
+
+.home_banner h6 {
+    padding: 8px;
+    background: #3e9696;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    width: 70%;
+}
+
+.home_banner h1 {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+}
+
+.home_banner span {
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.content {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+}
+.home_banner .input_filed{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border: 10px solid #559595;
+}
+.home_banner .content .phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    border-radius: 0px !important;
+    padding: 14px !important;
+}
+.home_banner .content .phone{
+    position: relative;
+}
+.loc_icon{
+    top: 5px;
+    position: absolute;
+    right: 150px;
+    font-size: 25px;
+    color: lightgray !important;
+}
+.home_banner .content .phone .ser_btn{
+    background-color: #249EA0 !important;
+    border-radius: 0px 10px 10px 0;
+} 
+.home_banner .content .phone .ser_btn button{
+    color: white !important;
+    padding: 10px 25px;
+    font-size: 18px;
+    text-transform: capitalize;
+    
+} 
+.ser_btn svg{
+    font-size: 25px;
+    margin-right: 5px;
+}
+@media only screen and (max-width: 600px) {
+    .content{
+        width: 100%;
+        height: 350px;
+    }
+    .home_banner{
+        height: 400px;
+    }
+    .home_banner h1{
+       font-size: 30px;
+       line-height: 40px;
+    }
+    .home_banner h6{
+        width: 100%;
+    }
+    .home_banner .input_filed{
+        padding: 0px;
+        border: none;
+    }
+    .content .phone select{
+        padding: 5px !important;
+    }
+    .home_banner .content .phone .ser_btn button{
+        padding: 10px 15px 10px 4px;
+    }
+    .loc_icon{
+        top: 7px;
+        right: 115px;
+    }
+  }

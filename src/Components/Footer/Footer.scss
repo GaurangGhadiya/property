@@ -1,0 +1,59 @@
+.Footer{
+    background: #1D2222;
+    height: 100%;
+    color: white;
+    padding-top: 130px;
+    font-family: 'Inter';
+font-style: normal;
+}
+.Footer ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+.Footer h6{
+    margin: 20px 10px 20px 0;
+    font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+}
+.Footer h3{
+    text-transform: uppercase;
+    font-weight: 600;
+font-size: 19px;
+line-height: 20px;
+}
+.Footer ul li{
+    font-weight: 400;
+font-size: 15px;
+line-height: 30px;
+color: #7E7E7E;
+}
+.footer_end{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.white_space_footer{
+    margin-top: 100px;
+    margin-bottom: -25px;
+    background-color: white;
+    height: 52px;
+    transform: rotate(-1.6deg);
+    overflow: hidden !important;
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .Footer{
+        padding-top: 50px;
+    }
+    .Footer h3{
+        margin-top: 15px;
+    }
+    .css-11lq3yg-MuiGrid-root{
+        justify-content: space-between;
+    }
+    .white_space_footer{
+        margin-top: 20px;
+    }
+}

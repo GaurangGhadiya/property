@@ -1,0 +1,73 @@
+.car_title{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 55px;
+}
+.car_title h1{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+color: #1D2222;
+}
+.car_title button{
+    background: #249EA0;
+border-radius: 8px;
+color: white;
+padding: 5px 30px !important;
+height:50px;
+}
+.car_title .border_bottom{
+    width: 60px;
+height: 5px;
+margin-top: 10px;
+background: #343D42;
+border-radius: 3px;
+}
+.cards{
+    margin-top: 25px !important;
+}
+.Card{
+    font-family: 'Inter';
+    font-style: normal;
+}
+.Card img{
+    width: 275px;
+}
+.Card h5{
+    margin-top: 8px;
+font-weight: 600;
+font-size: 17px;
+line-height: 15px;
+color: #1D2222;
+}
+.Card span{
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+color: #7E7E7E;
+}
+.cards .MuiGrid-item{
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+}
+@media only screen and (max-width: 600px) {
+    .car_title{
+        margin-top: 20px;
+    }
+    .car_title h1{
+        font-size: 15px;
+    }
+    .car_title button{
+        height: 37px;
+        margin-top: 13px;
+    }
+    .css-mhc70k-MuiGrid-root{
+        width: 100% !important;
+    }
+    .Card img{
+        width: 100%;
+    }
+  }

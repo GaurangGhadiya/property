@@ -1,0 +1,48 @@
+.img2{
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    padding: 25px;
+    margin: 20px;
+    width: 150px;
+    height: 150px;
+}
+.feachers{
+    margin-top: 20px;
+}
+.feachers img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+}
+.img_long{
+    width: 80% !important;
+}
+.img_short{
+    width: 120% !important;
+}
+.feachers .css-mhc70k-MuiGrid-root>.MuiGrid-item{
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+@media only screen and (max-width: 900px) {
+    .feachers .img{
+        display: block;
+        width: 100px !important;
+    }
+  }
+@media only screen and (max-width: 600px) {
+    .img2{
+        width: 125px;
+        height: 122px;
+    }
+    .feachers .img{
+        width: 70px !important;
+    }
+    .feachers .css-mhc70k-MuiGrid-root > .MuiGrid-item{
+        text-align: center;
+    }
+  }

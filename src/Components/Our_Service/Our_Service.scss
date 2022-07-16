@@ -1,0 +1,30 @@
+.Our_Service{
+    background: linear-gradient(180deg, #F7F7F7 0%, rgba(247, 247, 247, 0) 100%);
+}
+.Our_Service .car_title{
+    padding-top: 55px !important;
+}
+.Our_Service .Card{
+    position: relative;
+}
+.Our_Service .Card h5{
+        margin-top: 45px;
+}
+.Our_Service .Card .icon_border{
+    position: absolute;
+    left: 10px;
+    // width: 100px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 25px;
+    bottom: 70px;
+}
+.Our_Service .Card .Icon_img{
+    width: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .Our_Service .car_title{
+        padding-top: 25px !important;
+    }
+}

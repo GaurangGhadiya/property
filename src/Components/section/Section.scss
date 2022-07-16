@@ -1,0 +1,54 @@
+.Section{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(89.82deg, #249EA0 23.9%, rgba(36, 158, 160, 0) 100.01%),url("../../../public/Images/section-banner.png");
+border-radius: 15px;
+height: 350px;
+margin-top: 80px;
+background-position: center;
+background-size: contain;
+display: flex;
+flex-direction: column;
+justify-content: center;
+font-family: 'Inter';
+font-style: normal;
+color: #FFFFFF;
+padding-left: 100px;
+}
+.Section h1{
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+}
+.Section h6{
+    font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+}
+.Section button{
+    margin-top: 40px;
+    color: white;
+    width: 12%;
+    background: #FF9C00;
+border-radius: 8px;
+}
+@media only screen and (max-width: 900px) {
+    .Section{
+        background-size: cover;
+    }
+    .Section button{
+        width: 32%;
+    }
+  }
+@media only screen and (max-width: 600px) {
+    .Section{
+        margin-top: 30px;
+        padding-left: 30px;
+        height: 250px;
+    }
+    .Section h1{
+        font-size: 35px;
+        line-height: 40px;
+    }
+    .Section button{
+        margin-top: 20px;
+    }
+  }
