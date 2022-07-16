@@ -10,7 +10,7 @@ import Top_Car from '../Components/top_car/Top_Car'
 
 const Home = () => {
   return (
-    <><Header />
+    <>
     <Banner />
     <Feachers />
     <Top_Car />

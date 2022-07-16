@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import "./Header.scss"
 import Model from '../Model/Model';
+import { auth } from '../../firebase';
 
 
 const drawerWidth = 240;
@@ -28,7 +29,9 @@ const Header = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate()
-  const { window } = props;
+  const { window, isAuth, logout } = props;
+
+  console.log("header", isAuth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -78,14 +81,21 @@ const Header = (props) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <div className='navbar_main'>
-      <Box sx={{ display: 'flex', marginBottom: "55px" }}>
+    <div className="navbar_main">
+      <Box sx={{ display: "flex", marginBottom: "55px" }}>
         <AppBar component="nav">
           <Container>
             <Toolbar>
               <Link to="/">
-                <Typography variant="h6" sx={{ mr: 2, display: { sm: 'none' } }}>
-                  <img className='mt-0' width={150} src={process.env.PUBLIC_URL + '/Images/Logo/trader.png'} />
+                <Typography
+                  variant="h6"
+                  sx={{ mr: 2, display: { sm: "none" } }}
+                >
+                  <img
+                    className="mt-0"
+                    width={150}
+                    src={process.env.PUBLIC_URL + "/Images/Logo/trader.png"}
+                  />
                 </Typography>
               </Link>
               <IconButton
@@ -93,46 +103,85 @@ const Header = (props) => {
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { sm: 'none' } }}
+                sx={{ mr: 2, display: { sm: "none" } }}
               >
                 <MenuIcon />
               </IconButton>
               <Typography
                 variant="h6"
                 component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}
               >
                 <Link to="/">
-                  <img className='mt-0' width={150} src={process.env.PUBLIC_URL + '/Images/Logo/trader.png'} />
+                  <img
+                    className="mt-0"
+                    width={150}
+                    src={process.env.PUBLIC_URL + "/Images/Logo/trader.png"}
+                  />
                 </Link>
               </Typography>
-              <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-                <Button key={1} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/shopping.png'} />
+              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                <Button key={1} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/shopping.png"}
+                  />
                   Shopping
                 </Button>
-                <Button key={2} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/sell.png'} />
+                <Button key={2} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/sell.png"}
+                  />
                   Sell
                 </Button>
-                <Button key={3} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/help.png'} />
+                <Button key={3} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/help.png"}
+                  />
                   Help
                 </Button>
-                <Button key={4} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/message.png'} />
+                <Button key={4} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/message.png"}
+                  />
                   Message
                 </Button>
-                <Button key={5} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/like.png'} />
+                <Button key={5} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/like.png"}
+                  />
                 </Button>
-                <Button key={5} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/cart.png'} />
+                <Button key={5} sx={{ color: "black" }}>
+                  <img
+                    className="me-2"
+                    src={process.env.PUBLIC_URL + "/Images/Icons/cart.png"}
+                  />
                 </Button>
-                <Button onClick={handleOpen} className='login_btn' key={6} sx={{ color: 'black' }} >
-                  <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
-                  Login | Register
-                </Button>
+                {isAuth?.email ? (
+                  <>
+
+
+                  <p className='text-black p-0 m-0 mt-2'>{isAuth?.displayName} </p>
+                  <p onClick={logout} className="text-black ms-3 mt-2 ">Logout</p>
+                  </>
+                ) : (
+                  <Button
+                    onClick={handleOpen}
+                    className="login_btn"
+                    key={6}
+                    sx={{ color: "black" }}
+                  >
+                    <img
+                      className="me-2"
+                      src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
+                    />
+                    Login | Register
+                  </Button>
+                )}
               </Box>
             </Toolbar>
           </Container>
@@ -149,18 +198,25 @@ const Header = (props) => {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
             }}
           >
             {drawer}
           </Drawer>
-
         </Box>
       </Box>
-      <Model handleClose={handleClose} handleOpen={handleOpen} setOpen={setOpen} open={open}/>
+      <Model
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+        setOpen={setOpen}
+        open={open}
+      />
     </div>
-  )
+  );
 }
 
 export default Header

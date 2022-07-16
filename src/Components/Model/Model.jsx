@@ -10,6 +10,10 @@ import Tab from '@mui/material/Tab';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { auth } from '../../firebase';
+// import { dealerauth } from "../../dealerFirebase";
+import { ErrorToast, SuccessToast } from '../Toast';
 
 
 const style = {
@@ -59,7 +63,58 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     const [value2, setValue2] = React.useState(
         new Date('2014-08-18T21:11:54'),
     );
+    const [signUp, setSignUp] = useState({
+      name: "",
+      email: "",
+      password : "",
+      confirmPassword : "",
+      number : ""
+    });
+    const [signIn, setSignIn] = useState({
+      email: "",
+      password : ""
+    });
 
+    const handleSignUp = (e) => {
+        const {name , value} = e.target
+        setSignUp({...signUp , [name] : value})
+    }
+    const handleSignIn = (e) => {
+        const {name , value} = e.target
+        setSignIn({...signIn , [name] : value})
+    }
+    
+    const userRegister = () => {
+        console.log("signUp", signUp);
+        if (join === "User"){
+createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
+  .then(async (res) => {
+    console.log(res);
+    const user = res?.user;
+    await updateProfile(user, { displayName: signUp?.name });
+    handleClose();
+    SuccessToast("Sign Up sucessFull!");
+  })
+  .catch((e) => {
+    console.log(e);
+    ErrorToast("something want wrong");
+  });
+}
+          
+    }
+    const userSignIn = () => {
+        // console.log("signUp", signUp);
+        signInWithEmailAndPassword(auth, signIn.email, signIn.password).then(async res =>{
+            console.log(res);
+            // const user = res?.user
+        //    await updateProfile(user, {displayName :signUp?.name})
+            handleClose()
+            SuccessToast("Sign In sucessFull!")
+        }).catch(e => {
+            console.log(e);
+            ErrorToast("something want wrong")
+        })
+    }
     const handleChange2 = (newValue) => {
         setValue2(newValue);
     };
@@ -72,163 +127,328 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
         setJoin(e.target.value)
     }
     const DelarOpen = () => {
-        setToggle(1)
+        //  createUserWithEmailAndPassword(
+        //    dealerauth,
+        //    signUp.email,
+        //    signUp.password
+        //  )
+        //    .then(async (res) => {
+        //      console.log(res);
+        //      const user = res?.user;
+        //      await updateProfile(user, { displayName: signUp?.name });
+        //      setToggle(1);
+
+        //      //  handleClose();
+        //      SuccessToast(" dealer sSign Up sucessFull!");
+        //    })
+        //    .catch((e) => {
+        //      console.log(e);
+        //      ErrorToast("something want wrong");
+        //    });
+    }
+
+    const googleLogin = () => {
+        const provider = new GoogleAuthProvider()
+        signInWithPopup(auth, provider).then(res => {
+            console.log("google login", res);
+              handleClose();
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+    const fbLogin = () => {
+        const provider = new FacebookAuthProvider()
+        signInWithPopup(auth, provider).then(res => {
+            console.log("fb login", res);
+              handleClose();
+        }).catch(e => {
+            console.log(e);
+        })
     }
 
 
     return (
-        <div>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={5}>
-                            <img className='me-2 w-100 h-100 img' src={process.env.PUBLIC_URL + '/Images/login.png'} />
-                        </Grid>
-                        {toggle === 0 && <Grid item xs={12} sm={7}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Login" {...a11yProps(0)} />
-                                    <Tab label="Register" {...a11yProps(1)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={value} index={0}>
-                                <div className="input_filed">
-                                    <label htmlFor="email">Email or Mobile</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="input_filed mt-2">
-                                    <label htmlFor="password">Password</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="remeber">
-                                    <h6>Forgot password?</h6>
-                                </div>
-                                <Button className='common_btn' onClick={handleClose}>Login</Button>
-                                <div className="social">
-                                    <Button className='common_btn'>Google</Button>
-                                    <Button className='common_btn'>Facebook</Button>
-                                </div>
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                                <div className="input_filed">
-                                    <label htmlFor="email">Your Name</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="input_filed mt-2">
-                                    <label htmlFor="email">Email Address</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="input_filed mt-2">
-                                    <label htmlFor="email">Password</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="input_filed mt-2">
-                                    <label htmlFor="email">Confirm Password</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div>
-                                <div className="input_filed mt-2">
-                                    <label htmlFor="email">Phone Number</label>
-                                    <div className="phone">
-                                        <select name="" id="">
-                                            <option value="+91">+91</option>
-                                        </select>
-                                        <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                    </div>
-                                </div>
-                                <FormControl className='mt-2'>
-                                    <FormLabel id="demo-radio-buttons-group-label">Join As</FormLabel>
-                                    <RadioGroup
-                                        aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="User"
-                                        name="join"
-                                        value={join}
-                                        onChange={joinus}
-
-                                    >
-                                        <FormControlLabel value="User" control={<Radio />} label="User" />
-                                        <FormControlLabel value="Dealer" control={<Radio />} label="Dealer" />
-                                    </RadioGroup>
-                                </FormControl>
-                                <div className="agree">
-                                    <FormControlLabel control={<Checkbox />} label="I agree to be contacted by trader.com and others for similar properties or related services via  WhatsApp, phone, sms, e-mail etc." />
-                                </div>
-                                <Button className='common_btn' onClick={join === "User" ? handleClose : DelarOpen}>Register</Button>
-                                <h5 className='terms'>By clicking you will be agreeing to <span>Terms & Conditions</span></h5>
-                            </TabPanel>
-                        </Grid>}
-                        {toggle === 1 && <Grid className='p-4' item xs={7} sm={7}>
-                            <h1 className='delar_title'>Fill Out The Dealership Form</h1>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}><div className="input_filed">
-                                    <label htmlFor="email">Dealership Name</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={6}><div className="input_filed">
-                                    <label htmlFor="email">Dealer Code</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={12}>
-                                    <div className="input_filed mt-2">
-                                        <label htmlFor="email">Phone No</label>
-                                        <div className="phone delarphone">
-                                            <select name="" id="">
-                                                <option value="+91">+91</option>
-                                            </select>
-                                            <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                        </div>
-                                    </div>
-                                </Grid>
-                                <Grid item xs={6}><div className="input_filed">
-                                    <label htmlFor="email">Showroom Location</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={6}><div className="input_filed">
-                                    <label htmlFor="email">Area Name</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={12}><div className="input_filed mt-2">
-                                    <label htmlFor="email">Phone No(Service)</label>
-                                    <div className="phone delarphone">
-                                        <select name="" id="">
-                                            <option value="+91">+91</option>
-                                        </select>
-                                        <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                    </div>
-                                </div></Grid>
-                                <Grid item xs={12}><div className="input_filed">
-                                    <label htmlFor="email">Select Brand</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={6}><div className="input_filed datepicker">
-                                    <label htmlFor="email">Date Of Issuance</label>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DesktopDatePicker
-                                        inputFormat="MM/dd/yyyy"
-                                        value={value2}
-                                        onChange={handleChange2}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />
-                                    </LocalizationProvider>
-                                </div></Grid>
-                                <Grid item xs={6}><div className="input_filed">
-                                    <label htmlFor="email">GSTIN</label>
-                                    <TextField hiddenLabel id="outlined-basic" variant="outlined" />
-                                </div></Grid>
-                                <Grid item xs={12}>
-                                    <Button className='common_btn' onClick={handleClose}>Submit</Button>
-                                </Grid>
-                            </Grid>
-                        </Grid>}
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={5}>
+                <img
+                  className="me-2 w-100 h-100 img"
+                  src={process.env.PUBLIC_URL + "/Images/login.png"}
+                />
+              </Grid>
+              {toggle === 0 && (
+                <Grid item xs={12} sm={7}>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab label="Login" {...a11yProps(0)} />
+                      <Tab label="Register" {...a11yProps(1)} />
+                    </Tabs>
+                  </Box>
+                  <TabPanel value={value} index={0}>
+                    <div className="input_filed">
+                      <label htmlFor="email">Email or Mobile</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        variant="outlined"
+                        name="email"
+                        onChange={handleSignIn}
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="password">Password</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        variant="outlined"
+                        name="password"
+                        onChange={handleSignIn}
+                      />
+                    </div>
+                    <div className="remeber">
+                      <h6>Forgot password?</h6>
+                    </div>
+                    <Button className="common_btn" onClick={userSignIn}>
+                      Login
+                    </Button>
+                    <div className="social">
+                      <Button className="common_btn" onClick={googleLogin}>
+                        Google
+                      </Button>
+                      <Button className="common_btn" onClick={fbLogin}>
+                        Facebook
+                      </Button>
+                    </div>
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <div className="input_filed">
+                      <label htmlFor="email">Your Name</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="name"
+                        onChange={handleSignUp}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">Email Address</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="email"
+                        variant="outlined"
+                        onChange={handleSignUp}
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">Password</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="password"
+                        variant="outlined"
+                        onChange={handleSignUp}
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">Confirm Password</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="confirmPassword"
+                        variant="outlined"
+                        onChange={handleSignUp}
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">Phone Number</label>
+                      <div className="phone">
+                        <select id="">
+                          <option value="+91">+91</option>
+                        </select>
+                        <TextField
+                          hiddenLabel
+                          name="number"
+                          id="outlined-basic"
+                          variant="outlined"
+                          onChange={handleSignUp}
+                        />
+                      </div>
+                    </div>
+                    <FormControl className="mt-2">
+                      <FormLabel id="demo-radio-buttons-group-label">
+                        Join As
+                      </FormLabel>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="User"
+                        name="join"
+                        value={join}
+                        onChange={joinus}
+                      >
+                        <FormControlLabel
+                          value="User"
+                          control={<Radio />}
+                          label="User"
+                        />
+                        <FormControlLabel
+                          value="Dealer"
+                          control={<Radio />}
+                          label="Dealer"
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                    <div className="agree">
+                      <FormControlLabel
+                        control={<Checkbox />}
+                        label="I agree to be contacted by trader.com and others for similar properties or related services via  WhatsApp, phone, sms, e-mail etc."
+                      />
+                    </div>
+                    <Button
+                      className="common_btn"
+                      onClick={join === "User" ? userRegister : DelarOpen}
+                    >
+                      Register
+                    </Button>
+                    <h5 className="terms">
+                      By clicking you will be agreeing to{" "}
+                      <span>Terms & Conditions</span>
+                    </h5>
+                  </TabPanel>
+                </Grid>
+              )}
+              {toggle === 1 && (
+                <Grid className="p-4" item xs={7} sm={7}>
+                  <h1 className="delar_title">Fill Out The Dealership Form</h1>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <div className="input_filed">
+                        <label htmlFor="email">Dealership Name</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
                     </Grid>
-                </Box>
-            </Modal>
-        </div>
-    )
+                    <Grid item xs={6}>
+                      <div className="input_filed">
+                        <label htmlFor="email">Dealer Code</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div className="input_filed mt-2">
+                        <label htmlFor="email">Phone No</label>
+                        <div className="phone delarphone">
+                          <select name="" id="">
+                            <option value="+91">+91</option>
+                          </select>
+                          <TextField
+                            hiddenLabel
+                            id="outlined-basic"
+                            variant="outlined"
+                          />
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <div className="input_filed">
+                        <label htmlFor="email">Showroom Location</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <div className="input_filed">
+                        <label htmlFor="email">Area Name</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div className="input_filed mt-2">
+                        <label htmlFor="email">Phone No(Service)</label>
+                        <div className="phone delarphone">
+                          <select name="" id="">
+                            <option value="+91">+91</option>
+                          </select>
+                          <TextField
+                            hiddenLabel
+                            id="outlined-basic"
+                            variant="outlined"
+                          />
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div className="input_filed">
+                        <label htmlFor="email">Select Brand</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <div className="input_filed datepicker">
+                        <label htmlFor="email">Date Of Issuance</label>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                          <DesktopDatePicker
+                            inputFormat="MM/dd/yyyy"
+                            value={value2}
+                            onChange={handleChange2}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                        </LocalizationProvider>
+                      </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <div className="input_filed">
+                        <label htmlFor="email">GSTIN</label>
+                        <TextField
+                          hiddenLabel
+                          id="outlined-basic"
+                          variant="outlined"
+                        />
+                      </div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button className="common_btn" onClick={handleClose}>
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              )}
+            </Grid>
+          </Box>
+        </Modal>
+      </div>
+    );
 }
 
 export default Model
