@@ -1,6 +1,7 @@
 import { Container, Grid } from '@mui/material'
 import React from 'react'
 import "./Footer.scss"
+import { AiFillLinkedin,AiOutlineInstagram,AiOutlineTwitter,AiFillFacebook } from 'react-icons/ai';
 
 const Footer = () => {
     return (
@@ -46,7 +47,7 @@ const Footer = () => {
                                 <li>Phone: 1234567890</li>
                                 <li>Email: comapany@gmail.com</li>
                                 <li>Location : 100 Smart Street</li>
-                                <li>f t i i</li>
+                                <li><AiFillFacebook className='footer_icon' size={30} /><AiOutlineTwitter className='footer_icon' size={30} /><AiOutlineInstagram className='footer_icon' size={30} /><AiFillLinkedin className='footer_icon' size={30} /></li>
                             </ul>
                         </Grid>
                     </Grid>

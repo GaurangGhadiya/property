@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import { auth } from './firebase';
 import { useEffect, useState } from 'react';
 import Header from './Components/Header/Header';
+import Product_Detail from './Pages/Product_Detail';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
       <Header isAuth={isAuth} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/product-detail" element={<Product_Detail />} />
         <Route element={<ProtectedRoutes />}>
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}

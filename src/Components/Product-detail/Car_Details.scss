@@ -1,0 +1,41 @@
+.product_details{
+    padding-top: 45px;
+}
+.big_Image img{
+    width: 100%;
+}
+.small_image img{
+    width: 23%;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.small_image img:last-child{
+    margin-right: 0px;
+}
+.iamges{
+    width: 400px;
+}
+.details{
+    display: flex;
+}
+.car_details{
+    width: 550px;
+    margin-left: 20px;
+}
+.car_details h1{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 36px;
+line-height: 44px;
+
+/* Dark */
+
+color: #1D2222;
+}
+@media only screen and (min-width: 1200px) {
+    .css-1oqqzyl-MuiContainer-root{
+        max-width: 1350px !important;
+    }
+}
