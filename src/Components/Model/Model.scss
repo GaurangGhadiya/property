@@ -7,20 +7,20 @@
 .css-11lxi55-MuiGrid-root{
     height: 100%;
 }
-.css-heg063-MuiTabs-flexContainer {
+.css-heg063-MuiTabs-flexContainer, .css-k008qs {
     justify-content: center;
 }
 
-.css-heg063-MuiTabs-flexContainer button {
+.css-heg063-MuiTabs-flexContainer button, .css-k008qs button {
     width: 50%;
     text-transform: capitalize;
 }
 
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected, .css-1q2h7u5.Mui-selected {
     color: #249EA0 !important;
 }
 
-.css-1aquho2-MuiTabs-indicator {
+.css-1aquho2-MuiTabs-indicator, .css-ttwr4n {
     background-color: #249EA0 !important;
 }
 
@@ -118,7 +118,7 @@
     width: 100%;
 }
 
-.css-dmmspl-MuiFormGroup-root {
+.css-dmmspl-MuiFormGroup-root, .css-1h7anqn {
     flex-direction: row !important;
     width: 100%;
 }
@@ -163,12 +163,12 @@
     color: #249EA0 !important;
 }
 
-.css-i4bv87-MuiSvgIcon-root {
+.css-i4bv87-MuiSvgIcon-root, .css-vubbuv {
     width: 1.2em !important;
     height: 1.2em !important;
 }
 
-.agree .css-i4bv87-MuiSvgIcon-root {
+.agree .css-i4bv87-MuiSvgIcon-root, .agree .css-vubbuv {
     position: relative;
     top: -8px;
 }
