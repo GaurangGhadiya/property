@@ -262,11 +262,11 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
                       Login
                     </Button>
                     <div className="social">
-                      <Button className="common_btn" onClick={googleLogin}>
-                        Google
+                      <Button className="" onClick={googleLogin}>
+                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/google.png'} />
                       </Button>
-                      <Button className="common_btn" onClick={fbLogin}>
-                        Facebook
+                      <Button className="" onClick={fbLogin}>
+                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/facebook.png'} />
                       </Button>
                     </div>
                   </TabPanel>
