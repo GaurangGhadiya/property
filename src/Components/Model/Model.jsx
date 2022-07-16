@@ -369,7 +369,7 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
                 </Grid>
               )}
               {toggle === 1 && (
-                <Grid className="p-4" item xs={7} sm={7}>
+                <Grid className="delar_box" item xs={7} sm={7}>
                   <h1 className="delar_title">Fill Out The Dealership Form</h1>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
