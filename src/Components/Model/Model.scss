@@ -7,13 +7,16 @@
 .css-11lxi55-MuiGrid-root{
     height: 100%;
 }
-.css-heg063-MuiTabs-flexContainer, .css-k008qs {
+.modal .css-heg063-MuiTabs-flexContainer, .css-k008qs {
     justify-content: center;
 }
 
-.css-heg063-MuiTabs-flexContainer button, .css-k008qs button {
+.modal .css-heg063-MuiTabs-flexContainer button, .css-k008qs button {
     width: 50%;
+}
+.css-heg063-MuiTabs-flexContainer button, .css-k008qs button{
     text-transform: capitalize;
+
 }
 
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected, .css-1q2h7u5.Mui-selected {
@@ -151,7 +154,7 @@
     overflow-y: auto;
 }
 
-.css-mhc70k-MuiGrid-root>.MuiGrid-item {
+.modal .css-mhc70k-MuiGrid-root>.MuiGrid-item {
     padding: 0px !important;
     margin-top: 16px;
 }

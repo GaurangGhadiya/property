@@ -1,0 +1,75 @@
+
+.faqs .css-19kzrtu p .MuiPaper-root .MuiButtonBase-root .MuiAccordionSummary-content p {
+    font-family: 'Lato' !important;
+    font-style: normal;
+}
+.faqs h1{
+    font-weight: 600;
+font-size: 36px;
+line-height: 44px;
+color: hsl(180, 8%, 12%);
+margin: 40px 0 10px 0;
+}
+.faqs .MuiAccordionSummary-content.Mui-expanded {
+    color: #249EA0;
+}
+
+.faqs .border_bottom{
+    margin-bottom: 40px;
+    width: 60px;
+height: 5px;
+background: #343D42;
+border-radius: 3px;
+}
+.faqs .MuiPaper-root {
+    margin-bottom: 10px;
+    box-shadow: none !important;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px !important;
+}
+
+.MuiPaper-root::after,
+.MuiPaper-root:before {
+    background-color: #BABEBF !important;
+    opacity: 0 !important;
+}
+
+.faqs .ans {
+    font-family: 'Lato' !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.01em;
+    color: #5B5C60;
+}
+
+.faqs .css-i4bv87-MuiSvgIcon-root path,
+.faqs .MuiSvgIcon-root path {
+    display: none;
+}
+
+.faqs .MuiAccordionSummary-content,
+.faqs .MuiAccordionSummary-content {
+    padding: 12px 0 7px 0;
+}
+
+.faqs .MuiAccordionSummary-expandIconWrapper {
+    transform: rotate(0deg) !important;
+    background: url("../../../public/Images/Vector\ \(3\).png");
+    background-repeat: no-repeat;
+}
+
+.faqs .MuiAccordionSummary-expandIconWrapper.Mui-expanded {
+    width: 20px;
+    transform: rotate(0deg) !important;
+    background: url("../../../public/Images/Vector\ \(4\).png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.faqs .css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded:first-of-type{
+    background: #FFFFFF;
+    border: none !important;
+box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.07) !important;
+border-radius: 5px !important;
+}
