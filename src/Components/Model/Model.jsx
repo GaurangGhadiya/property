@@ -87,40 +87,52 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     
     const userRegister = () => {
         console.log("signUp", signUp);
-        if (join === "User"){
-createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
-  .then(async (res) => {
-    console.log(res);
-    const user = res?.user;
-    await updateProfile(user, { displayName: signUp?.name });
-    handleClose();
-    SuccessToast("Sign Up sucessFull!");
-  })
-  .catch((e) => {
-    console.log(e);
-    ErrorToast("something want wrong");
-  });
-}
+        if (
+          join === "User" &&
+          signUp.email &&
+          signUp.password &&
+          signUp?.name
+  && signUp?.number       ) {
+          createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
+            .then(async (res) => {
+              console.log(res);
+              const user = res?.user;
+              await updateProfile(user, { displayName: signUp?.name });
+              handleClose();
+              SuccessToast("Sign Up sucessFull!");
+            })
+            .catch((e) => {
+              console.log(e);
+              ErrorToast("something want wrong");
+            });
+        } else{
+          ErrorToast("All Fields are Requried!")
+        }
           
     }
     const userSignIn = () => {
         // console.log("signUp", signUp);
-        signInWithEmailAndPassword(
-          joinLogin === "User" ? auth : dealerauth,
-          signIn.email,
-          signIn.password
-        )
-          .then(async (res) => {
-            console.log(res);
-            // const user = res?.user
-            //    await updateProfile(user, {displayName :signUp?.name})
-            handleClose();
-            SuccessToast("Sign In sucessFull!");
-          })
-          .catch((e) => {
-            console.log(e);
-            ErrorToast("something want wrong");
-          });
+        if ((signIn.email && signIn.password)){
+ signInWithEmailAndPassword(
+   joinLogin === "User" ? auth : dealerauth,
+   signIn.email,
+   signIn.password
+ )
+   .then(async (res) => {
+     console.log(res);
+     // const user = res?.user
+     //    await updateProfile(user, {displayName :signUp?.name})
+     handleClose();
+     SuccessToast("Sign In sucessFull!");
+   })
+   .catch((e) => {
+     console.log(e);
+     ErrorToast("something want wrong");
+   });
+        } else{
+          ErrorToast("All Fields are Requried!")
+        }
+         
     }
     const handleChange2 = (newValue) => {
         setValue2(newValue);
@@ -139,24 +151,28 @@ createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
     }
     const DelarOpen = () => {
         console.log("dealer select");
-         createUserWithEmailAndPassword(
-           dealerauth,
-           signUp.email,
-           signUp.password
-         )
-           .then(async (res) => {
-             console.log("delear sign up",res);
-             const user = res?.user;
-             await updateProfile(user, { displayName: signUp?.name });
-             setToggle(1);
+                if (signIn.email && signIn.password) {
+                  createUserWithEmailAndPassword(
+                    dealerauth,
+                    signUp.email,
+                    signUp.password
+                  )
+                    .then(async (res) => {
+                      console.log("delear sign up", res);
+                      const user = res?.user;
+                      await updateProfile(user, { displayName: signUp?.name });
+                      setToggle(1);
 
-            //   handleClose();
-             SuccessToast(" dealer sSign Up sucessFull!");
-           })
-           .catch((e) => {
-             console.log(e);
-             ErrorToast("something want wrong");
-           });
+                      //   handleClose();
+                      SuccessToast(" dealer sSign Up sucessFull!");
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                      ErrorToast("something want wrong");
+                    });
+                } else {
+                  ErrorToast("All Fields are Requried!");
+                }
     }
 
     const googleLogin = () => {
