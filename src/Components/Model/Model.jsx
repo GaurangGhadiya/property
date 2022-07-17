@@ -200,7 +200,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
 
 
     return (
-      <div>
+      <div className='modal'>
         <Modal
           open={open}
           onClose={handleClose}
