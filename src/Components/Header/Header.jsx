@@ -69,7 +69,7 @@ const Header = (props) => {
               
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/cart.png'} />
             </ListItemButton>
-            <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }}>
+            <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
               Login | Register
             </ListItemButton>
