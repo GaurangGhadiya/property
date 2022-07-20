@@ -88,11 +88,14 @@
     margin-top: 10px;
     display: flex;
 }
-.social img{
-    width: 225px;
-    height: 43px;
+.social button{
+    padding: 10px 16px;
+    border: 1px solid lightgray;
+    text-transform: capitalize;
+    color: black !important;
+    // margin-right: 10px; 
 }
-.social .common_btn:nth-child(1) {
+.social button:nth-child(1) {
     margin-right: 10px;
 }
 

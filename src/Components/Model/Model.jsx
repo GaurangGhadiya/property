@@ -279,10 +279,12 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     </Button>
                     <div className="social">
                       <Button className="" onClick={googleLogin}>
-                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/google.png'} />
+                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/search 1.png'} />
+                      Continue with Google
                       </Button>
                       <Button className="" onClick={fbLogin}>
-                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/facebook.png'} />
+                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/facebook (1) 1.png'} />
+                      Continue with Facebook
                       </Button>
                     </div>
                   </TabPanel>
