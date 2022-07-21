@@ -91,8 +91,13 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
           join === "User" &&
           signUp.email &&
           signUp.password &&
-          signUp?.name
-  && signUp?.number       ) {
+          signUp?.name &&
+          signUp?.number &&
+          signUp.password === signUp?.confirmPassword &&
+          signUp?.city &&
+          signUp?.state &&
+          signUp?.country
+        ) {
           createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
             .then(async (res) => {
               console.log(res);
@@ -105,8 +110,10 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
               console.log(e);
               ErrorToast("something want wrong");
             });
-        } else{
-          ErrorToast("All Fields are Requried!")
+        } else if (signUp.password !== signUp?.confirmPassword) {
+          ErrorToast("Password are not matched!");
+        } else {
+          ErrorToast("All Fields are Requried!");
         }
           
     }
@@ -126,8 +133,12 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
      SuccessToast("Sign In sucessFull!");
    })
    .catch((e) => {
-     console.log(e);
-     ErrorToast("something want wrong");
+    //  console.log("www",e);
+     ErrorToast(
+       e.message === "Firebase: Error (auth/user-not-found)."
+         ? "You are not registerd. Please register yourself! "
+         : e.message === "Firebase: Error (auth/wrong-password)." ? "Email and Password are not matched!" : "Something want wrong!"
+     );
    });
         } else{
           ErrorToast("All Fields are Requried!")
@@ -151,7 +162,16 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     }
     const DelarOpen = () => {
         console.log("dealer select");
-                if (signIn.email && signIn.password) {
+                if (
+                  signUp.email &&
+                  signUp.password &&
+                  signUp?.name &&
+                  signUp?.number &&
+                  signUp.password === signUp?.confirmPassword &&
+                  signUp?.city &&
+                  signUp?.state &&
+                  signUp?.country
+                ) {
                   createUserWithEmailAndPassword(
                     dealerauth,
                     signUp.email,
@@ -164,12 +184,14 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                       setToggle(1);
 
                       //   handleClose();
-                      SuccessToast(" dealer sSign Up sucessFull!");
+                      SuccessToast("Dealer Sign Up sucessFull!");
                     })
                     .catch((e) => {
                       console.log(e);
-                      ErrorToast("something want wrong");
+                      ErrorToast("Something want wrong");
                     });
+                } else if (signUp.password !== signUp?.confirmPassword) {
+                  ErrorToast("Password are not matched!");
                 } else {
                   ErrorToast("All Fields are Requried!");
                 }
@@ -200,7 +222,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
 
 
     return (
-      <div className='modal'>
+      <div className="modal">
         <Modal
           open={open}
           onClose={handleClose}
@@ -241,6 +263,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     <div className="input_filed mt-2">
                       <label htmlFor="password">Password</label>
                       <TextField
+                        type="password"
                         hiddenLabel
                         id="outlined-basic"
                         variant="outlined"
@@ -279,12 +302,21 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     </Button>
                     <div className="social">
                       <Button className="" onClick={googleLogin}>
-                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/search 1.png'} />
-                      Continue with Google
+                        <img
+                          className="me-2"
+                          src={process.env.PUBLIC_URL + "/Images/search 1.png"}
+                        />
+                        Continue with Google
                       </Button>
                       <Button className="" onClick={fbLogin}>
-                      <img className='me-2' src={process.env.PUBLIC_URL + '/Images/facebook (1) 1.png'} />
-                      Continue with Facebook
+                        <img
+                          className="me-2"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/Images/facebook (1) 1.png"
+                          }
+                        />
+                        Continue with Facebook
                       </Button>
                     </div>
                   </TabPanel>
@@ -312,6 +344,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     <div className="input_filed mt-2">
                       <label htmlFor="email">Password</label>
                       <TextField
+                        type="password"
                         hiddenLabel
                         id="outlined-basic"
                         name="password"
@@ -343,6 +376,36 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                           onChange={handleSignUp}
                         />
                       </div>
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">City</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="city"
+                        onChange={handleSignUp}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">State</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="state"
+                        onChange={handleSignUp}
+                        variant="outlined"
+                      />
+                    </div>
+                    <div className="input_filed mt-2">
+                      <label htmlFor="email">Country</label>
+                      <TextField
+                        hiddenLabel
+                        id="outlined-basic"
+                        name="country"
+                        onChange={handleSignUp}
+                        variant="outlined"
+                      />
                     </div>
                     <FormControl className="mt-2">
                       <FormLabel id="demo-radio-buttons-group-label">
