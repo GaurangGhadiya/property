@@ -177,6 +177,21 @@ color: #1D2222;
     color: white !important;
     padding: 16px !important;
 }
+.date .supplier{
+    color: #FF9C00;
+    border: 1px solid #FF9C00  !important;
+    border-radius: 10px;
+    padding: 16px;
+    width: 100%;
+    background-color: white;
+}
+.date .supplier img{
+    width: 20px;
+    margin-right: 5px;
+}
+.date button{
+    font-weight: 800;
+}
 @media only screen and (min-width: 1200px) {
     .css-1oqqzyl-MuiContainer-root{
         max-width: 1350px !important;

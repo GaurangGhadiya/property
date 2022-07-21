@@ -129,7 +129,7 @@ const Car_Details = () => {
               <img className='me-3' src={process.env.PUBLIC_URL + '/Images/Group 518.png'} />
               <span>Estimated delivery 7/15-8/18</span>
               <h5>For product pricing, customization, or other inquiries:</h5>
-              <button><img className='' src={process.env.PUBLIC_URL + '/Images/sup.png'} /></button>
+              <button className='supplier'><img className='' src={process.env.PUBLIC_URL + '/Images/Vector (5).png'} /> Contact Supplier </button>
               <button className='buy_now'>Buy Now</button>
             </div>
 
@@ -151,6 +151,7 @@ const Car_Details = () => {
                   {value === 1 && <Comapny_Profile />}
                   {value === 2 && <Reviews />}
         </div>
+        <hr />
         <div className="faqs">
           <h1>FAQs</h1>
           <div className="border_bottom"></div>
