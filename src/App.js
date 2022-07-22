@@ -10,6 +10,7 @@ import { dealerauth } from "./dealerFirebase";
 import { useEffect, useState } from 'react';
 import Header from './Components/Header/Header';
 import Product_Detail from './Pages/Product_Detail';
+import Product_List from './Pages/Product_List';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product-detail" element={<Product_Detail />} />
+        <Route path="/product-list" element={<Product_List />} />
         <Route element={<ProtectedRoutes />}>
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}

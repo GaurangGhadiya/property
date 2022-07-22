@@ -111,14 +111,14 @@ padding: 12px 30px;
     background-color: #FF9C00;
     cursor: pointer;
 }
- table tr td:nth-child(1){
+.bil table tr td:nth-child(1){
     font-weight: 700;
 font-size: 16px;
 line-height: 19px;
 color: #7E7E7E;
 vertical-align: text-top !important;
 }
- table tr td:nth-child(2){
+.bil table tr td:nth-child(2){
     font-weight: 600;
 font-size: 16px;
 line-height: 19px;
@@ -130,7 +130,7 @@ font-size: 16px;
 line-height: 19px;
 color: #1D2222;
 }
- table tr td:nth-child(2){
+.bil table tr td:nth-child(2){
     padding: 0 0 20px 40px !important;
 }
 .benifit table tr:nth-child(6),.benifit table tr:nth-child(1),.bil table tr:nth-child(4){
@@ -215,7 +215,7 @@ color: #1D2222;
     .price .like svg{
        margin: 0; 
     }
-    table tr td:nth-child(2),.benifit table tr:nth-child(5) td:nth-child(2){
+    .bil table tr td:nth-child(2),.benifit table tr:nth-child(5) td:nth-child(2){
         padding: 0 0 20px 20px !important;
     }
     .product_details button img{
