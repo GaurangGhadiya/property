@@ -287,13 +287,13 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       });
   };
 
-  const responseFacebook = (response) => {
+  const responseFacebook = async(response) => {
     console.log(response);
     const body = {
       accessToken: response?.accessToken,
       deviceToken: "123",
     };
-    ApiPostNoAuth("/dealer/facebook_login", body).then(res => {
+   await ApiPostNoAuth("dealer/facebook_login", body).then(res => {
         console.log("res",res);
     }).catch(e => {
         console.log("e",e);
