@@ -35,9 +35,10 @@ function App() {
   }, [])
 
     const logout = () => {
-      auth.signOut();
-      dealerauth.signOut();
-      window.location.reload()
+      // auth.signOut();
+      // dealerauth.signOut();
+      localStorage.clear();
+      window.location.reload();
     };
   
   return (

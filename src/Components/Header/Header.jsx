@@ -14,22 +14,29 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Container } from '@mui/material';
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 import { Link } from 'react-router-dom';
 import "./Header.scss"
 import Model from '../Model/Model';
 import { auth } from '../../userFirebase';
+import DealerModal from '../Model/DealerModal';
+import { getUserData } from '../../Api/Api';
 
 
 const drawerWidth = 240;
-const navItems = ['Shopping', 'Sell', 'Help', 'Message', "Login | Register"];
 
 const Header = (props) => {
+  const { window, isAuth, logout } = props;
+  const navigate = useNavigate()
+  const [loginData, setLoginData] = React.useState(getUserData())
+  //user
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate()
-  const { window, isAuth, logout } = props;
+  // Dealer
+  const [open2, setOpen2] = React.useState(false);
+  const handleOpen2 = () => setOpen2(true);
+  const handleClose2 = () => setOpen2(false);
 
   console.log("header", isAuth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -38,6 +45,12 @@ const Header = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  // const logout = () => {
+  //   console.log("44654");
+  //   localStorage.clear();
+  //   window.location.reload(false);
+    
+  // }
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Link to="/">
@@ -62,16 +75,20 @@ const Header = (props) => {
             </ListItemButton>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/message.png'} />
-              Message
+              {/* Message */}
             </ListItemButton>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/like.png'} />
+              {/* <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/like.png'} /> */}
               
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/cart.png'} />
             </ListItemButton>
             <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
-              Login | Register
+              User Login | Register
+            </ListItemButton>
+            <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
+              <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
+             Dealer Login | Register
             </ListItemButton>
           </ListItem>
       </List>
@@ -161,26 +178,42 @@ const Header = (props) => {
                     src={process.env.PUBLIC_URL + "/Images/Icons/cart.png"}
                   />
                 </Button>
-                {isAuth?.email ? (
+                {loginData?.name ? (
                   <>
-
-
-                  <p className='text-black p-0 m-0 mt-2'>{isAuth?.displayName} </p>
-                  <p onClick={logout} className="text-black ms-3 mt-2 ">Logout</p>
+                    <p className="text-black p-0 m-0 mt-2">
+                      {loginData?.name}{" "}
+                    </p>
+                    <p onClick={logout} className="text-black ms-3 mt-2 ">
+                      Logout
+                    </p>
                   </>
                 ) : (
-                  <Button
-                    onClick={handleOpen}
-                    className="login_btn"
-                    key={6}
-                    sx={{ color: "black" }}
-                  >
-                    <img
-                      className="me-2"
-                      src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
-                    />
-                    Login | Register
-                  </Button>
+                  <>
+                    <Button
+                      onClick={handleOpen}
+                      className="login_btn"
+                      key={6}
+                      sx={{ color: "black" }}
+                    >
+                      <img
+                        className="me-2"
+                        src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
+                      />
+                      User Login | Register
+                    </Button>
+                    <Button
+                      onClick={handleOpen2}
+                      className="login_btn ms-2"
+                      key={6}
+                      sx={{ color: "black" }}
+                    >
+                      <img
+                        className="me-2"
+                        src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
+                      />
+                      Dealer Login | Register
+                    </Button>
+                  </>
                 )}
               </Box>
             </Toolbar>
@@ -214,6 +247,12 @@ const Header = (props) => {
         handleOpen={handleOpen}
         setOpen={setOpen}
         open={open}
+      />
+      <DealerModal
+        handleClose={handleClose2}
+        handleOpen={handleOpen2}
+        setOpen={setOpen2}
+        open={open2}
       />
     </div>
   );
