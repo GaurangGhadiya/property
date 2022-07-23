@@ -387,7 +387,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                     /> */}
                     <FacebookLogin
                       appId="663969168653765"
-                      autoLoad={true}
+                      autoLoad={false}
                       fields="name,email,picture"
                       onClick={(e) => console.log(e)}
                       callback={responseFacebook}
