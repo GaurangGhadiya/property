@@ -84,11 +84,11 @@ const Header = (props) => {
             </ListItemButton>
             <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
-              User Login | Register
+              User Login 
             </ListItemButton>
             <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
-             Dealer Login | Register
+             Dealer Login 
             </ListItemButton>
           </ListItem>
       </List>
@@ -199,7 +199,7 @@ const Header = (props) => {
                         className="me-2"
                         src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
                       />
-                      User Login | Register
+                      User Login 
                     </Button>
                     <Button
                       onClick={handleOpen2}
@@ -211,7 +211,7 @@ const Header = (props) => {
                         className="me-2"
                         src={process.env.PUBLIC_URL + "/Images/Icons/login.png"}
                       />
-                      Dealer Login | Register
+                      Dealer Login 
                     </Button>
                   </>
                 )}
