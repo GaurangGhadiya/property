@@ -218,58 +218,62 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       signUp.password &&
       signUp?.name &&
       signUp?.number &&
-      signUp.password === signUp?.confirmPassword &&
       signUp?.city &&
       signUp?.state &&
       signUp?.pincode &&
-      signUp?.otherContacted &&signUp?.dealershipName &&signUp?.dealerCode &&signUp?.showroomLocation &&
-      signUp?.areaName &&signUp?.servicePhoneNumber &&signUp?.GST &&signUp?.brand && value2
-
+      signUp?.dealershipName &&
+      signUp?.dealerCode &&
+      signUp?.showroomLocation &&
+      signUp?.areaName &&
+      signUp?.servicePhoneNumber &&
+      signUp?.GST &&
+      signUp?.brand &&
+      value2
     ) {
-        const body = {
-          name: signUp?.name,
-          email: signUp?.email,
-          phoneNumber: signUp?.number,
-          password: signUp?.password,
-          countryCode: 91,
-          city: signUp?.city,
-          state: signUp?.state,
-          pinCode: signUp?.pincode,
-          otherContacted: signUp?.otherContacted ?? false,
-          dealershipName: signUp?.dealershipName,
-          dealerCode: signUp?.dealerCode,
-          showroomLocation: signUp?.showroomLocation,
-          areaName: signUp?.areaName,
-          servicePhoneNumber: signUp?.servicePhoneNumber,
-          GST: signUp?.GST,
-          brand: signUp?.brand,
-          dateOfIssuance: value2,
-        };
-        ApiPostNoAuth("dealer/signup",body).then(res => {
-            setSignUp({ otherContacted: false });
-            SuccessToast(res?.data?.message);
-            localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-            setToggle(0)
-            handleClose();
-            window.location.pathname = "/";
-
-        }).catch(e => {
-                        ErrorToast(e?.data?.message);
-
+      const body = {
+        name: signUp?.name,
+        email: signUp?.email,
+        phoneNumber: signUp?.number,
+        password: signUp?.password,
+        countryCode: 91,
+        city: signUp?.city,
+        state: signUp?.state,
+        pinCode: signUp?.pincode,
+        otherContacted: signUp?.otherContacted ?? false,
+        dealershipName: signUp?.dealershipName,
+        dealerCode: signUp?.dealerCode,
+        showroomLocation: signUp?.showroomLocation,
+        areaName: signUp?.areaName,
+        servicePhoneNumber: signUp?.servicePhoneNumber,
+        GST: signUp?.GST,
+        brand: signUp?.brand,
+        dateOfIssuance: value2,
+      };
+      ApiPostNoAuth("dealer/signup", body)
+        .then((res) => {
+          setSignUp({ otherContacted: false });
+          SuccessToast(res?.data?.message);
+          localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+          setToggle(0);
+          handleClose();
+          window.location.pathname = "/";
+        })
+        .catch((e) => {
+          ErrorToast(e?.data?.message);
         });
-    //   createUserWithEmailAndPassword(dealerauth, signUp.email, signUp.password)
-    //     .then(async (res) => {
-    //       console.log("delear sign up", res);
-    //       const user = res?.user;
-    //       await updateProfile(user, { displayName: signUp?.name });
+      //   createUserWithEmailAndPassword(dealerauth, signUp.email, signUp.password)
+      //     .then(async (res) => {
+      //       console.log("delear sign up", res);
+      //       const user = res?.user;
+      //       await updateProfile(user, { displayName: signUp?.name });
 
-    //       //   handleClose();
-    //       SuccessToast("Dealer Sign Up sucessFull!");
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       ErrorToast("Something want wrong");
-    //     });
+      //       //   handleClose();
+      //       SuccessToast("Dealer Sign Up sucessFull!");
+      //     })
+      //     .catch((e) => {
+      //       console.log(e);
+      //       ErrorToast("Something want wrong");
+      //     });
     } else {
       ErrorToast("All Fields are Requried!");
     }
