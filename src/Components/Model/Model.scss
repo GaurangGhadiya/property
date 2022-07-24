@@ -243,13 +243,7 @@
     background-color: white;
     border-radius: 4px;
 }
-.login_btn{
-        width: 70%;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            margin-bottom: 10px !important;
-}
+
 @media only screen and (max-width: 900px) {
     
     .css-1wnsr1i {
@@ -265,6 +259,13 @@
   }
 
 @media only screen and (max-width: 600px) {
+    .login_btn {
+            width: 70%;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 10px !important;
+        }
     .social{
         flex-wrap: wrap;
     }
