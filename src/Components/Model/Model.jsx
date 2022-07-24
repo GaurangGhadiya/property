@@ -276,7 +276,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
       idToken: response?.tokenObj?.id_token,
       deviceToken: "123",
     };
-    ApiPostNoAuth("user/google_login/", body)
+    ApiPostNoAuth("user/google_login", body)
       .then((res) => {
         console.log("es", res);
         SuccessToast(res?.data?.message);
