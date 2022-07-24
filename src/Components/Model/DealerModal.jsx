@@ -436,7 +436,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       cookiePolicy={"single_host_origin"}
                     />
                     <FacebookLogin
-                      appId={process.env.REACT_APP_FACEBOOK_LOGIN}
+                      appId="663969168653765"
                       autoLoad={false}
                       fields="name,email,picture"
                       onClick={(e) => console.log(e)}
