@@ -32,6 +32,7 @@ import { dealerauth } from "../../dealerFirebase";
 import { ErrorToast, SuccessToast } from "../Toast";
 import { ApiPostNoAuth } from "../../Api/Api";
 import { useNavigate } from "react-router-dom";
+import ReactFacebookLogin from "react-facebook-login";
 
 const style = {
   position: "absolute",
@@ -274,6 +275,25 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
         console.log(e);
       });
   };
+
+  const responseFacebook = async (response) => {
+    console.log(response);
+    const body = {
+      accessToken: response?.accessToken,
+      deviceToken: "123",
+    };
+    await ApiPostNoAuth("user/facebook_login", body)
+      .then((res) => {
+        console.log("res", res);
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+        handleClose();
+        window.location.pathname = "/";
+      })
+      .catch((e) => {
+        ErrorToast(e?.data?.message);
+      });
+  };
   const fbLogin = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(dealerauth, provider)
@@ -373,6 +393,13 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     />
                     Continue with Google
                   </Button>
+                  <ReactFacebookLogin
+                    appId="663969168653765"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    onClick={(e) => console.log(e)}
+                    callback={responseFacebook}
+                  />
                   <Button className="" onClick={fbLogin}>
                     <img
                       className="me-2"

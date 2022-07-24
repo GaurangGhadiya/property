@@ -295,8 +295,12 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
     };
    await ApiPostNoAuth("dealer/facebook_login", body).then(res => {
         console.log("res",res);
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+        handleClose();
+        window.location.pathname = "/";
     }).catch(e => {
-        console.log("e",e);
+                        ErrorToast(e?.data?.message);
     });
   };
   const fbLogin = () => {
