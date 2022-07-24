@@ -87,16 +87,20 @@
 .social {
     margin-top: 10px;
     display: flex;
+    justify-content: space-between;
 }
 .social button{
-    padding: 10px 16px;
+    padding: 9.5px 24px;
     border: 1px solid lightgray;
     text-transform: capitalize;
     color: black !important;
     // margin-right: 10px; 
 }
-.social button:nth-child(1) {
-    margin-right: 10px;
+// .social button:nth-child(1) {
+//     margin-right: 10px;
+// }
+.social span button{
+    padding: 11.5px 24px !important;
 }
 
 .phone {
@@ -230,6 +234,7 @@
     padding: 11px !important;
 }
 
+
 .fs-14{
     font-size: 14px !important;
 }
@@ -237,6 +242,13 @@
 .my-facebook-button-class{
     background-color: white;
     border-radius: 4px;
+}
+.login_btn{
+        width: 70%;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 10px !important;
 }
 @media only screen and (max-width: 900px) {
     
@@ -258,7 +270,9 @@
     }
     .social button{
         width: 100%;
-        margin-right: 10px;
+    }
+    .social span{
+        width: 100%;
         margin-top: 10px;
     }
     .img{
