@@ -33,6 +33,11 @@ import { ErrorToast, SuccessToast } from "../Toast";
 import { ApiPostNoAuth } from "../../Api/Api";
 import { useNavigate } from "react-router-dom";
 import ReactFacebookLogin from "react-facebook-login";
+import { FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import GoogleLogin from "react-google-login";
+
+
 
 const style = {
   position: "absolute",
@@ -264,6 +269,27 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     }
   };
 
+  const responseGoogle = (response) => {
+    console.log(response);
+    const body = {
+      accessToken: response?.tokenObj?.access_token,
+      idToken: response?.tokenObj?.id_token,
+      deviceToken: "123",
+    };
+    ApiPostNoAuth("user/google_login", body)
+      .then((res) => {
+        console.log("es", res);
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+        handleClose();
+        window.location.pathname = "/";
+      })
+      .catch((e) => {
+        console.log(e);
+        ErrorToast(e?.data?.message);
+      });
+  };
+
   const googleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(joinLogin === "User" ? auth : dealerauth, provider)
@@ -386,21 +412,47 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                   Login as a User
                 </Button>
                 <div className="social mt-4">
-                  <Button className="" onClick={googleLogin}>
-                    <img
+                  {/* <Button className="" onClick={googleLogin}> */}
+                  {/* <img
                       className="me-2"
                       src={process.env.PUBLIC_URL + "/Images/search 1.png"}
                     />
                     Continue with Google
-                  </Button>
+                  </Button> */}
+                  <GoogleLogin
+                    clientId="10109790765-hafmqegekgk0i04sevd2div2pmt1rfi9.apps.googleusercontent.com"
+                    buttonText="Login"
+                    render={(renderProps) => (
+                      <Button
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                      >
+                        {/* <img
+                          className="me-2"
+                          src={process.env.PUBLIC_URL + "/Images/search 1.png"}
+                        /> */}
+                        <FcGoogle size={20} className="me-2"/>
+                        Continue with Google
+                      </Button>
+                    )}
+                    className="my-facebook-button-class"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                  />
                   <ReactFacebookLogin
                     appId="663969168653765"
                     autoLoad={false}
                     fields="name,email,picture"
                     onClick={(e) => console.log(e)}
                     callback={responseFacebook}
+                    cssClass="my-facebook-button-class m-0"
+                    icon={
+                      <FaFacebook color="blue" size={20} className="me-2" />
+                    }
+                    textButton="Continue with Facebook"
                   />
-                  <Button className="" onClick={fbLogin}>
+                  {/* <Button className="" onClick={fbLogin}>
                     <img
                       className="me-2"
                       src={
@@ -408,7 +460,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                       }
                     />
                     Continue with Facebook
-                  </Button>
+                  </Button> */}
                 </div>
               </TabPanel>
               <TabPanel value={value} index={1}>
