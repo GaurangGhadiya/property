@@ -13,16 +13,16 @@ import Product_Detail from './Pages/Product_Detail';
 import Product_List from './Pages/Product_List';
 
 import {gapi} from "gapi-script"
-const clientId =
-  "10109790765-hafmqegekgk0i04sevd2div2pmt1rfi9.apps.googleusercontent.com";
+
 
 function App() {
   const [isAuth, setIsAuth] = useState({})
 
   const start = () =>{
     gapi.client.init({
-      clientId,scope:""
-    })
+      clientId: process.env.REACT_APP_GOOGLE_LOGIN,
+      scope: "",
+    });
   }
 
   useEffect(() => {

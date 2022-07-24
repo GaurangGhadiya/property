@@ -415,7 +415,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       />
                     </GoogleOAuthProvider> */}
                     <GoogleLogin
-                      clientId="10109790765-hafmqegekgk0i04sevd2div2pmt1rfi9.apps.googleusercontent.com"
+                      clientId={process.env.REACT_APP_GOOGLE_LOGIN}
                       buttonText="Login"
                       render={(renderProps) => (
                         <Button
@@ -436,7 +436,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       cookiePolicy={"single_host_origin"}
                     />
                     <FacebookLogin
-                      appId="663969168653765"
+                      appId={process.env.REACT_APP_FACEBOOK_LOGIN}
                       autoLoad={false}
                       fields="name,email,picture"
                       onClick={(e) => console.log(e)}

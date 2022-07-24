@@ -420,7 +420,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     Continue with Google
                   </Button> */}
                   <GoogleLogin
-                    clientId="10109790765-hafmqegekgk0i04sevd2div2pmt1rfi9.apps.googleusercontent.com"
+                    clientId={process.env.REACT_APP_GOOGLE_LOGIN}
                     buttonText="Login"
                     render={(renderProps) => (
                       <Button
@@ -431,7 +431,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                           className="me-2"
                           src={process.env.PUBLIC_URL + "/Images/search 1.png"}
                         /> */}
-                        <FcGoogle size={20} className="me-2"/>
+                        <FcGoogle size={20} className="me-2" />
                         Continue with Google
                       </Button>
                     )}
@@ -441,7 +441,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     cookiePolicy={"single_host_origin"}
                   />
                   <ReactFacebookLogin
-                    appId="663969168653765"
+                    appId={process.env.REACT_APP_FACEBOOK_LOGIN}
                     autoLoad={false}
                     fields="name,email,picture"
                     onClick={(e) => console.log(e)}
