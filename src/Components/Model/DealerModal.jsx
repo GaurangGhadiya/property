@@ -441,7 +441,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       fields="name,email,picture"
                       onClick={(e) => console.log(e)}
                       callback={responseFacebook}
-                      cssClass="my-facebook-button-class m-0"
+                      cssClass="my-facebook-button-class m-0 fs-14"
                       icon={
                         <FaFacebook color="blue" size={20} className="me-2" />
                       }

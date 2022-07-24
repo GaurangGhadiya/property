@@ -441,12 +441,23 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     cookiePolicy={"single_host_origin"}
                   />
                   <ReactFacebookLogin
+                  render={(renderProps) => {
+                    <Button className="" onClick={renderProps.onClick}>
+                      <img
+                        className="me-2"
+                        src={
+                          process.env.PUBLIC_URL + "/Images/facebook (1) 1.png"
+                        }
+                      />
+                      Continue with Facebook
+                    </Button>;
+                  }}
                     appId="663969168653765"
                     autoLoad={false}
                     fields="name,email,picture"
                     onClick={(e) => console.log(e)}
                     callback={responseFacebook}
-                    cssClass="my-facebook-button-class m-0"
+                    cssClass="my-facebook-button-class m-0 fs-14"
                     icon={
                       <FaFacebook color="blue" size={20} className="me-2" />
                     }
