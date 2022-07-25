@@ -14,6 +14,7 @@ import Product_List from './Pages/Product_List';
 
 import {gapi} from "gapi-script"
 import Add_Product from './Pages/Add_Product';
+import View_Product from './Pages/View_Product';
 
 
 function App() {
@@ -60,6 +61,7 @@ gapi.load('client:auth2',start)
         <Route path="/product-detail" element={<Product_Detail />} />
         <Route path="/product-list" element={<Product_List />} />
         <Route path="/add-product" element={<Add_Product />} />
+        <Route path="/view-product" element={<View_Product />} />
         <Route element={<ProtectedRoutes />}>
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}

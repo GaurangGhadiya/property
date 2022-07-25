@@ -67,7 +67,7 @@ const Description = () => {
                         {data.map((e) => {
                             return (
                                 <tr>
-                                    <td>{e?.title}:</td>
+                                    <td>{e?.title}</td>
                                     <td>{e?.value}</td>
                                 </tr>
                             )
@@ -79,7 +79,7 @@ const Description = () => {
                         {data.map((e) => {
                             return (
                                 <tr>
-                                    <td>{e?.title}:</td>
+                                    <td>{e?.title}</td>
                                     <td>{e?.value}</td>
                                 </tr>
                             )
@@ -91,7 +91,7 @@ const Description = () => {
                         {data.map((e) => {
                             return (
                                 <tr>
-                                    <td>{e?.title}:</td>
+                                    <td>{e?.title}</td>
                                     <td>{e?.value}</td>
                                 </tr>
                             )
@@ -122,7 +122,7 @@ const Description = () => {
                 </tr>
                 <tr>
                     <td>Lead Time:</td>
-                    <td>Quantity(Sets) 1-1 >1</td>
+                    <td>Quantity(Sets) 1-1 > 1</td>
                 </tr>
             </table>
         </div>

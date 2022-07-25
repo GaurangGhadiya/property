@@ -17,18 +17,21 @@
 .Product_List .product_table {
     margin-top: 20px;
     font-family: 'Inter' !important;
-    
+
 }
-.Product_List .product_table table tr td{
+
+.Product_List .product_table table tr td {
     font-weight: 600 !important;
-font-size: 16px !important;
-line-height: 22px !important;
-color: #1D2222 !important;
+    font-size: 16px !important;
+    line-height: 22px !important;
+    color: #1D2222 !important;
 }
+
 .Product_List .product_table thead {
     background: #F7F7F7;
     border-radius: 20px;
 }
+
 .Product_List .product_table tbody tr {
     border-bottom: 1px solid lightgray;
 }
@@ -44,14 +47,17 @@ color: #1D2222 !important;
 .W_150 {
     width: 300px;
 }
-.W_150 img{
+
+.W_150 img {
     margin: 20px 0;
 }
-.action{
+
+.action {
     display: flex;
     flex-wrap: wrap;
 }
-.action_btn{
+
+.action_btn {
     font-weight: 600 !important;
     border: none;
     background-color: white;
@@ -60,46 +66,60 @@ color: #1D2222 !important;
     border-radius: 5px;
     padding: 5px 13px;
 }
-.W_150 div{
+
+.W_150 div {
     align-items: center;
 }
-.product_pagination{
-    margin:40px 0;
+
+.product_pagination {
+    margin: 40px 0;
     display: flex;
     justify-content: space-between;
 }
-.product_pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root, .MuiButtonBase-root{
-font-weight: 600;
+
+.product_pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root,
+.MuiButtonBase-root {
+    font-weight: 600;
 }
-.product_pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected, .MuiButtonBase-root.Mui-selected{
+
+.product_pagination .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected,
+.MuiButtonBase-root.Mui-selected {
     background-color: white !important;
-    border: none !important ;
+    border: none !important;
 }
+
 @media only screen and (max-width: 600px) {
-    .Product_List h1{
-margin: 20px 0;
+    .Product_List h1 {
+        margin: 20px 0;
     }
-    .responsiveTable td .tdBefore{
+
+    .responsiveTable td .tdBefore {
         margin-top: 10px !important;
     }
+
     .Product_List .product_table tbody tr td {
         padding-left: calc(50% + 10px) !important;
         padding-top: 10px;
     }
+
     .W_150 {
         width: auto !important;
     }
-    .W_150 div{
+
+    .W_150 div {
         align-items: flex-start;
         flex-direction: column;
     }
-    .action_btn{
+
+    .action_btn {
         margin-top: 10px;
     }
-    .action_btn:nth-child(3){
+
+    .action_btn:nth-child(3) {
         margin-bottom: 10px;
     }
-    .W_150 img{
+
+    .W_150 img {
         margin: 0;
     }
 }
