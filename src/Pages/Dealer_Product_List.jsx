@@ -13,7 +13,7 @@ const breadcrumb = [
         Product list
     </Typography>,
 ];
-const Product_List = () => {
+const Dealer_Product_List = () => {
     return (
         <div className='Product_List'>
             <div className='header_breadcrumb'>
@@ -250,4 +250,4 @@ const Product_List = () => {
     )
 }
 
-export default Product_List
+export default Dealer_Product_List

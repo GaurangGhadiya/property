@@ -1,0 +1,176 @@
+.user_car_list .phone select {
+    padding: 0 13px !important;
+}
+
+.user_car_list .phone {
+    position: relative;
+    margin-top: 10px;
+}
+
+.accordion-body {
+    padding: 0 1.25rem !important;
+}
+
+.accordion-button {
+    padding: 1rem 1.25rem 0.5rem 1.25rem !important;
+}
+
+.user_car_list .product_agree label span {
+    padding: 0 5px !important;
+}
+
+.user_car_list .loc_icon {
+    position: absolute;
+    right: 145px;
+    top: 3px;
+}
+
+.user_car_list .phone .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
+.user_car_list .phone .css-1x5jdmq {
+    border-radius: 0px !important;
+}
+
+.user_car_list .ser_btn button {
+    background-color: #249EA0;
+    color: white;
+    border-radius: 0 8px 8px 0 !important;
+    padding: 12px 20px;
+}
+
+.ant-slider-track {
+    background-color: #249EA0 !important;
+}
+
+.ant-slider-handle {
+    border: 2px solid #249EA0 !important;
+}
+
+.accordion {
+    background: #FFFFFF;
+    box-shadow: 0px -3px 20px rgba(0, 0, 0, 0.07);
+    margin-top: 33px;
+}
+
+.accordion-item {
+    border: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1D2222 !important;
+    background-color: white !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23212529%27%3e%3cpath fill-rule=%27evenodd%27 d=%27M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e");
+}
+
+.accordion-button:focus {
+    border-color: white !important;
+    box-shadow: none !important;
+}
+
+.user_car_list .card {
+    padding: 7px;
+    position: relative;
+}
+.user_car_list .card .like_btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    border: 1px solid #D9D9D9;
+}
+.user_car_list .card .price {
+    margin-bottom: 0px;
+}
+
+.user_car_list .card-body {
+    padding: 1rem 0 0 0 !important;
+}
+
+.user_car_list .card-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #1D2222;
+}
+
+.user_car_list .card-body h4 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1D2222;
+    margin-bottom: 5px;
+}
+
+.user_car_list .card-body h6 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #7E7E7E;
+}
+
+.user_car_list .bugde {
+    background: #fff0d9;
+    // opacity: 0.15;
+    height: 30px;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+.user_car_list .bugde p {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FF9C00 !important;
+    width: 110px !important;
+}
+.add_cart .outline_btn{
+    width: 100%;
+}
+.user_car_list .question{
+    background: #F7F7F7;
+border-radius: 8px;
+display: flex;
+padding: 15px 20px;
+align-items: center;
+
+}
+.user_car_list .question h6{
+    margin-bottom: 0;
+}
+.user_car_list .question .box{
+    background: #FFFFFF;
+border: 1px solid #D9D9D9;
+padding: 7px 20px;
+border-radius: 4px;
+margin-left: 10px;
+font-weight: 600;
+font-size: 16px;
+line-height: 19px;
+color: #1D2222;
+}
+.range_dropdown {
+    display: flex;
+    justify-content: space-between;
+}
+.range_dropdown select{
+    background: #FFFFFF;
+    padding: 8px 12px;
+border: 1px solid #D9D9D9 !important;
+border-radius: 4px;
+}
+@media only screen and (max-width: 600px) {
+    .user_car_list .loc_icon{
+        right: 115px;
+        top: 0;
+    }
+    .user_car_list .ser_btn button{
+        padding: 12px 10px;
+    }
+}

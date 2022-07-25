@@ -4,17 +4,18 @@ import { Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './Routes/ProtectedRoutes';
 import Home from './Pages/Home';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle"
 import { Toaster } from 'react-hot-toast';
 import { auth } from './userFirebase';
 import { dealerauth } from "./dealerFirebase";
 import { useEffect, useState } from 'react';
 import Header from './Components/Header/Header';
 import Product_Detail from './Pages/Product_Detail';
-import Product_List from './Pages/Product_List';
-
 import {gapi} from "gapi-script"
 import Add_Product from './Pages/Add_Product';
 import View_Product from './Pages/View_Product';
+import Dealer_Product_List from './Pages/Dealer_Product_List';
+import User_Product_List from './Pages/User_Product_List';
 
 
 function App() {
@@ -59,7 +60,8 @@ gapi.load('client:auth2',start)
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product-detail" element={<Product_Detail />} />
-        <Route path="/product-list" element={<Product_List />} />
+        <Route path="/dealer-product-list" element={<Dealer_Product_List />} />
+        <Route path="/user-product-list" element={<User_Product_List />} />
         <Route path="/add-product" element={<Add_Product />} />
         <Route path="/view-product" element={<View_Product />} />
         <Route element={<ProtectedRoutes />}>
