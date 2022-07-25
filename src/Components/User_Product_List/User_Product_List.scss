@@ -77,7 +77,8 @@
     padding: 7px;
     position: relative;
 }
-.user_car_list .card .like_btn{
+
+.user_car_list .card .like_btn {
     position: absolute;
     right: 15px;
     top: 15px;
@@ -86,6 +87,7 @@
     border-radius: 50%;
     border: 1px solid #D9D9D9;
 }
+
 .user_car_list .card .price {
     margin-bottom: 0px;
 }
@@ -123,6 +125,7 @@
     padding: 5px 15px;
     border-radius: 15px;
 }
+
 .user_car_list .bugde p {
     font-weight: 600;
     font-size: 14px;
@@ -130,47 +133,55 @@
     color: #FF9C00 !important;
     width: 110px !important;
 }
-.add_cart .outline_btn{
+
+.add_cart .outline_btn {
     width: 100%;
 }
-.user_car_list .question{
+
+.user_car_list .question {
     background: #F7F7F7;
-border-radius: 8px;
-display: flex;
-padding: 15px 20px;
-align-items: center;
+    border-radius: 8px;
+    display: flex;
+    padding: 15px 20px;
+    align-items: center;
 
 }
-.user_car_list .question h6{
+
+.user_car_list .question h6 {
     margin-bottom: 0;
 }
-.user_car_list .question .box{
+
+.user_car_list .question .box {
     background: #FFFFFF;
-border: 1px solid #D9D9D9;
-padding: 7px 20px;
-border-radius: 4px;
-margin-left: 10px;
-font-weight: 600;
-font-size: 16px;
-line-height: 19px;
-color: #1D2222;
+    border: 1px solid #D9D9D9;
+    padding: 7px 20px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1D2222;
 }
+
 .range_dropdown {
     display: flex;
     justify-content: space-between;
 }
-.range_dropdown select{
+
+.range_dropdown select {
     background: #FFFFFF;
     padding: 8px 12px;
-border: 1px solid #D9D9D9 !important;
-border-radius: 4px;
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 4px;
 }
+
 @media only screen and (max-width: 600px) {
-    .user_car_list .loc_icon{
+    .user_car_list .loc_icon {
         right: 115px;
         top: 0;
     }
-    .user_car_list .ser_btn button{
+
+    .user_car_list .ser_btn button {
         padding: 12px 10px;
     }
 }
