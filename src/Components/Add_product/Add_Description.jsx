@@ -2,41 +2,20 @@ import { Grid, TextField } from '@mui/material';
 import React, { useState } from 'react'
 import RichTextEditor from "react-rte";
 
-const Add_Description = () => {
-    const [richValue, setrichValue] = useState(RichTextEditor.createEmptyValue());
-    const [richValue1, setrichValue1] = useState(RichTextEditor.createEmptyValue());
-    const [richValue2, setrichValue2] = useState(RichTextEditor.createEmptyValue());
-    const [pipData, setpipData] = useState({});
-    const [pipData1, setpipData1] = useState({});
-    const [pipData2, setpipData2] = useState({});
-    const onChange = (value) => {
-        setrichValue(value);
-        value.toString("html");
-        setpipData({ ...pipData, description: value.toString("html") });
-      };
-    const onChange1 = (value) => {
-        setrichValue1(value);
-        value.toString("html");
-        setpipData1({ ...pipData, description: value.toString("html") });
-      };
-    const onChange2 = (value) => {
-        setrichValue2(value);
-        value.toString("html");
-        setpipData2({ ...pipData, description: value.toString("html") });
-      };
+const Add_Description = ({handleChange,data,richValue,richValue1,richValue2,onChange3,onChange1,onChange2}) => {
     return (
         <div className='text_editor'>
             <div className="input_filed">
                 <label className='text_editor_lable'>Column 1</label>
-                <RichTextEditor value={richValue} onChange={onChange} />
+                <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
             </div>
             <div className="input_filed">
                 <label className='text_editor_lable'>Column 2</label>
-                <RichTextEditor value={richValue1} onChange={onChange1} />
+                <RichTextEditor name="description" value={richValue1} onChange={onChange1} />
             </div>
             <div className="input_filed">
                 <label className='text_editor_lable'>Column 3</label>
-                <RichTextEditor value={richValue2} onChange={onChange2} />
+                <RichTextEditor name="description" value={richValue2} onChange={onChange2} />
             </div>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}><h6 className='mt-4'>Supply Ability</h6></Grid>
@@ -50,7 +29,9 @@ const Add_Description = () => {
                                     hiddenLabel
                                     id="outlined-basic"
                                     variant="outlined"
-                                    name="Supply Ability"
+                                    name="supplyAbility"
+                                    value={data?.supplyAbility}
+                                    onChange={handleChange}
                                 />
                             </div>
                     </Grid>
@@ -64,7 +45,9 @@ const Add_Description = () => {
                                     hiddenLabel
                                     id="outlined-basic"
                                     variant="outlined"
-                                    name="Packaging Details"
+                                    name="packaging"
+                                    value={data?.packaging}
+                                    onChange={handleChange}
                                 />
                             </div>
                 </Grid>
@@ -76,7 +59,9 @@ const Add_Description = () => {
                                     hiddenLabel
                                     id="outlined-basic"
                                     variant="outlined"
-                                    name="Port"
+                                    name="port"
+                                    value={data?.port}
+                                    onChange={handleChange}
                                 />
                             </div>
                 </Grid>
@@ -88,7 +73,9 @@ const Add_Description = () => {
                                     hiddenLabel
                                     id="outlined-basic"
                                     variant="outlined"
-                                    name="Lead Time"
+                                    name="leadTime"
+                                    value={data?.leadTime}
+                                    onChange={handleChange}
                                 />
                             </div>
                 </Grid>

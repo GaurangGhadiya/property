@@ -1,10 +1,11 @@
 import { Button, Container, Link, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../Components/Breadcrumbs/Breadcrumb'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "../Components/Product_List/Product_List.scss"
 import { Pagination } from '@mui/material';
+import { ApiGet } from '../Api/Api';
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
         Home
@@ -14,6 +15,17 @@ const breadcrumb = [
     </Typography>,
 ];
 const Dealer_Product_List = () => {
+    const [data, setData] = useState([])
+    useEffect(() => {
+        ApiGet("dealer/product")
+        .then((res) => {
+            console.log(res);
+            setData(res?.data?.data)
+        })
+        .catch(async (err) => {
+            console.log(err);
+        });
+    }, [])
     return (
         <div className='Product_List'>
             <div className='header_breadcrumb'>
@@ -50,7 +62,9 @@ const Dealer_Product_List = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            <Tr>
+                            {data?.map((e) => {
+                                return (
+                                    <Tr>
                                 <Td className="W_150">
                                     <div className="d-flex   align-items-center">
                                         <img
@@ -81,161 +95,8 @@ const Dealer_Product_List = () => {
                                     </div>
                                 </Td>
                             </Tr>
-                            <Tr>
-                                <Td className="W_150">
-                                    <div className="d-flex   align-items-center">
-                                        <img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/table.png"}
-                                        />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
-                                    </div>
-                                </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
-                                <Td>
-                                    <div className="action">
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                        />Edit</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/eye.png"}
-                                        />View</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/delete.png"}
-                                        />Delete</button>
-                                    </div>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td className="W_150">
-                                    <div className="d-flex   align-items-center">
-                                        <img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/table.png"}
-                                        />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
-                                    </div>
-                                </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
-                                <Td>
-                                    <div className="action">
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                        />Edit</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/eye.png"}
-                                        />View</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/delete.png"}
-                                        />Delete</button>
-                                    </div>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td className="W_150">
-                                    <div className="d-flex   align-items-center">
-                                        <img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/table.png"}
-                                        />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
-                                    </div>
-                                </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
-                                <Td>
-                                    <div className="action">
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                        />Edit</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/eye.png"}
-                                        />View</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/delete.png"}
-                                        />Delete</button>
-                                    </div>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td className="W_150">
-                                    <div className="d-flex ">
-                                        <img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/table.png"}
-                                        />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
-                                    </div>
-                                </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
-                                <Td>
-                                    <div className="action">
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                        />Edit</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/eye.png"}
-                                        />View</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/delete.png"}
-                                        />Delete</button>
-                                    </div>
-                                </Td>
-                            </Tr>
-                            <Tr>
-                                <Td className="W_150">
-                                    <div className="d-flex   align-items-center">
-                                        <img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/table.png"}
-                                        />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
-                                    </div>
-                                </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
-                                <Td>
-                                    <div className="action">
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                        />Edit</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/eye.png"}
-                                        />View</button>
-                                        <button className='action_btn'><img
-                                            className="me-2"
-                                            src={process.env.PUBLIC_URL + "/Images/delete.png"}
-                                        />Delete</button>
-                                    </div>
-                                </Td>
-                            </Tr>
+                                )
+                            })}
                         </Tbody>
                     </Table>
                 </div>

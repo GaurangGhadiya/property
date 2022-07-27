@@ -142,7 +142,12 @@
 .Dropdown__root___3ALmx {
     display: none !important;
 }
-
+.Add_Product select{
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 5px;
+    padding: 12px;
+    width: 100%;
+}
 .text_editor h6 {
     font-weight: 700;
     font-size: 18px;

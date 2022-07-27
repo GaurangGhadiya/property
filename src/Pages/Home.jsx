@@ -21,7 +21,6 @@ const Home = () => {
     <Top_Car />
     <Our_Service />
     <Download_App />
-    <Footer />
     </>
   )
 }

@@ -16,6 +16,7 @@ import Add_Product from './Pages/Add_Product';
 import View_Product from './Pages/View_Product';
 import Dealer_Product_List from './Pages/Dealer_Product_List';
 import User_Product_List from './Pages/User_Product_List';
+import Footer from './Components/Footer/Footer';
 
 
 function App() {
@@ -69,6 +70,7 @@ gapi.load('client:auth2',start)
           {/* <Route path="/contact" element={<Contact />} /> */}
         </Route>
       </Routes>
+        <Footer />
       <Toaster position="top-right" reverseOrder={false} />
     </>
   );
