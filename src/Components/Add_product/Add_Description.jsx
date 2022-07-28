@@ -2,20 +2,11 @@ import { Grid, TextField } from '@mui/material';
 import React, { useState } from 'react'
 import RichTextEditor from "react-rte";
 
-const Add_Description = ({handleChange,data,richValue,richValue1,richValue2,onChange3,onChange1,onChange2}) => {
+const Add_Description = ({handleChange,data,richValue,onChange3}) => {
     return (
         <div className='text_editor'>
             <div className="input_filed">
-                <label className='text_editor_lable'>Column 1</label>
                 <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
-            </div>
-            <div className="input_filed">
-                <label className='text_editor_lable'>Column 2</label>
-                <RichTextEditor name="description" value={richValue1} onChange={onChange1} />
-            </div>
-            <div className="input_filed">
-                <label className='text_editor_lable'>Column 3</label>
-                <RichTextEditor name="description" value={richValue2} onChange={onChange2} />
             </div>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}><h6 className='mt-4'>Supply Ability</h6></Grid>

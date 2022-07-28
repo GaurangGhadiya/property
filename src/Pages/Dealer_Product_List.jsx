@@ -5,7 +5,9 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "../Components/Product_List/Product_List.scss"
 import { Pagination } from '@mui/material';
-import { ApiGet } from '../Api/Api';
+import {ApiPost } from '../Api/Api';
+import moment from 'moment';
+import {useNavigate} from 'react-router-dom'
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
         Home
@@ -15,16 +17,40 @@ const breadcrumb = [
     </Typography>,
 ];
 const Dealer_Product_List = () => {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
-    useEffect(() => {
-        ApiGet("dealer/product")
+    const [totalpage, settotalpage] = useState(0);
+    const [currentpage, setcurrentpage] = useState(1);
+  const [searching, setsearching] = useState("");
+
+    const fetchData = (a,c) => {
+        const body = {
+            page:a,
+            limit:10,
+            search:c
+        }
+        ApiPost("dealer/product/filter_product",body)
         .then((res) => {
             console.log(res);
-            setData(res?.data?.data)
+            setData(res?.data?.data?.product_data)
+            settotalpage(res?.data?.data?.state?.page_limit);
+        setcurrentpage(res?.data?.data?.state?.page);
         })
         .catch(async (err) => {
             console.log(err);
         });
+    }
+    const handlesearch = (e) => {
+        console.log(e.target.value);
+        setsearching(e.target.value);
+        fetchData(1,e.target.value);
+      };
+    const handleChange = (e, i) => {
+        console.log(i);
+        fetchData(i, searching);
+      };
+      useEffect(() => {
+        fetchData(1, searching);
     }, [])
     return (
         <div className='Product_List'>
@@ -42,10 +68,11 @@ const Dealer_Product_List = () => {
                             hiddenLabel
                             id="outlined-basic"
                             variant="outlined"
-                            name="email"
+                            value={searching}
+                            onChange={(e) => handlesearch(e)}
                         />
                     </div>
-                    <Button className="common_btn w-100" >
+                    <Button className="common_btn w-100" onClick={() => navigate("/add-product")}>
                         Add Product
                     </Button>
                 </div>
@@ -57,7 +84,6 @@ const Dealer_Product_List = () => {
                                 <Th>Purchage Order</Th>
                                 <Th>Price</Th>
                                 <Th>Body Type</Th>
-                                <Th>Mileage</Th>
                                 <Th>Action</Th>
                             </Tr>
                         </Thead>
@@ -71,13 +97,12 @@ const Dealer_Product_List = () => {
                                             className="me-2"
                                             src={process.env.PUBLIC_URL + "/Images/table.png"}
                                         />
-                                        <span>Raysince supplier mini vehicle 2021 Hot sales smart</span>
+                                        <span>{e?.title}</span>
                                     </div>
                                 </Td>
-                                <Td>$12,000.00</Td>
-                                <Td>$12,000.00</Td>
-                                <Td>Coupe</Td>
-                                <Td>13600</Td>
+                                <Td>{moment(e?.createdAt).format("DD/MM/YYYY")}</Td>
+                                <Td>{e?.price ? e?.price : 0}</Td>
+                                <Td>{e?.bodyType?.bodyType ? e?.bodyType?.bodyType : "-"}</Td>
                                 <Td>
                                     <div className="action">
                                         <button className='action_btn'><img
@@ -103,8 +128,15 @@ const Dealer_Product_List = () => {
             </Container>
             <Container>
             <div className="product_pagination ">
-            <h6>Page 1 to 20</h6>
-            <Pagination count={4} variant="outlined" shape="rounded" />
+            <h6>Page {currentpage} to {totalpage}</h6>
+            <Pagination
+                    count={totalpage}
+                    page={currentpage}
+                    onChange={handleChange}
+                    variant="outlined"
+                    shape="rounded"
+                    className="pagination_"
+                  />
             </div>
             </Container>
         </div>

@@ -40,8 +40,8 @@ const Add_Product = () => {
         packaging: "",
         port: "",
         leadTime: "",
-        question:"",
-        ans:""
+        question: "",
+        ans: ""
     })
     const [protection, setProtection] = useState({
         tradeAssurance: false,
@@ -56,28 +56,18 @@ const Add_Product = () => {
     const [image, setImage] = useState([])
     const [category, setCategory] = useState([])
     const [categoryID, setCategoryID] = useState("")
+    const [subCategory, setSubCategory] = useState([])
+    const [SubCategoryID, setSubCategoryID] = useState("")
+    const [body_type, setBody_type] = useState([])
+    const [body_typeID, setBody_typeID] = useState("")
     const [value, setValue] = React.useState(0)
     const [richValue, setrichValue] = useState(RichTextEditor.createEmptyValue());
-    const [richValue1, setrichValue1] = useState(RichTextEditor.createEmptyValue());
-    const [richValue2, setrichValue2] = useState(RichTextEditor.createEmptyValue());
     const [pipData, setpipData] = useState({});
-    const [pipData1, setpipData1] = useState({});
-    const [pipData2, setpipData2] = useState({});
     const onChange = (value) => {
         setrichValue(value);
         value.toString("html");
         setpipData({ ...pipData, description: value.toString("html") });
-      };
-    const onChange1 = (value) => {
-        setrichValue1(value);
-        value.toString("html");
-        setpipData1({ ...pipData1, description: value.toString("html") });
-      };
-    const onChange2 = (value) => {
-        setrichValue2(value);
-        value.toString("html");
-        setpipData2({ ...pipData2, description: value.toString("html") });
-      };
+    };
     const changeCheccbox = (e) => {
         const { name, checked } = e.target
         setProtection({
@@ -114,7 +104,7 @@ const Add_Product = () => {
     const deleteImage = (e) => {
         setImage(image.filter(y => y != e))
     }
-    console.log("protection",protection );
+    console.log("protection", protection);
     console.log("category", category);
     const imagearrayapi = async () => {
         let image1 = [];
@@ -140,80 +130,93 @@ const Add_Product = () => {
     const submitData = async () => {
         let image = await imagearrayapi();
         const body = {
-            categoryId:categoryID,
-            title:data?.title,
-            benefits:data?.benefits,
-            price:data?.price,
-            maxQuantity:data?.maxQuantity,
-            customization:data?.customization,
-            shippingCharge:data?.shippingCharge,
-            shipping:data?.shipping,
-            supplyAbility:data?.supplyAbility,
-            packaging:data?.packaging,
-            port:data?.port,
-            leadTime:data?.leadTime,
-            shareOption:share,
+            categoryId: categoryID,
+            subCategoryId: SubCategoryID,
+            bodyTypeId: body_typeID,
+            title: data?.title,
+            benefits: data?.benefits,
+            price: data?.price,
+            maxQuantity: data?.maxQuantity,
+            customization: data?.customization,
+            shippingCharge: data?.shippingCharge,
+            shipping: data?.shipping,
+            supplyAbility: data?.supplyAbility,
+            packaging: data?.packaging,
+            port: data?.port,
+            leadTime: data?.leadTime,
+            shareOption: share,
             protection,
-            image:image,
-            description:{
-                column1:pipData?.description,
-                column2:pipData1?.description,
-                column3:pipData2?.description
-            },
+            image: image,
+            description: pipData?.description
         }
-        console.log("body",body);
+        console.log("body", body);
         await ApiPost("dealer/product/add", body)
-        .then((res) => {
-            SuccessToast(res?.data?.message);
-            setData({
-                title: "",
-                benefits: "",
-                price: "",
-                maxQuantity: "",
-                customization: "",
-                shippingCharge: "",
-                shipping: "",
-                supplyAbility: "",
-                packaging: "",
-                port: "",
-                leadTime: "",
-                question:"",
-                ans:""
+            .then((res) => {
+                SuccessToast(res?.data?.message);
+                setData({
+                    title: "",
+                    benefits: "",
+                    price: "",
+                    maxQuantity: "",
+                    customization: "",
+                    shippingCharge: "",
+                    shipping: "",
+                    supplyAbility: "",
+                    packaging: "",
+                    port: "",
+                    leadTime: "",
+                    question: "",
+                    ans: ""
+                })
+                setCategoryID("")
+                setSubCategoryID("")
+                setBody_typeID("")
+                setImage([])
+                setShare({
+                    facebook: false,
+                    linkedin: false,
+                    twitter: false,
+                    pinterest: false
+                })
+                setProtection({
+                    tradeAssurance: false,
+                    refundPolicy: false
+                })
+                setpipData({})
+                setrichValue(RichTextEditor.createEmptyValue())
             })
-            setCategoryID("")
-            setImage([])
-            setShare({
-                facebook: false,
-                linkedin: false,
-                twitter: false,
-                pinterest: false
-            })
-            setProtection({
-                tradeAssurance: false,
-                refundPolicy: false
-            })
-            setpipData({})
-            setpipData1({})
-            setpipData2({})
-            setrichValue(RichTextEditor.createEmptyValue())
-            setrichValue1(RichTextEditor.createEmptyValue())
-            setrichValue2(RichTextEditor.createEmptyValue())
-        })
-        .catch(async (err) => {
-            console.log(err);
-        });
+            .catch(async (err) => {
+                console.log(err);
+            });
     }
     useEffect(() => {
         ApiGet("dealer/category")
-        .then((res) => {
-            console.log(res);
-            setCategory(res?.data?.data)
-        })
-        .catch(async (err) => {
-            console.log(err);
-        });
+            .then((res) => {
+                console.log(res);
+                setCategory(res?.data?.data)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+        ApiGet("dealer/bodyType")
+            .then((res) => {
+                console.log(res);
+                setBody_type(res?.data?.data)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
     }, [])
-    
+    useEffect(() => {
+        ApiGet(`dealer/subCategory/category/${categoryID}`)
+            .then((res) => {
+                console.log(res);
+                setSubCategory(res?.data?.data)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+    }, [categoryID])
     return (
         <div className='Add_Product'>
             <div className='header_breadcrumb'>
@@ -246,19 +249,39 @@ const Add_Product = () => {
                     </div>
 
                     </Grid>
-                    <Grid item sx={12} sm={12} md={12} >
-                    <div className="input_filed">
+                    <Grid container item spacing={3} sx={12} sm={12} md={12}>
+                        <Grid item sx={12} sm={12} md={6} >
+                            <div className="input_filed">
                                 <label htmlFor="Title">Category</label>
-                                <select name='categoryId' value={categoryID} onChange={(y) => setCategoryID(y?.target.value)} id="">
-                                <option value="">Select</option>
-                                                    {category.map(e => <option value={e?._id}>{e?.name}</option>)}
-                                                </select>
+                                <select value={categoryID} onChange={(y) => setCategoryID(y?.target.value)} id="">
+                                    <option value="">Select</option>
+                                    {category.map(e => <option value={e?._id}>{e?.name}</option>)}
+                                </select>
                             </div>
                         </Grid>
-                    <Grid  item spacing={3} sx={12} sm={12} md={6}>
+                        {subCategory.length !== 0 && <Grid item sx={12} sm={12} md={6} >
+                            <div className="input_filed">
+                                <label htmlFor="Title">Sub Category</label>
+                                <select value={SubCategoryID} onChange={(y) => setSubCategoryID(y?.target.value)} id="">
+                                    <option value="">Select</option>
+                                    {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
+                                </select>
+                            </div>
+                        </Grid>}
+                        <Grid item sx={12} sm={12} md={6} >
+                            <div className="input_filed">
+                                <label htmlFor="Title">Body Type</label>
+                                <select value={body_typeID} onChange={(y) => setBody_typeID(y?.target.value)} id="">
+                                    <option value="">Select</option>
+                                    {body_type.map(e => <option value={e?._id}>{e?.bodyType}</option>)}
+                                </select>
+                            </div>
+                        </Grid>
+                    </Grid>
+                    <Grid item spacing={3} sx={12} sm={12} md={6}>
 
                         <Grid item sx={12} sm={12} md={12} >
-                        <div className="input_filed">
+                            <div className="input_filed">
                                 <label htmlFor="Title">Product Title</label>
                                 <TextField
                                     type="Product Title"
@@ -292,7 +315,7 @@ const Add_Product = () => {
                             <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox}/>
+                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} />
                                     }
                                     label="Trade Assurance"
                                 />
@@ -432,14 +455,14 @@ const Add_Product = () => {
                                     <Tab label="Company Profile" {...a11yProps(1)} />
                                 </Tabs>
                             </Box>
-                            {value === 0 && <Add_Description data={data} handleChange={handleChange} richValue={richValue} richValue1={richValue1}richValue2={richValue2} onChange3={onChange} onChange1={onChange1 } onChange2={onChange2}/>}
+                            {value === 0 && <Add_Description data={data} handleChange={handleChange} richValue={richValue} onChange3={onChange} />}
                             {value === 1 && <Add_Comapny_Profile />}
                         </div>
                     </Grid>
 
                 </Grid>
             </Container>
-            <Faq data={data} handleChange={handleChange}/>
+            <Faq data={data} handleChange={handleChange} />
             <div className="bottom_btn">
                 <button className='outline_btn'>Cancle</button>
                 <button className='none_outline_btn' onClick={submitData}>Add Product</button>

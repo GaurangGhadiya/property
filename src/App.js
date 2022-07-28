@@ -17,6 +17,7 @@ import View_Product from './Pages/View_Product';
 import Dealer_Product_List from './Pages/Dealer_Product_List';
 import User_Product_List from './Pages/User_Product_List';
 import Footer from './Components/Footer/Footer';
+import Dealer_Profile from './Pages/Dealer_Profile';
 
 
 function App() {
@@ -60,12 +61,14 @@ gapi.load('client:auth2',start)
       <Header isAuth={isAuth} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
+        
+        <Route element={<ProtectedRoutes />}>
         <Route path="/product-detail" element={<Product_Detail />} />
         <Route path="/dealer-product-list" element={<Dealer_Product_List />} />
         <Route path="/user-product-list" element={<User_Product_List />} />
         <Route path="/add-product" element={<Add_Product />} />
         <Route path="/view-product" element={<View_Product />} />
-        <Route element={<ProtectedRoutes />}>
+        <Route path="/dealer-profile" element={<Dealer_Profile />} />
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}
         </Route>
