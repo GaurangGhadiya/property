@@ -23,3 +23,23 @@ line-height: 44px;
 color: #1D2222;
 margin-bottom: 30px;
 }
+.delete_text{
+    font-size: 18px;
+    font-family: 'Inter';
+    font-weight: 800;
+}
+.buttons{
+    position: absolute;
+    bottom: 2px;
+    right: 10px;
+}
+.buttons button{
+    color: white;
+    background-color: #249EA0;
+    text-transform: capitalize;
+    margin: 10px 10px 10px 0;
+    padding: 7px 25px;
+}
+.buttons button:hover{
+    background-color: #249EA0;
+}

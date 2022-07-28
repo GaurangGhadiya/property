@@ -1,13 +1,14 @@
-import { Button, Container, Link, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, Link, Modal, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../Components/Breadcrumbs/Breadcrumb'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import "../Components/Product_List/Product_List.scss"
 import { Pagination } from '@mui/material';
-import { ApiPost } from '../Api/Api';
+import { ApiDelete, ApiPost } from '../Api/Api';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom'
+import { ErrorToast, SuccessToast } from '../Components/Toast';
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
         Home
@@ -16,13 +17,31 @@ const breadcrumb = [
         Product list
     </Typography>,
 ];
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 450,
+    height:170,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+    borderRadius:2
+  };
 const Dealer_Product_List = () => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [totalpage, settotalpage] = useState(0);
     const [currentpage, setcurrentpage] = useState(1);
     const [searching, setsearching] = useState("");
-
+    const [deleteID, setdeleteID] = useState("")
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = (e) => {
+        setOpen(true)
+        setdeleteID(e?._id)
+    };
+    const handleClose = () => setOpen(false);
     const fetchData = (a, c) => {
         const body = {
             page: a,
@@ -52,6 +71,20 @@ const Dealer_Product_List = () => {
     useEffect(() => {
         fetchData(1, searching);
     }, [])
+    const deteleProduct = () => {
+        ApiDelete(`/dealer/product/${deleteID}`)
+            .then((res) => {
+                console.log(res);
+                handleClose()
+                SuccessToast(res?.data?.message);
+                fetchData(currentpage, searching);
+            })
+            .catch(async (err) => {
+                console.log(err);
+                ErrorToast(err?.response?.data?.message);
+                handleClose()
+            });
+    }
     return (
         <div className='Product_List'>
             <div className='header_breadcrumb'>
@@ -117,7 +150,7 @@ const Dealer_Product_List = () => {
                                                         className="me-2"
                                                         src={process.env.PUBLIC_URL + "/Images/eye.png"}
                                                     />View</button>
-                                                <button className='action_btn'><img
+                                                <button className='action_btn' onClick={() => handleOpen(e)}><img
                                                     className="me-2"
                                                     src={process.env.PUBLIC_URL + "/Images/delete.png"}
                                                 />Delete</button>
@@ -143,6 +176,22 @@ const Dealer_Product_List = () => {
                     />
                 </div>
             </Container>
+            <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+            <div className="delete_text">
+            Are You Sure Delete This Product?
+            </div>
+            <div className="buttons">
+                <Button onClick={handleClose}>Cancle</Button>
+                <Button onClick={deteleProduct}>Submit</Button>
+            </div>
+        </Box>
+      </Modal>
         </div>
     )
 }
