@@ -159,7 +159,7 @@ const Car_Details = () => {
         </div>
       <Also_Like />
       </Container>
-      <Footer />
+   
     </div>
   )
 }

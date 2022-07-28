@@ -1,5 +1,7 @@
 import { Container, Link, Typography } from '@mui/material';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import { ApiGet } from '../Api/Api';
 import Breadcrumb from '../Components/Breadcrumbs/Breadcrumb'
 import Dealer_Car_Details from '../Components/Delaer_Product/Dealer_Car_Details';
 
@@ -18,6 +20,19 @@ const View_Product = () => {
        View Product
     </Typography>,
   ];
+  const [data, setData] = useState({})
+  const { id } = useParams()
+    console.log("id",id);
+    useEffect(() => {
+      ApiGet(`dealer/product/${id}`)
+          .then((res) => {
+              console.log(res);
+              setData(res?.data?.data)
+          })
+          .catch(async (err) => {
+              console.log(err);
+          });
+  }, [])
   return (
     <>
       <div className='header_breadcrumb'>
@@ -25,7 +40,7 @@ const View_Product = () => {
           <Breadcrumb breadcrumb={breadcrumb} />
         </Container>
       </div>
-      <Dealer_Car_Details />
+      <Dealer_Car_Details data={data}/>
     </>
   )
 }

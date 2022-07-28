@@ -67,7 +67,7 @@ gapi.load('client:auth2',start)
         <Route path="/dealer-product-list" element={<Dealer_Product_List />} />
         <Route path="/user-product-list" element={<User_Product_List />} />
         <Route path="/add-product" element={<Add_Product />} />
-        <Route path="/view-product" element={<View_Product />} />
+        <Route path="/view-product/:id" element={<View_Product />} />
         <Route path="/dealer-profile" element={<Dealer_Profile />} />
           {/* <Route path="/about" element={<About />} /> */}
           {/* <Route path="/contact" element={<Contact />} /> */}
