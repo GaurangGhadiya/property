@@ -140,7 +140,9 @@ const Dealer_Product_List = () => {
                                         <Td>{e?.bodyType?.bodyType ? e?.bodyType?.bodyType : "-"}</Td>
                                         <Td>
                                             <div className="action">
-                                                <button className='action_btn'><img
+                                                <button className='action_btn' onClick={() => navigate("/add-product", {
+                                                    state: { id: e?._id }
+                                                })}><img
                                                     className="me-2"
                                                     src={process.env.PUBLIC_URL + "/Images/edit.png"}
                                                 />Edit</button>

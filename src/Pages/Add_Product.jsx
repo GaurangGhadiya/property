@@ -6,9 +6,10 @@ import { IoClose } from 'react-icons/io5';
 import Add_Description from '../Components/Add_product/Add_Description';
 import Add_Comapny_Profile from '../Components/Add_product/Add_Comapny_Profile';
 import Faq from '../Components/Add_product/Faq';
-import { ApiGet, ApiPost } from '../Api/Api';
+import { ApiGet, ApiPost, ApiPut } from '../Api/Api';
 import RichTextEditor from "react-rte";
 import { SuccessToast } from '../Components/Toast';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
@@ -28,6 +29,11 @@ function a11yProps(index) {
     };
 }
 const Add_Product = () => {
+    const navigate = useNavigate()
+    const [editData, setEditData] = useState({})
+    const location = useLocation();
+    console.log("number", location);
+
     const [data, setData] = useState({
         title: "",
         benefits: "",
@@ -92,7 +98,7 @@ const Add_Product = () => {
             [name]: value
         })
     }
-    console.log("image", image);
+    console.log("richValue", richValue);
     const onImageChange = (e) => {
         console.log(e.target.files);
         let file = e.target.files[0];
@@ -153,6 +159,7 @@ const Add_Product = () => {
         await ApiPost("dealer/product/add", body)
             .then((res) => {
                 SuccessToast(res?.data?.message);
+                navigate("/dealer-product-list")
                 setData({
                     title: "",
                     benefits: "",
@@ -189,6 +196,64 @@ const Add_Product = () => {
                 console.log(err);
             });
     }
+    const submitUpdateData = async () => {
+        let image = await imagearrayapi();
+        const body = {
+            id:location?.state?.id,
+            categoryId: categoryID,
+            subCategoryId: SubCategoryID,
+            bodyTypeId: body_typeID,
+            title: data?.title,
+            benefits: data?.benefits,
+            price: data?.price,
+            maxQuantity: data?.maxQuantity,
+            customization: data?.customization,
+            shippingCharge: data?.shippingCharge,
+            shipping: data?.shipping,
+            supplyAbility: data?.supplyAbility,
+            packaging: data?.packaging,
+            port: data?.port,
+            leadTime: data?.leadTime,
+            shareOption: share,
+            protection,
+            image: image,
+            description: pipData?.description
+        }
+        console.log("body", body);
+        await ApiPut("dealer/product/update", body)
+            .then((res) => {
+                SuccessToast(res?.data?.message);
+                navigate("/dealer-product-list")
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+    }
+    useEffect(() => {
+        ApiGet(`dealer/product/${location?.state?.id}`)
+            .then((res) => {
+                console.log(res);
+                setData(res?.data?.data)
+                setShare(res?.data?.data?.shareOption)
+                setProtection(res?.data?.data?.protection)
+                setpipData(res?.data?.data?.description)
+                if (res?.data?.data?.description){
+                    setrichValue(
+                        RichTextEditor?.createValueFromString(
+                            res?.data?.data?.description?.toString()?.replace(/<[^>]+>/g, ""),
+                          "markdown"
+                        )
+                      );
+                }
+                setBody_typeID(res?.data?.data?.bodyTypeId)
+                setSubCategoryID(res?.data?.data?.subCategoryId)
+                setCategoryID(res?.data?.data?.categoryId)
+                setImage(res?.data?.data?.image)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+    }, [])
     useEffect(() => {
         ApiGet("dealer/category")
             .then((res) => {
@@ -225,7 +290,7 @@ const Add_Product = () => {
                 </Container>
             </div>
             <Container>
-                <h1>Add Product</h1>
+                <h1>{location?.state?.id ? "Update" : "Add"} Product</h1>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={3}>
                         <div className="Img_Upload">
@@ -238,7 +303,7 @@ const Add_Product = () => {
                         </div>
                     </Grid>
                     {image.map(e => <Grid className='uploade_img' item xs={12} sm={6} md={3}>
-                        <img className='product_img' src={e?.fileURL} alt="" />
+                        <img className='product_img' src={e?.fileURL ? e?.fileURL : e} alt="" />
                         <div className="close_icon cursor_pointer" onClick={() => deleteImage(e)}><img src={process.env.PUBLIC_URL + '/Images/product_delete.png'} alt="" /></div>
                     </Grid>)}
                     <Grid item sx={12} sm={12} md={12}><div class="progress">
@@ -315,7 +380,7 @@ const Add_Product = () => {
                             <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} />
+                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} checked={protection?.tradeAssurance}/>
                                     }
                                     label="Trade Assurance"
                                 />
@@ -323,7 +388,7 @@ const Add_Product = () => {
                             <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name="refundPolicy" value={protection?.refundPolicy} onChange={changeCheccbox} />
+                                        <Checkbox name="refundPolicy" value={protection?.refundPolicy} onChange={changeCheccbox} checked={protection?.refundPolicy}/>
                                     }
                                     label="Refund Policy"
                                 />
@@ -411,7 +476,7 @@ const Add_Product = () => {
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="facebook" value={share?.facebook} onChange={changeShareCheccbox} />
+                                            <Checkbox name="facebook" value={share?.facebook} onChange={changeShareCheccbox} checked={share?.facebook}/>
                                         }
                                         label="Facebook"
                                     />
@@ -419,7 +484,7 @@ const Add_Product = () => {
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="linkedin" value={share?.linkedin} onChange={changeShareCheccbox} />
+                                            <Checkbox name="linkedin" value={share?.linkedin} onChange={changeShareCheccbox} checked={share?.linkedin}/>
                                         }
                                         label="Linkedin"
                                     />
@@ -427,7 +492,7 @@ const Add_Product = () => {
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="twitter" value={share?.twitter} onChange={changeShareCheccbox} />
+                                            <Checkbox name="twitter" value={share?.twitter} onChange={changeShareCheccbox} checked={share?.twitter}/>
                                         }
                                         label="Twitter"
                                     />
@@ -435,7 +500,7 @@ const Add_Product = () => {
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="pinterest" value={share?.pinterest} onChange={changeShareCheccbox} />
+                                            <Checkbox name="pinterest" value={share?.pinterest} onChange={changeShareCheccbox} checked={share?.pinterest}/>
                                         }
                                         label="Pinterest"
                                     />
@@ -465,7 +530,8 @@ const Add_Product = () => {
             <Faq data={data} handleChange={handleChange} />
             <div className="bottom_btn">
                 <button className='outline_btn'>Cancle</button>
-                <button className='none_outline_btn' onClick={submitData}>Add Product</button>
+                {!location?.state?.id && <button className='none_outline_btn' onClick={submitData}>Add Product</button>}
+                {location?.state?.id && <button className='none_outline_btn' onClick={submitUpdateData}>Update Product</button>}
             </div>
         </div>
     )
