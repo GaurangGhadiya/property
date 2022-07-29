@@ -1,8 +1,9 @@
 import React from 'react'
+import Dealer_Profiles from '../Components/Dealer_Profile.jsx/Dealer_Profile'
 
 const Dealer_Profile = () => {
   return (
-    <div>Dealer_Profile</div>
+    <Dealer_Profiles />
   )
 }
 
