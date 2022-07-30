@@ -53,7 +53,7 @@ gapi.load('client:auth2',start)
       // auth.signOut();
       // dealerauth.signOut();
       localStorage.clear();
-      window.location.reload();
+      window.location.pathname = "/";
     };
   
   return (
