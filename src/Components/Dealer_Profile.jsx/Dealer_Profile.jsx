@@ -122,34 +122,34 @@ const Dealer_Profile = () => {
                             <table className='dealer_table'>
                                 <tr>
                                     <td> Company&nbsp;Name:</td>
-                                    <td> {companyInfo?.name}</td>
+                                    <td> {companyInfo?.name?.default === null ? "" : companyInfo?.name}</td>
                                 </tr>
                                 <tr>
                                     <td>Year&nbsp;Established:</td>
-                                    <td>{companyInfo?.yearEstablished} </td>
+                                    <td>{companyInfo?.yearEstablished?.default === null ? "" : companyInfo?.yearEstablished} </td>
                                 </tr>
                                 <tr>
                                     <td> Website:</td>
-                                    <td>{companyInfo?.website}</td>
+                                    <td>{companyInfo?.website?.default === null ? "" : companyInfo?.website}</td>
                                 </tr>
                                 <tr>
                                     <td>No.&nbsp;of&nbsp;Employees:</td>
-                                    <td> {companyInfo?.employees} People</td>
+                                    <td> {companyInfo?.employees?.default === null ? "" : companyInfo?.employees + "People"} </td>
                                 </tr>
                             </table></div>
                         <div className="col-md-6 ">
                             <table className='dealer_table '>
                                 <tr>
                                     <td>Registered&nbsp;Address:</td>
-                                    <td>{companyInfo?.registeredAddress}</td>
+                                    <td>{companyInfo?.registeredAddress?.default === null ? "" : companyInfo?.registeredAddress}</td>
                                 </tr>
                                 <tr>
                                     <td>Operational&nbsp;Address:</td>
-                                    <td>{ companyInfo?.operationalAddress} </td>
+                                    <td>{companyInfo?.operationalAddress?.default === null ? "" : companyInfo?.operationalAddress} </td>
                                 </tr>
                                 <tr>
                                     <td>About Us:</td>
-                                    <td>{companyInfo?.aboutUs}</td>
+                                    <td>{companyInfo?.aboutUs?.default === null ? "" : companyInfo?.aboutUs}</td>
                                 </tr>
                             </table>
                         </div>
@@ -161,22 +161,22 @@ const Dealer_Profile = () => {
                             <table className='dealer_table'>
                                 <tr>
                                     <td>Annual&nbsp;Purchasing&nbsp;Volumn: </td>
-                                    <td>${sourcingInfo?.annualPurchasingVolumn }</td>
+                                    <td>${sourcingInfo?.annualPurchasingVolumn?.default === null ? 0 :sourcingInfo?.annualPurchasingVolumn }</td>
                                 </tr>
                                 <tr>
                                     <td>Average&nbsp;Sourcing&nbsp;Frequency:</td>
-                                    <td>{sourcingInfo?.averageSourcingFrequency}</td>
+                                    <td>{sourcingInfo?.averageSourcingFrequency?.default === null ? "" : sourcingInfo?.averageSourcingFrequency}</td>
                                 </tr>
                             </table></div>
                         <div className="col-md-6 ">
                             <table className='dealer_table '>
                                 <tr>
                                     <td>Supplier&nbsp;Qualifications:</td>
-                                    <td>{sourcingInfo?.supplierQualification}</td>
+                                    <td>{sourcingInfo?.supplierQualification?.default === null ? "" :sourcingInfo?.supplierQualification}</td>
                                 </tr>
                                 <tr>
                                     <td>Preferred&nbsp;Industries:</td>
-                                    <td>{sourcingInfo?.preferredIndustries}</td>
+                                    <td>{sourcingInfo?.preferredIndustries?.default === null ? "" :sourcingInfo?.preferredIndustries}</td>
                                 </tr>
                             </table>
                         </div>
