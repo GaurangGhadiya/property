@@ -23,12 +23,12 @@ const style = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 450,
-    height:170,
+    height: 170,
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
-    borderRadius:2
-  };
+    borderRadius: 2
+};
 const Dealer_Product_List = () => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
@@ -128,7 +128,7 @@ const Dealer_Product_List = () => {
                                             <div className="d-flex   align-items-center">
                                                 <img
                                                     className="me-2"
-                                                    src={e?.image?.length !== 0 ? e?.image[0] : `${process.env.PUBLIC_URL + "/Images/car.png"}` }
+                                                    src={e?.image?.length !== 0 ? e?.image[0] : `${process.env.PUBLIC_URL + "/Images/car.png"}`}
                                                     height="80"
                                                     width={80}
                                                 />
@@ -143,9 +143,9 @@ const Dealer_Product_List = () => {
                                                 <button className='action_btn' onClick={() => navigate("/add-product", {
                                                     state: { id: e?._id }
                                                 })}><img
-                                                    className="me-2"
-                                                    src={process.env.PUBLIC_URL + "/Images/edit.png"}
-                                                />Edit</button>
+                                                        className="me-2"
+                                                        src={process.env.PUBLIC_URL + "/Images/edit.png"}
+                                                    />Edit</button>
                                                 <button className='action_btn' onClick={() => navigate(`/view-product/${e?._id}`, {
                                                     state: { id: e?._id }
                                                 })}><img
@@ -179,21 +179,21 @@ const Dealer_Product_List = () => {
                 </div>
             </Container>
             <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-            <div className="delete_text">
-            Are You Sure Delete This Product?
-            </div>
-            <div className="buttons">
-                <Button onClick={handleClose}>Cancle</Button>
-                <Button onClick={deteleProduct}>Submit</Button>
-            </div>
-        </Box>
-      </Modal>
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style} className="Product_delete_modal">
+                    <div className="delete_text">
+                        Are You Sure Delete This Product?
+                    </div>
+                    <div className="buttons">
+                        <Button onClick={handleClose}>Cancle</Button>
+                        <Button onClick={deteleProduct}>Delete</Button>
+                    </div>
+                </Box>
+            </Modal>
         </div>
     )
 }

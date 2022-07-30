@@ -75,12 +75,15 @@ const Header = (props) => {
             </ListItemButton>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/message.png'} />
-              {/* Message */}
             </ListItemButton>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              {/* <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/like.png'} /> */}
-              
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/cart.png'} />
+            </ListItemButton>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate("/dealer-product-list")}>
+              Product
+            </ListItemButton>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate("/dealer-profile")}>
+              Profile
             </ListItemButton>
             <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
@@ -172,7 +175,13 @@ const Header = (props) => {
                     src={process.env.PUBLIC_URL + "/Images/Icons/like.png"}
                   />
                 </Button>
-                <Button key={5} sx={{ color: "black" }}>
+                <Button key={6} sx={{ color: "black" }}  onClick={() => navigate("/dealer-product-list")}>
+                  Product
+                </Button>
+                <Button key={7} sx={{ color: "black" }}  onClick={() => navigate("/dealer-profile")}>
+                  Profile
+                </Button>
+                <Button key={8} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/cart.png"}

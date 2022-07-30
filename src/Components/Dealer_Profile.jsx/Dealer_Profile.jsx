@@ -51,8 +51,8 @@ const Dealer_Profile = () => {
             console.log(res);
             setImage(res?.data?.data?.image)
             setData(res?.data?.data)
-            setCompanyInfo(res?.data?.data?.companyInfo)
-            setSourcingInfo(res?.data?.data?.sourcingInfo)
+            setCompanyInfo(res?.data?.data?.companyInfo ? res?.data?.data?.companyInfo : {})
+            setSourcingInfo(res?.data?.data?.sourcingInfo ? res?.data?.data?.sourcingInfo : {})
         })
         .catch(async (err) => {
             console.log(err);
