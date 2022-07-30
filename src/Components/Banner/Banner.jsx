@@ -15,7 +15,7 @@ const Banner = () => {
           <h1>Search for products & find verified sellers near you</h1>
           <div className="input_filed mt-2">
             <div className="phone">
-              <select name="" id="">
+              <select name="" id="" className='text-black'>
                 <option value="Category">Category</option>
               </select>
               <TextField hiddenLabel id="outlined-basic" placeholder='Serach product' variant="outlined" />
