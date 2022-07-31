@@ -49,7 +49,7 @@ const Dealer_Profile = () => {
         ApiGet("dealer/get_profile")
         .then((res) => {
             console.log(res);
-            setImage(res?.data?.data?.image)
+            setImage([res?.data?.data?.image])
             setData(res?.data?.data)
             setCompanyInfo(res?.data?.data?.companyInfo ? res?.data?.data?.companyInfo : {})
             setSourcingInfo(res?.data?.data?.sourcingInfo ? res?.data?.data?.sourcingInfo : {})
@@ -72,7 +72,7 @@ const Dealer_Profile = () => {
                     <div className="row">
                         <div className="col-md-2 ">
                             <div className="text-center">
-                                <img className='dealer_img' src={image} />
+                                <img className='dealer_img' src={image[0]} />
                                 <h4>{data?.name}</h4>
                             </div>
                         </div>
