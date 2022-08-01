@@ -2,7 +2,7 @@ import { Grid, TextField } from '@mui/material';
 import React, { useState } from 'react'
 import RichTextEditor from "react-rte";
 
-const Add_Description = ({handleChange,data,richValue,onChange3}) => {
+const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors}) => {
     return (
         <div className='text_editor'>
             <div className="title">
@@ -10,6 +10,9 @@ const Add_Description = ({handleChange,data,richValue,onChange3}) => {
             </div>
             <div className="input_filed">
                 <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
+                <span className="errorInput">
+                                {pipData?.description !== "<p><br></p>" ? "" : errors["pipData"]}
+                            </span>
             </div>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}><h6 className='mt-4'>Supply Ability</h6></Grid>
@@ -27,6 +30,9 @@ const Add_Description = ({handleChange,data,richValue,onChange3}) => {
                                     value={data?.supplyAbility}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.supplyAbility?.length > 0 ? "" : errors["supplyAbility"]}
+                            </span>
                             </div>
                     </Grid>
                 </Grid>
@@ -43,6 +49,9 @@ const Add_Description = ({handleChange,data,richValue,onChange3}) => {
                                     value={data?.packaging}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.packaging?.length > 0 ? "" : errors["packaging"]}
+                            </span>
                             </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -57,6 +66,9 @@ const Add_Description = ({handleChange,data,richValue,onChange3}) => {
                                     value={data?.port}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.port?.length > 0 ? "" : errors["port"]}
+                            </span>
                             </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -71,6 +83,9 @@ const Add_Description = ({handleChange,data,richValue,onChange3}) => {
                                     value={data?.leadTime}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.leadTime?.length > 0 ? "" : errors["leadTime"]}
+                            </span>
                             </div>
                 </Grid>
 

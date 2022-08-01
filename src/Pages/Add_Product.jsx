@@ -68,9 +68,10 @@ const Add_Product = () => {
     const [body_typeID, setBody_typeID] = useState("")
     const [value, setValue] = React.useState(0)
     const [richValue, setrichValue] = useState(RichTextEditor.createEmptyValue());
-    const [pipData, setpipData] = useState({});
+    const [pipData, setpipData] = useState({description: "<p><br></p>"});
     const [richValue2, setrichValue2] = useState(RichTextEditor.createEmptyValue());
-    const [pipData2, setpipData2] = useState({});
+    const [pipData2, setpipData2] = useState({description: "<p><br></p>"});
+    const [errors, setError] = useState({});
     const onChange = (value) => {
         setrichValue(value);
         value.toString("html");
@@ -117,8 +118,8 @@ const Add_Product = () => {
     const deleteImage = (e) => {
         setImage(image.filter(y => y != e))
     }
-    console.log("protection", protection);
-    console.log("category", category);
+    console.log("pipData2", pipData2.description);
+    console.log("pipData", pipData.description);
     const imagearrayapi = async () => {
         let image1 = [];
         for (let i = 0; i < image.length; i++) {
@@ -140,76 +141,158 @@ const Add_Product = () => {
         }
         return image1;
     };
-    const submitData = async () => {
-        let image = await imagearrayapi();
-        const body = {
-            categoryId: categoryID,
-            subCategoryId: SubCategoryID,
-            bodyTypeId: body_typeID,
-            title: data?.title,
-            benefits: data?.benefits,
-            price: data?.price,
-            maxQuantity: data?.maxQuantity,
-            customization: data?.customization,
-            shippingCharge: data?.shippingCharge,
-            shipping: data?.shipping,
-            supplyAbility: data?.supplyAbility,
-            packaging: data?.packaging,
-            port: data?.port,
-            leadTime: data?.leadTime,
-            shareOption: share,
-            protection,
-            image: image,
-            description: pipData?.description,
-            companyProfile: pipData2?.description
+    const validateForm = () => {
+        console.log("valid");
+        let errors = {};
+        let formIsValid = true;
+        if (!data?.title) {
+            formIsValid = false;
+            errors["title"] = "Please enter product title";
         }
-        console.log("body", body);
-        await ApiPost("dealer/product/add", body)
-            .then((res) => {
-                SuccessToast(res?.data?.message);
-                navigate("/dealer-product-list")
-                setData({
-                    title: "",
-                    benefits: "",
-                    price: "",
-                    maxQuantity: "",
-                    customization: "",
-                    shippingCharge: "",
-                    shipping: "",
-                    supplyAbility: "",
-                    packaging: "",
-                    port: "",
-                    leadTime: "",
-                    question: "",
-                    ans: ""
+        if (!data?.benefits) {
+            formIsValid = false;
+            errors["benefits"] = "Please enter benefits";
+        }
+        if (!data?.price) {
+            formIsValid = false;
+            errors["price"] = "Please enter price";
+        }
+        if (!categoryID) {
+            formIsValid = false;
+            errors["categoryID"] = "Please select category";
+        }
+        if (!SubCategoryID) {
+            formIsValid = false;
+            errors["SubCategoryID"] = "Please select sub-category";
+        }
+        if (!body_typeID) {
+            formIsValid = false;
+            errors["body_typeID"] = "Please select body type";
+        }
+        if (pipData?.description === "<p><br></p>") {
+            formIsValid = false;
+            errors["pipData"] = "Please enter description";
+        }
+        if (pipData2?.description === "<p><br></p>") {
+            formIsValid = false;
+            errors["pipData2"] = "Please enter company details";
+        }
+        if (image.length === 0) {
+            formIsValid = false;
+            errors["image"] = "Please add image";
+        }
+        if (!data?.maxQuantity) {
+            formIsValid = false;
+            errors["maxQuantity"] = "Please enter max quantity";
+        }
+        if (!data?.customization) {
+            formIsValid = false;
+            errors["customization"] = "Please enter customization";
+        }
+        if (!data?.shippingCharge) {
+            formIsValid = false;
+            errors["shippingCharge"] = "Please enter shipping charge";
+        }
+        if (!data?.shipping) {
+            formIsValid = false;
+            errors["shipping"] = "Please enter shipping";
+        }
+        if (!data?.supplyAbility) {
+            formIsValid = false;
+            errors["supplyAbility"] = "Please enter supply ability";
+        }
+        if (!data?.packaging) {
+            formIsValid = false;
+            errors["packaging"] = "Please enter packaging details";
+        }
+        if (!data?.port) {
+            formIsValid = false;
+            errors["port"] = "Please enter port";
+        }
+        if (!data?.leadTime) {
+            formIsValid = false;
+            errors["leadTime"] = "Please enter lead time";
+        }
+        setError(errors);
+
+        return formIsValid;
+    };
+    const submitData = async () => {
+        
+        window.scroll(0,0)
+        if (validateForm()) {
+            let image = await imagearrayapi();
+            const body = {
+                categoryId: categoryID,
+                subCategoryId: SubCategoryID,
+                bodyTypeId: body_typeID,
+                title: data?.title,
+                benefits: data?.benefits,
+                price: data?.price,
+                maxQuantity: data?.maxQuantity,
+                customization: data?.customization,
+                shippingCharge: data?.shippingCharge,
+                shipping: data?.shipping,
+                supplyAbility: data?.supplyAbility,
+                packaging: data?.packaging,
+                port: data?.port,
+                leadTime: data?.leadTime,
+                shareOption: share,
+                protection,
+                image: image,
+                description: pipData?.description,
+                companyProfile: pipData2?.description
+            }
+            console.log("body", body);
+            await ApiPost("dealer/product/add", body)
+                .then((res) => {
+                    SuccessToast(res?.data?.message);
+                    navigate("/dealer-product-list")
+                    setData({
+                        title: "",
+                        benefits: "",
+                        price: "",
+                        maxQuantity: "",
+                        customization: "",
+                        shippingCharge: "",
+                        shipping: "",
+                        supplyAbility: "",
+                        packaging: "",
+                        port: "",
+                        leadTime: "",
+                        question: "",
+                        ans: ""
+                    })
+                    setCategoryID("")
+                    setSubCategoryID("")
+                    setBody_typeID("")
+                    setImage([])
+                    setShare({
+                        facebook: false,
+                        linkedin: false,
+                        twitter: false,
+                        pinterest: false
+                    })
+                    setProtection({
+                        tradeAssurance: false,
+                        refundPolicy: false
+                    })
+                    setpipData({})
+                    setrichValue(RichTextEditor.createEmptyValue())
+                    setpipData2({})
+                    setrichValue2(RichTextEditor.createEmptyValue())
                 })
-                setCategoryID("")
-                setSubCategoryID("")
-                setBody_typeID("")
-                setImage([])
-                setShare({
-                    facebook: false,
-                    linkedin: false,
-                    twitter: false,
-                    pinterest: false
-                })
-                setProtection({
-                    tradeAssurance: false,
-                    refundPolicy: false
-                })
-                setpipData({})
-                setrichValue(RichTextEditor.createEmptyValue())
-                setpipData2({})
-                setrichValue2(RichTextEditor.createEmptyValue())
-            })
-            .catch(async (err) => {
-                console.log(err);
-            });
+                .catch(async (err) => {
+                    console.log(err);
+                });
+        }
     }
     const submitUpdateData = async () => {
-        let image = await imagearrayapi();
+        window.scroll(0,0)
+        if(validateForm()){
+            let image = await imagearrayapi();
         const body = {
-            id:location?.state?.id,
+            id: location?.state?.id,
             categoryId: categoryID,
             subCategoryId: SubCategoryID,
             bodyTypeId: body_typeID,
@@ -239,6 +322,7 @@ const Add_Product = () => {
             .catch(async (err) => {
                 console.log(err);
             });
+        }
     }
     useEffect(() => {
         ApiGet(`dealer/product/${location?.state?.id}`)
@@ -249,21 +333,21 @@ const Add_Product = () => {
                 setProtection(res?.data?.data?.protection)
                 setpipData(res?.data?.data?.description)
                 setpipData2(res?.data?.data?.companyProfile)
-                if (res?.data?.data?.description){
+                if (res?.data?.data?.description) {
                     setrichValue(
                         RichTextEditor?.createValueFromString(
                             res?.data?.data?.description?.toString()?.replace(/<[^>]+>/g, ""),
-                          "markdown"
+                            "markdown"
                         )
-                      );
+                    );
                 }
-                if (res?.data?.data?.companyProfile){
+                if (res?.data?.data?.companyProfile) {
                     setrichValue2(
                         RichTextEditor?.createValueFromString(
                             res?.data?.data?.companyProfile?.toString()?.replace(/<[^>]+>/g, ""),
-                          "markdown"
+                            "markdown"
                         )
-                      );
+                    );
                 }
                 setBody_typeID(res?.data?.data?.bodyTypeId)
                 setSubCategoryID(res?.data?.data?.subCategoryId)
@@ -320,11 +404,14 @@ const Add_Product = () => {
                                 <p className='bottom'> Max file size: 1mb</p>
                                 <input type="file" id='inputTag' className='display_none' accept="image/*" onChange={onImageChange} />
                             </label>
+                            <span className="errorInput">
+                                {image?.length > 0 ? "" : errors["image"]}
+                            </span>
                         </div>
                     </Grid>
                     {image.map(e => <Grid className='uploade_img' item xs={12} sm={6} md={3}>
                         <img className='product_img' src={e?.fileURL ? e?.fileURL : e} alt="" />
-                        <div className="close_icon cursor_pointer" onClick={() => deleteImage(e)}><RiDeleteBin6Line/></div>
+                        <div className="close_icon cursor_pointer" onClick={() => deleteImage(e)}><RiDeleteBin6Line /></div>
                     </Grid>)}
                     <Grid item sx={12} sm={12} md={12}><div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70"
@@ -342,6 +429,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {category.map(e => <option value={e?._id}>{e?.name}</option>)}
                                 </select>
+                                <span className="errorInput">
+                                {categoryID?.length > 0 ? "" : errors["categoryID"]}
+                            </span>
                             </div>
                         </Grid>
                         {subCategory.length !== 0 && <Grid item sx={12} sm={12} md={6} >
@@ -351,6 +441,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
                                 </select>
+                                <span className="errorInput">
+                                {SubCategoryID?.length > 0 ? "" : errors["SubCategoryID"]}
+                            </span>
                             </div>
                         </Grid>}
                         <Grid item sx={12} sm={12} md={6} >
@@ -360,6 +453,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {body_type.map(e => <option value={e?._id}>{e?.bodyType}</option>)}
                                 </select>
+                                <span className="errorInput">
+                                {body_typeID?.length > 0 ? "" : errors["body_typeID"]}
+                            </span>
                             </div>
                         </Grid>
                     </Grid>
@@ -377,6 +473,9 @@ const Add_Product = () => {
                                     value={data?.title}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.title?.length > 0 ? "" : errors["title"]}
+                            </span>
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={12} >
@@ -391,6 +490,9 @@ const Add_Product = () => {
                                     value={data?.benefits}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.benefits?.length > 0 ? "" : errors["benefits"]}
+                            </span>
                             </div>
                         </Grid>
                     </Grid>
@@ -400,7 +502,7 @@ const Add_Product = () => {
                             <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} checked={protection?.tradeAssurance}/>
+                                        <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} checked={protection?.tradeAssurance} />
                                     }
                                     label="Trade Assurance"
                                 />
@@ -408,7 +510,7 @@ const Add_Product = () => {
                             <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name="refundPolicy" value={protection?.refundPolicy} onChange={changeCheccbox} checked={protection?.refundPolicy}/>
+                                        <Checkbox name="refundPolicy" value={protection?.refundPolicy} onChange={changeCheccbox} checked={protection?.refundPolicy} />
                                     }
                                     label="Refund Policy"
                                 />
@@ -428,6 +530,9 @@ const Add_Product = () => {
                                     value={data?.price}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.price?.length > 0 ? "" : errors["price"]}
+                            </span>
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -442,6 +547,9 @@ const Add_Product = () => {
                                     value={data?.maxQuantity}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.maxQuantity?.length > 0 ? "" : errors["maxQuantity"]}
+                            </span>
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -456,6 +564,9 @@ const Add_Product = () => {
                                     value={data?.shippingCharge}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.shippingCharge?.length > 0 ? "" : errors["shippingCharge"]}
+                            </span>
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -470,6 +581,9 @@ const Add_Product = () => {
                                     value={data?.shipping}
                                     onChange={handleChange}
                                 />
+                                <span className="errorInput">
+                                {data?.shipping?.length > 0 ? "" : errors["shipping"]}
+                            </span>
                             </div>
                         </Grid>
                     </Grid>
@@ -487,52 +601,55 @@ const Add_Product = () => {
                                 value={data?.customization}
                                 onChange={handleChange}
                             />
+                            <span className="errorInput">
+                                {data?.customization?.length > 0 ? "" : errors["customization"]}
+                            </span>
                         </div>
                     </Grid>
-                    <Grid item sx={12} sm={12} md={12}>
+                    {/* <Grid item sx={12} sm={12} md={12}>
                         <div className="input_filed">
                             <label htmlFor="Protection">Share</label>
                             <div className="share">
-                                {/* <div className="agree product_agree">
+                                <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
                                             <Checkbox name="facebook" value={share?.facebook} onChange={changeShareCheccbox} checked={share?.facebook}/>
                                         }
                                         label="Facebook"
                                     />
-                                </div> */}
+                                </div>
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="linkedin" value={share?.linkedin} onChange={changeShareCheccbox} checked={share?.linkedin}/>
+                                            <Checkbox name="linkedin" value={share?.linkedin} onChange={changeShareCheccbox} checked={share?.linkedin} />
                                         }
                                         label="Linkedin"
                                     />
                                 </div>
-                                {/* <div className="agree product_agree">
+                                <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
                                             <Checkbox name="twitter" value={share?.twitter} onChange={changeShareCheccbox} checked={share?.twitter}/>
                                         }
                                         label="Twitter"
                                     />
-                                </div> */}
+                                </div>
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
-                                            <Checkbox name="pinterest" value={share?.pinterest} onChange={changeShareCheccbox} checked={share?.pinterest}/>
+                                            <Checkbox name="pinterest" value={share?.pinterest} onChange={changeShareCheccbox} checked={share?.pinterest} />
                                         }
                                         label="Pinterest"
                                     />
                                 </div>
                             </div>
                         </div>
-                    </Grid>
+                    </Grid> */}
                     <Grid item sx={12} sm={12} md={12}>
                         <div className="description">
-                            <Add_Description data={data} handleChange={handleChange} richValue={richValue} onChange3={onChange} />
-                            <Add_Comapny_Profile richValue2={richValue2} onChange2={onChange2}/>
-                                                    </div>
+                            <Add_Description pipData={pipData} data={data} errors={errors} handleChange={handleChange} richValue={richValue} onChange3={onChange} />
+                            <Add_Comapny_Profile pipData2={pipData2} richValue2={richValue2} errors={errors} onChange2={onChange2} />
+                        </div>
                     </Grid>
 
                 </Grid>

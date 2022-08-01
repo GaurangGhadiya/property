@@ -80,15 +80,15 @@ const Dealer_Car_Details = ({data}) => {
                     {data?.protection?.refundPolicy &&  <h6><img className='me-2' src={process.env.PUBLIC_URL + '/Images/Group 499.png'} />Refund Policy</h6>}
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>Share:</td>
                   <td className='share_icon'>
-                  {/* {data?.shareOption?.facebook &&<FaFacebookF />}
-                  {data?.shareOption?.twitter &&<AiOutlineTwitter />} */}
+                  {data?.shareOption?.facebook &&<FaFacebookF />}
+                  {data?.shareOption?.twitter &&<AiOutlineTwitter />}
                   {data?.shareOption?.linkedin &&<FaLinkedinIn />}
                   {data?.shareOption?.pinterest &&<FaPinterestP />}
                   </td>
-                </tr>
+                </tr> */}
               </table>
 
             </div>

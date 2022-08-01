@@ -213,7 +213,13 @@
     text-align: center;
     margin: 20px 0;
 }
-
+.errorInput{
+    color: red;
+    font-weight: 500;
+    display: flex;
+    justify-content: end;
+    height: 5px;
+}
 @media only screen and (max-width: 600px) {
     .MuiGrid-root {
         width: 100%;
