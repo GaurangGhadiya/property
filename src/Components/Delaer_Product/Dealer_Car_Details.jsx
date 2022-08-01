@@ -83,8 +83,8 @@ const Dealer_Car_Details = ({data}) => {
                 <tr>
                   <td>Share:</td>
                   <td className='share_icon'>
-                  {data?.shareOption?.facebook &&<FaFacebookF />}
-                  {data?.shareOption?.twitter &&<AiOutlineTwitter />}
+                  {/* {data?.shareOption?.facebook &&<FaFacebookF />}
+                  {data?.shareOption?.twitter &&<AiOutlineTwitter />} */}
                   {data?.shareOption?.linkedin &&<FaLinkedinIn />}
                   {data?.shareOption?.pinterest &&<FaPinterestP />}
                   </td>

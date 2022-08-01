@@ -597,7 +597,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       />
                     </div>
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <div className="input_filed mt-2">
                       <label htmlFor="email">Phone No</label>
                       <div className="phone delarphone">
@@ -613,7 +613,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                         />
                       </div>
                     </div>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={6}>
                     <div className="input_filed">
                       <label htmlFor="email">Showroom Location</label>

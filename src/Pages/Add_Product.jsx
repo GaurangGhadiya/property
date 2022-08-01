@@ -2,7 +2,7 @@ import { Box, Checkbox, Container, FormControlLabel, Grid, Link, Tab, Tabs, Text
 import React, { useEffect, useState } from 'react'
 import Breadcrumb from '../Components/Breadcrumbs/Breadcrumb';
 import "../Components/Add_product/Add_product.scss"
-import { IoClose } from 'react-icons/io5';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import Add_Description from '../Components/Add_product/Add_Description';
 import Add_Comapny_Profile from '../Components/Add_product/Add_Comapny_Profile';
 import Faq from '../Components/Add_product/Faq';
@@ -304,7 +304,7 @@ const Add_Product = () => {
                     </Grid>
                     {image.map(e => <Grid className='uploade_img' item xs={12} sm={6} md={3}>
                         <img className='product_img' src={e?.fileURL ? e?.fileURL : e} alt="" />
-                        <div className="close_icon cursor_pointer" onClick={() => deleteImage(e)}><img src={process.env.PUBLIC_URL + '/Images/product_delete.png'} alt="" /></div>
+                        <div className="close_icon cursor_pointer" onClick={() => deleteImage(e)}><RiDeleteBin6Line/></div>
                     </Grid>)}
                     <Grid item sx={12} sm={12} md={12}><div class="progress">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70"
@@ -473,14 +473,14 @@ const Add_Product = () => {
                         <div className="input_filed">
                             <label htmlFor="Protection">Share</label>
                             <div className="share">
-                                <div className="agree product_agree">
+                                {/* <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
                                             <Checkbox name="facebook" value={share?.facebook} onChange={changeShareCheccbox} checked={share?.facebook}/>
                                         }
                                         label="Facebook"
                                     />
-                                </div>
+                                </div> */}
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
@@ -489,14 +489,14 @@ const Add_Product = () => {
                                         label="Linkedin"
                                     />
                                 </div>
-                                <div className="agree product_agree">
+                                {/* <div className="agree product_agree">
                                     <FormControlLabel
                                         control={
                                             <Checkbox name="twitter" value={share?.twitter} onChange={changeShareCheccbox} checked={share?.twitter}/>
                                         }
                                         label="Twitter"
                                     />
-                                </div>
+                                </div> */}
                                 <div className="agree product_agree">
                                     <FormControlLabel
                                         control={

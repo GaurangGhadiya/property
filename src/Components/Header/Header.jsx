@@ -192,7 +192,7 @@ const Header = (props) => {
                     <p className="text-black p-0 m-0 mt-2">
                       {loginData?.name}{" "}
                     </p>
-                    <p onClick={logout} className="text-black ms-3 mt-2 ">
+                    <p onClick={logout} className="cursor_pointer text-black ms-3 mt-2 ">
                       Logout
                     </p>
                   </>
