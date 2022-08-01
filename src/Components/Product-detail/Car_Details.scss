@@ -238,11 +238,22 @@
     width: 20px;
     margin-right: 5px;
 }
-
 .date button {
     font-weight: 800;
 }
-
+.border_bottom_Product,.border_bottom_Product1,.border_bottom_Product2{
+    margin-bottom: 20px;
+    width: 250px;
+height: 3px;
+background: #343D42;
+border-radius: 3px;
+}
+.border_bottom_Product1{
+    width: 200px;
+}
+.border_bottom_Product2{
+    width: 100px;
+}
 @media only screen and (min-width: 1200px) {
     .css-1oqqzyl-MuiContainer-root {
         max-width: 1350px !important;

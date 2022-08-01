@@ -96,20 +96,21 @@ const Dealer_Car_Details = ({data}) => {
           
         </div>
         <div className="description">
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                    <Tabs
-                      value={value}
-                      onChange={handleChange}
-                      aria-label="basic tabs example"
-                    >
-                      <Tab label="Product Description" {...a11yProps(0)} />
-                      <Tab label="Company Profile" {...a11yProps(1)} />
-                      <Tab label="Reviews" {...a11yProps(2)} />
-                    </Tabs>
-                  </Box>
-                  {value === 0 && <Description data={data}/>}
-                  {value === 1 && <Comapny_Profile />}
-                  {value === 2 && <Reviews />}
+                  <div className="faqs">
+          <h1>Product Description</h1>
+          <div className="border_bottom_Product"></div>
+        <Description data={data}/>
+        </div>
+                  <div className="faqs">
+          <h1>Company Profile</h1>
+          <div className="border_bottom_Product1"></div>
+        <Comapny_Profile data={data}/>
+        </div>
+                  <div className="faqs">
+          <h1>Reviews</h1>
+          <div className="border_bottom_Product2"></div>
+        <Reviews data={data}/>
+        </div>
         </div>
         <hr />
         <div className="faqs">

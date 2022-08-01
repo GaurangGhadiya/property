@@ -1,8 +1,13 @@
 import React from 'react'
 import "./Comapny-Profile.scss"
-const Comapny_Profile = () => {
+import parse from 'html-react-parser'
+const Comapny_Profile = ({data}) => {
   return (
-    <div>Comapny-Profile</div>
+    <div>
+      <div className="row">
+            {data?.description && parse(data?.companyProfile.replace(/!important/g, ''))}
+            </div>
+    </div>
   )
 }
 

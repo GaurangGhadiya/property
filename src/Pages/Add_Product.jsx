@@ -69,10 +69,17 @@ const Add_Product = () => {
     const [value, setValue] = React.useState(0)
     const [richValue, setrichValue] = useState(RichTextEditor.createEmptyValue());
     const [pipData, setpipData] = useState({});
+    const [richValue2, setrichValue2] = useState(RichTextEditor.createEmptyValue());
+    const [pipData2, setpipData2] = useState({});
     const onChange = (value) => {
         setrichValue(value);
         value.toString("html");
         setpipData({ ...pipData, description: value.toString("html") });
+    };
+    const onChange2 = (value) => {
+        setrichValue2(value);
+        value.toString("html");
+        setpipData2({ ...pipData2, description: value.toString("html") });
     };
     const changeCheccbox = (e) => {
         const { name, checked } = e.target
@@ -153,7 +160,8 @@ const Add_Product = () => {
             shareOption: share,
             protection,
             image: image,
-            description: pipData?.description
+            description: pipData?.description,
+            companyProfile: pipData2?.description
         }
         console.log("body", body);
         await ApiPost("dealer/product/add", body)
@@ -191,6 +199,8 @@ const Add_Product = () => {
                 })
                 setpipData({})
                 setrichValue(RichTextEditor.createEmptyValue())
+                setpipData2({})
+                setrichValue2(RichTextEditor.createEmptyValue())
             })
             .catch(async (err) => {
                 console.log(err);
@@ -217,7 +227,8 @@ const Add_Product = () => {
             shareOption: share,
             protection,
             image: image,
-            description: pipData?.description
+            description: pipData?.description,
+            companyProfile: pipData2?.description
         }
         console.log("body", body);
         await ApiPut("dealer/product/update", body)
@@ -237,10 +248,19 @@ const Add_Product = () => {
                 setShare(res?.data?.data?.shareOption)
                 setProtection(res?.data?.data?.protection)
                 setpipData(res?.data?.data?.description)
+                setpipData2(res?.data?.data?.companyProfile)
                 if (res?.data?.data?.description){
                     setrichValue(
                         RichTextEditor?.createValueFromString(
                             res?.data?.data?.description?.toString()?.replace(/<[^>]+>/g, ""),
+                          "markdown"
+                        )
+                      );
+                }
+                if (res?.data?.data?.companyProfile){
+                    setrichValue2(
+                        RichTextEditor?.createValueFromString(
+                            res?.data?.data?.companyProfile?.toString()?.replace(/<[^>]+>/g, ""),
                           "markdown"
                         )
                       );
@@ -510,19 +530,9 @@ const Add_Product = () => {
                     </Grid>
                     <Grid item sx={12} sm={12} md={12}>
                         <div className="description">
-                            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                                <Tabs
-                                    value={value}
-                                    onChange={handleTabChange}
-                                    aria-label="basic tabs example"
-                                >
-                                    <Tab label="Product Description" {...a11yProps(0)} />
-                                    <Tab label="Company Profile" {...a11yProps(1)} />
-                                </Tabs>
-                            </Box>
-                            {value === 0 && <Add_Description data={data} handleChange={handleChange} richValue={richValue} onChange3={onChange} />}
-                            {value === 1 && <Add_Comapny_Profile />}
-                        </div>
+                            <Add_Description data={data} handleChange={handleChange} richValue={richValue} onChange3={onChange} />
+                            <Add_Comapny_Profile richValue2={richValue2} onChange2={onChange2}/>
+                                                    </div>
                     </Grid>
 
                 </Grid>

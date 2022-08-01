@@ -5,6 +5,9 @@ import RichTextEditor from "react-rte";
 const Add_Description = ({handleChange,data,richValue,onChange3}) => {
     return (
         <div className='text_editor'>
+            <div className="title">
+                <h4>Add Description</h4>
+            </div>
             <div className="input_filed">
                 <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
             </div>
