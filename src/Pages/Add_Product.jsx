@@ -161,8 +161,9 @@ const Add_Product = () => {
             formIsValid = false;
             errors["categoryID"] = "Please select category";
         }
-        if (!SubCategoryID) {
+        if (subCategory.length !== 0 && !SubCategoryID) {
             formIsValid = false;
+            console.log("0");
             errors["SubCategoryID"] = "Please select sub-category";
         }
         if (!body_typeID) {
