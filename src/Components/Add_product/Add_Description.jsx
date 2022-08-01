@@ -10,9 +10,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
             </div>
             <div className="input_filed">
                 <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
-                <span className="errorInput">
+                {/* <span className="errorInput">
                                 {pipData?.description !== "<p><br></p>" ? "" : errors["pipData"]}
-                            </span>
+                            </span> */}
             </div>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}><h6 className='mt-4'>Supply Ability</h6></Grid>
@@ -30,9 +30,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
                                     value={data?.supplyAbility}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.supplyAbility?.length > 0 ? "" : errors["supplyAbility"]}
-                            </span>
+                            </span> */}
                             </div>
                     </Grid>
                 </Grid>
@@ -49,9 +49,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
                                     value={data?.packaging}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.packaging?.length > 0 ? "" : errors["packaging"]}
-                            </span>
+                            </span> */}
                             </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -66,9 +66,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
                                     value={data?.port}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.port?.length > 0 ? "" : errors["port"]}
-                            </span>
+                            </span> */}
                             </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -83,9 +83,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
                                     value={data?.leadTime}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.leadTime?.length > 0 ? "" : errors["leadTime"]}
-                            </span>
+                            </span> */}
                             </div>
                 </Grid>
 

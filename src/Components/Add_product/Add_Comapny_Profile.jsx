@@ -9,9 +9,9 @@ const Add_Comapny_Profile = ({pipData2,richValue2,onChange2,errors}) => {
             </div>
             <div className="input_filed">
                 <RichTextEditor name="company" value={richValue2} onChange={onChange2} />
-                <span className="errorInput">
+                {/* <span className="errorInput">
                                 {pipData2?.description !== "<p><br></p>" ? "" : errors["pipData2"]}
-                            </span>
+                            </span> */}
             </div>
     </div>
   )

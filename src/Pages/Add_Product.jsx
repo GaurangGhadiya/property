@@ -170,50 +170,50 @@ const Add_Product = () => {
             formIsValid = false;
             errors["body_typeID"] = "Please select body type";
         }
-        if (pipData?.description === "<p><br></p>") {
-            formIsValid = false;
-            errors["pipData"] = "Please enter description";
-        }
-        if (pipData2?.description === "<p><br></p>") {
-            formIsValid = false;
-            errors["pipData2"] = "Please enter company details";
-        }
+        // if (pipData?.description === "<p><br></p>") {
+        //     formIsValid = false;
+        //     errors["pipData"] = "Please enter description";
+        // }
+        // if (pipData2?.description === "<p><br></p>") {
+        //     formIsValid = false;
+        //     errors["pipData2"] = "Please enter company details";
+        // }
         if (image.length === 0) {
             formIsValid = false;
             errors["image"] = "Please add image";
         }
-        if (!data?.maxQuantity) {
-            formIsValid = false;
-            errors["maxQuantity"] = "Please enter max quantity";
-        }
-        if (!data?.customization) {
-            formIsValid = false;
-            errors["customization"] = "Please enter customization";
-        }
-        if (!data?.shippingCharge) {
-            formIsValid = false;
-            errors["shippingCharge"] = "Please enter shipping charge";
-        }
-        if (!data?.shipping) {
-            formIsValid = false;
-            errors["shipping"] = "Please enter shipping";
-        }
-        if (!data?.supplyAbility) {
-            formIsValid = false;
-            errors["supplyAbility"] = "Please enter supply ability";
-        }
-        if (!data?.packaging) {
-            formIsValid = false;
-            errors["packaging"] = "Please enter packaging details";
-        }
-        if (!data?.port) {
-            formIsValid = false;
-            errors["port"] = "Please enter port";
-        }
-        if (!data?.leadTime) {
-            formIsValid = false;
-            errors["leadTime"] = "Please enter lead time";
-        }
+        // if (!data?.maxQuantity) {
+        //     formIsValid = false;
+        //     errors["maxQuantity"] = "Please enter max quantity";
+        // }
+        // if (!data?.customization) {
+        //     formIsValid = false;
+        //     errors["customization"] = "Please enter customization";
+        // }
+        // if (!data?.shippingCharge) {
+        //     formIsValid = false;
+        //     errors["shippingCharge"] = "Please enter shipping charge";
+        // }
+        // if (!data?.shipping) {
+        //     formIsValid = false;
+        //     errors["shipping"] = "Please enter shipping";
+        // }
+        // if (!data?.supplyAbility) {
+        //     formIsValid = false;
+        //     errors["supplyAbility"] = "Please enter supply ability";
+        // }
+        // if (!data?.packaging) {
+        //     formIsValid = false;
+        //     errors["packaging"] = "Please enter packaging details";
+        // }
+        // if (!data?.port) {
+        //     formIsValid = false;
+        //     errors["port"] = "Please enter port";
+        // }
+        // if (!data?.leadTime) {
+        //     formIsValid = false;
+        //     errors["leadTime"] = "Please enter lead time";
+        // }
         setError(errors);
 
         return formIsValid;
@@ -531,9 +531,9 @@ const Add_Product = () => {
                                     value={data?.price}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.price?.length > 0 ? "" : errors["price"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -548,9 +548,9 @@ const Add_Product = () => {
                                     value={data?.maxQuantity}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.maxQuantity?.length > 0 ? "" : errors["maxQuantity"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -565,9 +565,9 @@ const Add_Product = () => {
                                     value={data?.shippingCharge}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.shippingCharge?.length > 0 ? "" : errors["shippingCharge"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
@@ -582,9 +582,9 @@ const Add_Product = () => {
                                     value={data?.shipping}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.shipping?.length > 0 ? "" : errors["shipping"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                     </Grid>
@@ -602,9 +602,9 @@ const Add_Product = () => {
                                 value={data?.customization}
                                 onChange={handleChange}
                             />
-                            <span className="errorInput">
+                            {/* <span className="errorInput">
                                 {data?.customization?.length > 0 ? "" : errors["customization"]}
-                            </span>
+                            </span> */}
                         </div>
                     </Grid>
                     {/* <Grid item sx={12} sm={12} md={12}>
