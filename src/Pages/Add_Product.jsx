@@ -10,6 +10,9 @@ import { ApiGet, ApiPost, ApiPut } from '../Api/Api';
 import RichTextEditor from "react-rte";
 import { SuccessToast } from '../Components/Toast';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Space } from 'antd';
+import 'antd/dist/antd.css';
 
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
@@ -59,6 +62,7 @@ const Add_Product = () => {
         twitter: false,
         pinterest: false
     })
+    const [accessories, setAccessories] = useState([])
     const [image, setImage] = useState([])
     const [category, setCategory] = useState([])
     const [categoryID, setCategoryID] = useState("")
@@ -230,6 +234,12 @@ const Add_Product = () => {
                 title: data?.title,
                 benefits: data?.benefits,
                 price: data?.price,
+                engine: data?.engine,
+                fuel: data?.fuel,
+                seating: data?.seating,
+                transmission: data?.transmission,
+                mileage: data?.mileage,
+                accessories,
                 maxQuantity: data?.maxQuantity,
                 customization: data?.customization,
                 shippingCharge: data?.shippingCharge,
@@ -300,6 +310,12 @@ const Add_Product = () => {
             title: data?.title,
             benefits: data?.benefits,
             price: data?.price,
+            engine: data?.engine,
+            fuel: data?.fuel,
+            seating: data?.seating,
+            transmission: data?.transmission,
+            mileage: data?.mileage,
+            accessories,
             maxQuantity: data?.maxQuantity,
             customization: data?.customization,
             shippingCharge: data?.shippingCharge,
@@ -325,6 +341,9 @@ const Add_Product = () => {
             });
         }
     }
+    console.log('====================================');
+    console.log("accessories",accessories);
+    console.log('====================================');
     useEffect(() => {
         ApiGet(`dealer/product/${location?.state?.id}`)
             .then((res) => {
@@ -334,6 +353,7 @@ const Add_Product = () => {
                 setProtection(res?.data?.data?.protection)
                 setpipData(res?.data?.data?.description)
                 setpipData2(res?.data?.data?.companyProfile)
+                setAccessories(res?.data?.data?.accessories)
                 if (res?.data?.data?.description) {
                     setrichValue(
                         RichTextEditor?.createValueFromString(
@@ -359,6 +379,12 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [])
+    const itemInputs = accessories.map((item) => {
+        return {
+          name: item.name,
+          price: item.price
+        };
+      });
     useEffect(() => {
         ApiGet("dealer/category")
             .then((res) => {
@@ -387,6 +413,10 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [categoryID])
+    const onFinish = (values) => {
+        console.log('Received values of form:', values);
+        setAccessories(values?.accessorie)
+      };
     return (
         <div className='Add_Product'>
             <div className='header_breadcrumb'>
@@ -460,9 +490,7 @@ const Add_Product = () => {
                             </div>
                         </Grid>
                     </Grid>
-                    <Grid item spacing={3} sx={12} sm={12} md={6}>
-
-                        <Grid item sx={12} sm={12} md={12} >
+                        <Grid item sx={12} sm={12} md={6} >
                             <div className="input_filed">
                                 <label htmlFor="Title">Product Title</label>
                                 <TextField
@@ -479,8 +507,8 @@ const Add_Product = () => {
                             </span>
                             </div>
                         </Grid>
-                        <Grid item sx={12} sm={12} md={12} >
-                            <div className="input_filed mt-2">
+                        <Grid item sx={12} sm={12} md={6} >
+                            <div className="input_filed">
                                 <label htmlFor="Benefits">Benefits</label>
                                 <TextField
                                     type="Benefits"
@@ -496,11 +524,27 @@ const Add_Product = () => {
                             </span>
                             </div>
                         </Grid>
-                    </Grid>
+                   
+                    
+                    <Grid item sx={12} sm={12} md={6}>
+                    <div className="input_filed">
+                                <label htmlFor="Mileage">Mileage</label>
+                                <TextField
+                                    type="text"
+                                    hiddenLabel
+                                    id="Title"
+                                    variant="outlined"
+                                    name="mileage"
+                                    value={data?.mileage}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            </Grid>
+                            
                     <Grid item sx={12} sm={12} md={6}>
                         <div className="input_filed">
                             <label htmlFor="Protection">Protection</label>
-                            <div className="agree product_agree">
+                          <div className="d-flex">  <div className="agree product_agree">
                                 <FormControlLabel
                                     control={
                                         <Checkbox name="tradeAssurance" value={protection?.tradeAssurance} onChange={changeCheccbox} checked={protection?.tradeAssurance} />
@@ -515,7 +559,7 @@ const Add_Product = () => {
                                     }
                                     label="Refund Policy"
                                 />
-                            </div>
+                            </div></div>
                         </div>
                     </Grid>
                     <Grid container item spacing={3} sx={12} sm={12} md={6}>
@@ -607,6 +651,123 @@ const Add_Product = () => {
                             </span> */}
                         </div>
                     </Grid>
+                    <Grid item sx={12} sm={12} md={3}>
+                    <div className="input_filed">
+                                <label htmlFor="transmission">Transmission</label>
+                                <TextField
+                                    type="text"
+                                    hiddenLabel
+                                    id="transmission"
+                                    variant="outlined"
+                                    name="transmission"
+                                    value={data?.transmission}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            </Grid>
+                            <Grid item sx={12} sm={12} md={3}>
+                    <div className="input_filed">
+                                <label htmlFor="seating">Seating</label>
+                                <TextField
+                                    type="number"
+                                    hiddenLabel
+                                    id="Title"
+                                    variant="outlined"
+                                    name="seating"
+                                    value={data?.seating}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            </Grid>
+                            <Grid item sx={12} sm={12} md={3}>
+                    <div className="input_filed">
+                                <label htmlFor="fuel">Fuel</label>
+                                <TextField
+                                    type="text"
+                                    hiddenLabel
+                                    id="Title"
+                                    variant="outlined"
+                                    name="fuel"
+                                    value={data?.fuel}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            </Grid>
+                            <Grid item sx={12} sm={12} md={3}>
+                    <div className="input_filed">
+                                <label htmlFor="engine">Engine</label>
+                                <TextField
+                                    type="text"
+                                    hiddenLabel
+                                    id="Title"
+                                    variant="outlined"
+                                    name="engine"
+                                    value={data?.engine}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            </Grid>
+                           <Grid item sx={12} sm={12} md={12}>
+                           <div className="title">
+                <h4>Accessories</h4>
+            </div>
+            <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" initialValues={itemInputs}>
+      <Form.List name="accessorie" >
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({field }) => (
+              <Space
+                key={field?.key}
+                style={{
+                  display: 'flex',
+                  marginBottom: 8,
+                }}
+                align="baseline"
+              >
+                <Form.Item
+                  {...field}
+                  name={[field?.name, "name"]}
+                  fieldKey={[field?.fieldKey, "name"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Missing name',
+                    },
+                  ]}
+                >
+                  <Input placeholder="Name"/>
+                </Form.Item>
+                <Form.Item
+                  {...field}
+                  name={[field?.name, 'price']}
+                  fieldKey={[field?.fieldKey, "price"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Missing Price',
+                    },
+                  ]}
+                >
+                  <Input type="number" placeholder="Price"  />
+                </Form.Item>
+                <MinusCircleOutlined onClick={() => remove(field?.name)} />
+              </Space>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add field
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+                           </Grid>
                     {/* <Grid item sx={12} sm={12} md={12}>
                         <div className="input_filed">
                             <label htmlFor="Protection">Share</label>

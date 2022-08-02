@@ -220,6 +220,42 @@
     justify-content: end;
     height: 5px;
 }
+// .ant-form-item:last-child{
+//     float: right !important;
+// }
+.ant-btn-dashed:hover, .ant-btn-dashed:focus{
+    color: #249EA0 !important;
+    border-color: #249EA0 !important;
+    background: #fff;
+}
+.ant-input:hover{
+    border-color: #D9D9D9 !important;
+}
+.ant-input:focus, .ant-input-focused{
+    box-shadow: none !important;
+}
+.ant-input{
+    padding: 12.5px !important;
+    border: 1px solid #D9D9D9 !important;
+    border-radius: 8px !important;
+}
+.ant-btn .anticon{
+    position: relative;
+    top: -2px;
+}
+.ant-btn.ant-btn-block{
+    width: 125px !important;
+    float: left;
+    height: 40px;
+    border-radius: 8px !important;
+}
+.ant-btn-primary{
+    background-color: #249EA0 !important;
+    border-color: #249EA0 !important;
+    border-radius: 8px !important;
+    width: 125px;
+    height: 40px !important;
+}
 @media only screen and (max-width: 600px) {
     .MuiGrid-root {
         width: 100%;

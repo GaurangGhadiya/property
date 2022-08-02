@@ -117,6 +117,7 @@ const Dealer_Product_List = () => {
                                 <Th>Purchage Order</Th>
                                 <Th>Price</Th>
                                 <Th>Body Type</Th>
+                                <Th>Mileage</Th>
                                 <Th>Action</Th>
                             </Tr>
                         </Thead>
@@ -138,6 +139,7 @@ const Dealer_Product_List = () => {
                                         <Td>{moment(e?.createdAt).format("DD/MM/YYYY")}</Td>
                                         <Td>{e?.price ? e?.price : 0}</Td>
                                         <Td>{e?.bodyType?.bodyType ? e?.bodyType?.bodyType : "-"}</Td>
+                                        <Td>{e?.mileage ? e?.mileage : "0"}</Td>
                                         <Td>
                                             <div className="action">
                                                 <button className='action_btn' onClick={() => navigate("/add-product", {
