@@ -70,6 +70,7 @@ const Dealer_Product_List = () => {
     };
     useEffect(() => {
         fetchData(1, searching);
+       
     }, [])
     const deteleProduct = () => {
         ApiDelete(`/dealer/product/${deleteID}`)
@@ -105,7 +106,9 @@ const Dealer_Product_List = () => {
                             onChange={(e) => handlesearch(e)}
                         />
                     </div>
-                    <Button className="common_btn w-100" onClick={() => navigate("/add-product")}>
+                    <Button className="common_btn w-100" onClick={() => navigate("/add-product", {
+                                                    state: { accessories:[]}
+                                                })}>
                         Add Product
                     </Button>
                 </div>
@@ -143,7 +146,7 @@ const Dealer_Product_List = () => {
                                         <Td>
                                             <div className="action">
                                                 <button className='action_btn' onClick={() => navigate("/add-product", {
-                                                    state: { id: e?._id }
+                                                    state: { id: e?._id , accessories:e?.accessories}
                                                 })}><img
                                                         className="me-2"
                                                         src={process.env.PUBLIC_URL + "/Images/edit.png"}

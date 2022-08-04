@@ -31,11 +31,16 @@ function a11yProps(index) {
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
+
 const Add_Product = () => {
     const navigate = useNavigate()
     const [editData, setEditData] = useState({})
     const location = useLocation();
+    var order = {
+        items: location?.state?.accessories
+    };
     console.log("number", location);
+    console.log("order", order);
 
     const [data, setData] = useState({
         title: "",
@@ -62,7 +67,9 @@ const Add_Product = () => {
         twitter: false,
         pinterest: false
     })
-    const [accessories, setAccessories] = useState([])
+    const [accessories, setAccessories] = useState({
+        items: []
+    })
     const [image, setImage] = useState([])
     const [category, setCategory] = useState([])
     const [categoryID, setCategoryID] = useState("")
@@ -239,7 +246,7 @@ const Add_Product = () => {
                 seating: data?.seating,
                 transmission: data?.transmission,
                 mileage: data?.mileage,
-                accessories,
+                accessories:accessories?.items,
                 maxQuantity: data?.maxQuantity,
                 customization: data?.customization,
                 shippingCharge: data?.shippingCharge,
@@ -315,7 +322,7 @@ const Add_Product = () => {
             seating: data?.seating,
             transmission: data?.transmission,
             mileage: data?.mileage,
-            accessories,
+            accessories:accessories?.items,
             maxQuantity: data?.maxQuantity,
             customization: data?.customization,
             shippingCharge: data?.shippingCharge,
@@ -344,8 +351,8 @@ const Add_Product = () => {
     console.log('====================================');
     console.log("accessories",accessories);
     console.log('====================================');
-    useEffect(() => {
-        ApiGet(`dealer/product/${location?.state?.id}`)
+    useEffect(async() => {
+        await ApiGet(`dealer/product/${location?.state?.id}`)
             .then((res) => {
                 console.log(res);
                 setData(res?.data?.data)
@@ -353,7 +360,7 @@ const Add_Product = () => {
                 setProtection(res?.data?.data?.protection)
                 setpipData(res?.data?.data?.description)
                 setpipData2(res?.data?.data?.companyProfile)
-                setAccessories(res?.data?.data?.accessories)
+                setAccessories({items:res?.data?.data?.accessories})
                 if (res?.data?.data?.description) {
                     setrichValue(
                         RichTextEditor?.createValueFromString(
@@ -379,18 +386,12 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [])
-    const itemInputs = accessories.map((item) => {
-        return {
-          name: item.name,
-          price: item.price
-        };
-      });
-    useEffect(() => {
-        ApiGet("dealer/category")
-            .then((res) => {
-                console.log(res);
-                setCategory(res?.data?.data)
-            })
+    useEffect(async() => {
+        await ApiGet("dealer/category")
+        .then((res) => {
+            console.log(res);
+            setCategory(res?.data?.data)
+        })
             .catch(async (err) => {
                 console.log(err);
             });
@@ -403,8 +404,8 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [])
-    useEffect(() => {
-        ApiGet(`dealer/subCategory/category/${categoryID}`)
+    useEffect(async() => {
+        await ApiGet(`dealer/subCategory/category/${categoryID}`)
             .then((res) => {
                 console.log(res);
                 setSubCategory(res?.data?.data)
@@ -414,9 +415,20 @@ const Add_Product = () => {
             });
     }, [categoryID])
     const onFinish = (values) => {
-        console.log('Received values of form:', values);
-        setAccessories(values?.accessorie)
-      };
+        console.log(values);
+        setAccessories(values)
+    };
+    console.log('====================================');
+    console.log("order",order,accessories);
+    console.log('====================================');
+    //Create form fields based off how many items are in the order
+    const itemInputs = order.items.map((item) => {
+        return {
+            name: item.name,
+            price: item.price
+        };
+    });
+    console.log("itemInputs",itemInputs);
     return (
         <div className='Add_Product'>
             <div className='header_breadcrumb'>
@@ -711,62 +723,55 @@ const Add_Product = () => {
                            <div className="title">
                 <h4>Accessories</h4>
             </div>
-            <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" initialValues={itemInputs}>
-      <Form.List name="accessorie" >
-        {(fields, { add, remove }) => (
-          <>
-            {fields.map(({field }) => (
-              <Space
-                key={field?.key}
-                style={{
-                  display: 'flex',
-                  marginBottom: 8,
-                }}
-                align="baseline"
-              >
-                <Form.Item
-                  {...field}
-                  name={[field?.name, "name"]}
-                  fieldKey={[field?.fieldKey, "name"]}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Missing name',
-                    },
-                  ]}
+    <div>
+      <Form onFinish={onFinish}>
+        <Form.List name="items" initialValue={itemInputs}>
+          {(fields, { add, remove }) => (
+            <>
+              {fields.map((field) => (
+                <Space
+                  key={field.key}
+                  style={{ display: "flex", marginBottom: 8 }}
+                  align="baseline"
                 >
-                  <Input placeholder="Name"/>
-                </Form.Item>
-                <Form.Item
-                  {...field}
-                  name={[field?.name, 'price']}
-                  fieldKey={[field?.fieldKey, "price"]}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Missing Price',
-                    },
-                  ]}
+                  <Form.Item
+                    {...field}
+                    name={[field.name, "name"]}
+                    key={[field.key, "name"]}
+                  >
+                    <Input placeholder="Item Code" />
+                  </Form.Item>
+                  <Form.Item
+                    {...field}
+                    name={[field.name, "price"]}
+                    key={[field.key, "price"]}
+                  >
+                    <Input placeholder="Quantity" />
+                  </Form.Item>
+                  <MinusCircleOutlined onClick={() => remove(field.name)} />
+                </Space>
+              ))}
+              <Form.Item>
+                <Button
+                  type="dashed"
+                  onClick={() => add()}
+                  block
+                  icon={<PlusOutlined />}
                 >
-                  <Input type="number" placeholder="Price"  />
-                </Form.Item>
-                <MinusCircleOutlined onClick={() => remove(field?.name)} />
-              </Space>
-            ))}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                Add field
-              </Button>
-            </Form.Item>
-          </>
-        )}
-      </Form.List>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+                  Add item
+                </Button>
+              </Form.Item>
+            </>
+          )}
+        </Form.List>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
                            </Grid>
                     {/* <Grid item sx={12} sm={12} md={12}>
                         <div className="input_filed">
