@@ -139,10 +139,10 @@ const Dealer_Product_List = () => {
                                                 <span>{e?.title}</span>
                                             </div>
                                         </Td>
-                                        <Td>{moment(e?.createdAt).format("DD/MM/YYYY")}</Td>
-                                        <Td>{e?.price ? e?.price : 0}</Td>
-                                        <Td>{e?.bodyType?.bodyType ? e?.bodyType?.bodyType : "-"}</Td>
-                                        <Td>{e?.mileage ? e?.mileage : "0"}</Td>
+                                        <Td className="W_100">{moment(e?.createdAt).format("DD/MM/YYYY")}</Td>
+                                        <Td className="W_100">{e?.price ? e?.price : 0}</Td>
+                                        <Td className="W_100">{e?.bodyType?.bodyType ? e?.bodyType?.bodyType : "-"}</Td>
+                                        <Td className="W_100">{e?.mileage ? e?.mileage : "0"}</Td>
                                         <Td>
                                             <div className="action">
                                                 <button className='action_btn' onClick={() => navigate("/add-product", {

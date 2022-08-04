@@ -34,27 +34,31 @@
 
 .Product_List .product_table tbody tr {
     border-bottom: 1px solid lightgray;
+    text-align: center;
 }
 
 .Product_List .product_table thead tr th:nth-child(1) {
     padding-left: 15px !important;
+    text-align: left;
 }
-
 .Product_List .product_table thead tr th {
     padding: 13px 0px !important;
+    text-align: center;
 }
-
-.W_150 {
-    width: 450px;
+.W_150{
+    width: 350px;
 }
-
+.W_100{
+    width: 150px;
+}
 .W_150 img {
     margin: 20px 0;
 }
 
 .action {
     display: flex;
-    flex-wrap: wrap;
+
+    justify-content: end;
 }
 
 .action_btn {
@@ -65,6 +69,7 @@
     border: 1px solid #E3E3E3;
     border-radius: 5px;
     padding: 5px 13px;
+    display: flex;
 }
 
 .W_150 div {
@@ -88,7 +93,7 @@
     border: none !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     .Product_List h1 {
         margin: 20px 0;
     }
@@ -102,15 +107,18 @@
         padding-top: 10px;
     }
 
-    .W_150 {
+    .W_150, .W_100 {
         width: auto !important;
     }
 
-    .W_150 div {
+    .W_150 div ,.W_100 div{
         align-items: flex-start;
         flex-direction: column;
     }
-
+    .action{
+            flex-wrap: wrap;
+            justify-content: start;
+    }
     .action_btn {
         margin-top: 10px;
     }
