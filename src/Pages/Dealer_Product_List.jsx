@@ -152,7 +152,7 @@ const Dealer_Product_List = () => {
                                                         src={process.env.PUBLIC_URL + "/Images/edit.png"}
                                                     />Edit</button>
                                                 <button className='action_btn' onClick={() => navigate(`/view-product/${e?._id}`, {
-                                                    state: { id: e?._id }
+                                                    state: { id: e?._id,image:e?.image }
                                                 })}><img
                                                         className="me-2"
                                                         src={process.env.PUBLIC_URL + "/Images/eye.png"}

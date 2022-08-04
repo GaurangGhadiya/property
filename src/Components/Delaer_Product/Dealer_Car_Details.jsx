@@ -23,9 +23,9 @@ function a11yProps(index) {
       'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-const Dealer_Car_Details = ({data}) => {
+const Dealer_Car_Details = ({data,image}) => {
   const navigate = useNavigate()
-  const [item, setItem] = useState(data?.image ? data?.image[0] : [`${process.env.PUBLIC_URL + "/Images/car.png"}`])
+  const [item, setItem] = useState(image ? image[0] : [`${process.env.PUBLIC_URL + "/Images/car.png"}`])
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);

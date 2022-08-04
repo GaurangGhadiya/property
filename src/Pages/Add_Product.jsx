@@ -739,14 +739,14 @@ const Add_Product = () => {
                     name={[field.name, "name"]}
                     key={[field.key, "name"]}
                   >
-                    <Input placeholder="Item Code" />
+                    <Input placeholder="Name" />
                   </Form.Item>
                   <Form.Item
                     {...field}
                     name={[field.name, "price"]}
                     key={[field.key, "price"]}
                   >
-                    <Input placeholder="Quantity" />
+                    <Input placeholder="Price" />
                   </Form.Item>
                   <MinusCircleOutlined onClick={() => remove(field.name)} />
                 </Space>
