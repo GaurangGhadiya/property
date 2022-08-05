@@ -8,7 +8,7 @@ import Add_Comapny_Profile from '../Components/Add_product/Add_Comapny_Profile';
 import Faq from '../Components/Add_product/Faq';
 import { ApiGet, ApiPost, ApiPut } from '../Api/Api';
 import RichTextEditor from "react-rte";
-import { SuccessToast } from '../Components/Toast';
+import { ErrorToast, SuccessToast } from '../Components/Toast';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Space } from 'antd';
@@ -302,6 +302,7 @@ const Add_Product = () => {
                 })
                 .catch(async (err) => {
                     console.log(err);
+                    ErrorToast(err?.message);
                 });
         }
     }
