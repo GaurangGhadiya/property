@@ -172,15 +172,15 @@ const Add_Product = () => {
             formIsValid = false;
             errors["categoryID"] = "Please select category";
         }
-        // if (subCategory.length !== 0 && !SubCategoryID) {
-        //     formIsValid = false;
-        //     console.log("0");
-        //     errors["SubCategoryID"] = "Please select sub-category";
-        // }
-        // if (!body_typeID) {
-        //     formIsValid = false;
-        //     errors["body_typeID"] = "Please select body type";
-        // }
+        if (subCategory.length !== 0 && !SubCategoryID) {
+            formIsValid = false;
+            console.log("0");
+            errors["SubCategoryID"] = "Please select sub-category";
+        }
+        if (!body_typeID) {
+            formIsValid = false;
+            errors["body_typeID"] = "Please select body type";
+        }
         if (pipData?.description === "<p><br></p>") {
             formIsValid = false;
             errors["pipData"] = "Please enter description";
@@ -483,9 +483,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
                                 </select>
-                                {/* <span className="errorInput">
+                                <span className="errorInput">
                                 {SubCategoryID?.length > 0 ? "" : errors["SubCategoryID"]}
-                            </span> */}
+                            </span>
                             </div>
                         </Grid>}
                         <Grid item sx={12} sm={12} md={6} >
@@ -495,9 +495,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {body_type.map(e => <option value={e?._id}>{e?.bodyType}</option>)}
                                 </select>
-                                {/* <span className="errorInput">
+                                <span className="errorInput">
                                 {body_typeID?.length > 0 ? "" : errors["body_typeID"]}
-                            </span> */}
+                            </span>
                             </div>
                         </Grid>
                     </Grid>
