@@ -160,10 +160,10 @@ const Add_Product = () => {
             formIsValid = false;
             errors["title"] = "Please enter product title";
         }
-        if (!data?.benefits) {
-            formIsValid = false;
-            errors["benefits"] = "Please enter benefits";
-        }
+        // if (!data?.benefits) {
+        //     formIsValid = false;
+        //     errors["benefits"] = "Please enter benefits";
+        // }
         if (!data?.price) {
             formIsValid = false;
             errors["price"] = "Please enter price";
@@ -172,19 +172,19 @@ const Add_Product = () => {
             formIsValid = false;
             errors["categoryID"] = "Please select category";
         }
-        if (subCategory.length !== 0 && !SubCategoryID) {
-            formIsValid = false;
-            console.log("0");
-            errors["SubCategoryID"] = "Please select sub-category";
-        }
-        if (!body_typeID) {
-            formIsValid = false;
-            errors["body_typeID"] = "Please select body type";
-        }
-        // if (pipData?.description === "<p><br></p>") {
+        // if (subCategory.length !== 0 && !SubCategoryID) {
         //     formIsValid = false;
-        //     errors["pipData"] = "Please enter description";
+        //     console.log("0");
+        //     errors["SubCategoryID"] = "Please select sub-category";
         // }
+        // if (!body_typeID) {
+        //     formIsValid = false;
+        //     errors["body_typeID"] = "Please select body type";
+        // }
+        if (pipData?.description === "<p><br></p>") {
+            formIsValid = false;
+            errors["pipData"] = "Please enter description";
+        }
         // if (pipData2?.description === "<p><br></p>") {
         //     formIsValid = false;
         //     errors["pipData2"] = "Please enter company details";
@@ -349,9 +349,7 @@ const Add_Product = () => {
             });
         }
     }
-    console.log('====================================');
     console.log("accessories",accessories);
-    console.log('====================================');
     useEffect(async() => {
         await ApiGet(`dealer/product/${location?.state?.id}`)
             .then((res) => {
@@ -485,9 +483,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
                                 </select>
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {SubCategoryID?.length > 0 ? "" : errors["SubCategoryID"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>}
                         <Grid item sx={12} sm={12} md={6} >
@@ -497,9 +495,9 @@ const Add_Product = () => {
                                     <option value="">Select</option>
                                     {body_type.map(e => <option value={e?._id}>{e?.bodyType}</option>)}
                                 </select>
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {body_typeID?.length > 0 ? "" : errors["body_typeID"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                     </Grid>
@@ -532,9 +530,9 @@ const Add_Product = () => {
                                     value={data?.benefits}
                                     onChange={handleChange}
                                 />
-                                <span className="errorInput">
+                                {/* <span className="errorInput">
                                 {data?.benefits?.length > 0 ? "" : errors["benefits"]}
-                            </span>
+                            </span> */}
                             </div>
                         </Grid>
                    
@@ -588,9 +586,9 @@ const Add_Product = () => {
                                     value={data?.price}
                                     onChange={handleChange}
                                 />
-                                {/* <span className="errorInput">
+                                <span className="errorInput">
                                 {data?.price?.length > 0 ? "" : errors["price"]}
-                            </span> */}
+                            </span>
                             </div>
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>

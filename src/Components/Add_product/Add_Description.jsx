@@ -10,9 +10,9 @@ const Add_Description = ({pipData,handleChange,data,richValue,onChange3,errors})
             </div>
             <div className="input_filed">
                 <RichTextEditor name="description1" value={richValue} onChange={onChange3} />
-                {/* <span className="errorInput">
+                <span className="errorInput">
                                 {pipData?.description !== "<p><br></p>" ? "" : errors["pipData"]}
-                            </span> */}
+                            </span>
             </div>
             <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={12}><h6 className='mt-4'>Supply Ability</h6></Grid>

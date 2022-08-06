@@ -101,16 +101,34 @@ const Dealer_Car_Details = ({data,image}) => {
           <div className="border_bottom_Product"></div>
         <Description data={data}/>
         </div>
-                  <div className="faqs">
+                {data?.companyProfile &&  <div className="faqs">
           <h1>Company Profile</h1>
           <div className="border_bottom_Product1"></div>
         <Comapny_Profile data={data}/>
-        </div>
-                  <div className="faqs">
+        </div>}
+        {data?.accessories && <div className="faqs">
+          <h1>Accessories</h1>
+          <div className="border_bottom_Product3"></div>
+          <table className='accessories'>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+            </tr>
+            {data?.accessories?.map((e) => {
+              return (
+                <tr>
+                  <td>{e?.name}</td>
+                  <td>{e?.price}</td>
+                </tr>
+              )
+            })}
+          </table>
+        </div>}
+                  {/* <div className="faqs">
           <h1>Reviews</h1>
           <div className="border_bottom_Product2"></div>
         <Reviews data={data}/>
-        </div>
+        </div> */}
         </div>
         <hr />
         <div className="faqs">

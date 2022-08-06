@@ -117,7 +117,7 @@ const Dealer_Product_List = () => {
                         <Thead>
                             <Tr>
                                 <Th>Title</Th>
-                                <Th>Purchage Order</Th>
+                                <Th>Date of creation</Th>
                                 <Th>Price</Th>
                                 <Th>Body Type</Th>
                                 <Th>Mileage</Th>

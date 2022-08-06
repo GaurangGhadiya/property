@@ -3,13 +3,13 @@ import React from 'react'
 import Card from './Card'
 import "./Top_Car.scss"
 
-const Top_Car = () => {
+const Top_Car = ({data}) => {
     return (
         <div>
             <Container>
                 <div className="car_title">
                     <div className="">
-                    <h1>Exploring Top Model Options</h1>
+                    <h1>{data?.title}</h1>
                     <div className="border_bottom"></div>
                     </div>
                     <Button>View All</Button>

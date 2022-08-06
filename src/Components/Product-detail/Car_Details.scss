@@ -241,7 +241,7 @@
 .date button {
     font-weight: 800;
 }
-.border_bottom_Product,.border_bottom_Product1,.border_bottom_Product2{
+.border_bottom_Product,.border_bottom_Product1,.border_bottom_Product2,.border_bottom_Product3{
     margin-bottom: 20px;
     width: 250px;
 height: 3px;
@@ -253,6 +253,12 @@ border-radius: 3px;
 }
 .border_bottom_Product2{
     width: 100px;
+}
+.border_bottom_Product3{
+    width: 150px;
+}
+.accessories tr th:nth-child(2){
+    padding-left: 18px;
 }
 @media only screen and (min-width: 1200px) {
     .css-1oqqzyl-MuiContainer-root {
