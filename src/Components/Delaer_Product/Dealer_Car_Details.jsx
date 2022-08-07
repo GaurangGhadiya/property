@@ -59,10 +59,10 @@ const Dealer_Car_Details = ({data,image}) => {
                   <td className='mt-3'>Benefits:</td>
                   <td>{data?.benefits}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>Samples:</td>
                   <td>$12,000.00/Set | 1 Set (Min. Order) </td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td className='d-flex'>Customization:</td>
                   <td>
@@ -96,16 +96,32 @@ const Dealer_Car_Details = ({data,image}) => {
           
         </div>
         <div className="description">
-                  <div className="faqs">
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab label="Product Description" {...a11yProps(0)} />
+                      <Tab label="Company Profile" {...a11yProps(1)} />
+                      {/* <Tab label="Reviews" {...a11yProps(2)} /> */}
+                    </Tabs>
+                  </Box>
+                  {value === 0 && <Description data={data}/>}
+                  {value === 1 && <Comapny_Profile data={data}/>}
+                  {/* {value === 2 && <Reviews />} */}
+        </div>
+        <div className="description">
+                  {/* <div className="faqs">
           <h1>Product Description</h1>
           <div className="border_bottom_Product"></div>
         <Description data={data}/>
-        </div>
-                {data?.companyProfile &&  <div className="faqs">
+        </div> */}
+                {/* {data?.companyProfile &&  <div className="faqs">
           <h1>Company Profile</h1>
           <div className="border_bottom_Product1"></div>
         <Comapny_Profile data={data}/>
-        </div>}
+        </div>} */}
         {data?.accessories && <div className="faqs">
           <h1>Accessories</h1>
           <div className="border_bottom_Product3"></div>
