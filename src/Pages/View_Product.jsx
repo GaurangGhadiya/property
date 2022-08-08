@@ -26,7 +26,7 @@ const View_Product = () => {
     console.log("id",id);
     useEffect(() => {
       window.scroll(0,0)
-      ApiGet(`dealer/product/${id}`)
+      ApiGet(`dealer/product/₹{id}`)
           .then((res) => {
               console.log(res);
               setData(res?.data?.data)

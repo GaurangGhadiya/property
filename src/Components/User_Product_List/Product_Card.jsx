@@ -10,7 +10,7 @@ const Product_Card = () => {
                     <p class="card-text">Raysince China supplier mini vehicle 2021 Hot sales smart electric cars.</p>
                     <div className="d-flex justify-content-between">
                         <div className="price">
-                            <h4>$12,000.00</h4>
+                            <h4>₹12,000.00</h4>
                             <h6>1 Set (Min. Order)</h6>
                         </div>
                         <div className="bugde">

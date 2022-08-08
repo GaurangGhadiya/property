@@ -161,7 +161,7 @@ const Dealer_Profile = () => {
                             <table className='dealer_table'>
                                 <tr>
                                     <td>Annual&nbsp;Purchasing&nbsp;Volumn: </td>
-                                    <td>${sourcingInfo?.annualPurchasingVolumn?.default === null ? 0 :sourcingInfo?.annualPurchasingVolumn }</td>
+                                    <td>₹{sourcingInfo?.annualPurchasingVolumn?.default === null ? 0 :sourcingInfo?.annualPurchasingVolumn }</td>
                                 </tr>
                                 <tr>
                                     <td>Average&nbsp;Sourcing&nbsp;Frequency:</td>

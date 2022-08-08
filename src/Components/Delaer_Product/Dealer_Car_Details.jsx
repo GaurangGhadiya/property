@@ -19,13 +19,13 @@ import { useNavigate } from 'react-router-dom'
 
 function a11yProps(index) {
   return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      id: `simple-tab-₹{index}`,
+      'aria-controls': `simple-tabpanel-₹{index}`,
   };
 }
 const Dealer_Car_Details = ({data,image}) => {
   const navigate = useNavigate()
-  const [item, setItem] = useState(image ? image[0] : [`${process.env.PUBLIC_URL + "/Images/car.png"}`])
+  const [item, setItem] = useState(image ? image[0] : [`₹{process.env.PUBLIC_URL + "/Images/car.png"}`])
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -51,7 +51,7 @@ const Dealer_Car_Details = ({data,image}) => {
           <div className="car_details">
             <h1>{data?.title}</h1>
             <div className="price">
-              <h1>${data?.price}</h1>
+              <h1>₹{data?.price}</h1>
             </div>
             <div className="benifit">
               <table>
@@ -61,7 +61,7 @@ const Dealer_Car_Details = ({data,image}) => {
                 </tr>
                 {/* <tr>
                   <td>Samples:</td>
-                  <td>$12,000.00/Set | 1 Set (Min. Order) </td>
+                  <td>₹12,000.00/Set | 1 Set (Min. Order) </td>
                 </tr> */}
                 <tr>
                   <td className='d-flex'>Customization:</td>

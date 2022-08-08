@@ -16,8 +16,8 @@ import Footer from '../Footer/Footer';
 
 function a11yProps(index) {
   return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      id: `simple-tab-₹{index}`,
+      'aria-controls': `simple-tabpanel-₹{index}`,
   };
 }
 const Car_Details = () => {
@@ -49,7 +49,7 @@ const Car_Details = () => {
               <span>7 Reviews</span>
             </div>
             <div className="price">
-              <h1>$12,000.00</h1>
+              <h1>₹12,000.00</h1>
               <div className="count">
                 <AiOutlineMinus onClick={() => setItem(item - 1)} />
                 <div className="item">
@@ -68,11 +68,11 @@ const Car_Details = () => {
               <table>
                 <tr>
                   <td>Benefits:</td>
-                  <td>Quick refunds on orders under US $1,000</td>
+                  <td>Quick refunds on orders under US ₹1,000</td>
                 </tr>
                 <tr>
                   <td>Samples:</td>
-                  <td>$12,000.00/Set | 1 Set (Min. Order) </td>
+                  <td>₹12,000.00/Set | 1 Set (Min. Order) </td>
                 </tr>
                 <tr>
                   <td>Customization:</td>
@@ -110,7 +110,7 @@ const Car_Details = () => {
             <table>
               <tr>
                 <td>Price:</td>
-                <td>US $20100.00</td>
+                <td>US ₹20100.00</td>
               </tr>
               <tr>
                 <td>Quantity:</td>
@@ -118,11 +118,11 @@ const Car_Details = () => {
               </tr>
               <tr>
                 <td>Shipping Charge:</td>
-                <td>US $1,200.00</td>
+                <td>US ₹1,200.00</td>
               </tr>
               <tr>
                 <td>Total:</td>
-                <td>US $29,300.00</td>
+                <td>US ₹29,300.00</td>
               </tr>
             </table>
             <div className="date">
