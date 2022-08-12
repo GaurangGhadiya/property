@@ -418,7 +418,7 @@ const Add_Product = () => {
         setAccessories(values)
     };
     console.log('====================================');
-    console.log("order",order,accessories);
+    console.log("order",data);
     console.log('====================================');
     //Create form fields based off how many items are in the order
     const itemInputs = order.items.map((item) => {
@@ -593,23 +593,6 @@ const Add_Product = () => {
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
                             <div className="input_filed">
-                                <label htmlFor="Max Quantity">Max Quantity</label>
-                                <TextField
-                                    type="number"
-                                    hiddenLabel
-                                    id="outlined-basic"
-                                    variant="outlined"
-                                    name="maxQuantity"
-                                    value={data?.maxQuantity}
-                                    onChange={handleChange}
-                                />
-                                {/* <span className="errorInput">
-                                {data?.maxQuantity?.length > 0 ? "" : errors["maxQuantity"]}
-                            </span> */}
-                            </div>
-                        </Grid>
-                        <Grid item sx={12} sm={12} md={6}>
-                            <div className="input_filed">
                                 <label htmlFor="Shipping Charge (%)">Shipping Charge (%)</label>
                                 <TextField
                                     type="number"
@@ -627,6 +610,15 @@ const Add_Product = () => {
                         </Grid>
                         <Grid item sx={12} sm={12} md={6}>
                             <div className="input_filed">
+                                <label htmlFor="Title">Availablity</label>
+                                <select name="maxQuantity" value={data?.maxQuantity} onChange={handleChange} id="">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </Grid>
+                        {/* <Grid item sx={12} sm={12} md={6}>
+                            <div className="input_filed">
                                 <label htmlFor="Shipping">Shipping</label>
                                 <TextField
                                     type="Shipping"
@@ -637,11 +629,11 @@ const Add_Product = () => {
                                     value={data?.shipping}
                                     onChange={handleChange}
                                 />
-                                {/* <span className="errorInput">
+                                <span className="errorInput">
                                 {data?.shipping?.length > 0 ? "" : errors["shipping"]}
-                            </span> */}
+                            </span>
                             </div>
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Grid item sx={12} sm={12} md={6}>
                         <div className="input_filed">
@@ -692,7 +684,7 @@ const Add_Product = () => {
                             </Grid>
                             <Grid item sx={12} sm={12} md={3}>
                     <div className="input_filed">
-                                <label htmlFor="fuel">Fuel</label>
+                                <label htmlFor="fuel">Fuel Type</label>
                                 <TextField
                                     type="text"
                                     hiddenLabel
