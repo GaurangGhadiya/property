@@ -155,8 +155,11 @@
 .MuiFormGroup-root label {
     width: 45%;
 }
-
-.css-uqwprf-MuiGrid-root, .css-5n8ohs-MuiGrid-root {
+.css-isbt42 > .MuiGrid-item{
+    margin-top: 16px;
+    padding-top: 0px !important;
+}
+.css-uqwprf-MuiGrid-root, .css-5n8ohs-MuiGrid-root ,.css-16ykuap{
     height: 595px !important;
     overflow-y: auto;
 }
