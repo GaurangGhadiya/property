@@ -351,7 +351,7 @@ const Add_Product = () => {
     }
     console.log("accessories",accessories);
     useEffect(async() => {
-        await ApiGet(`dealer/product/₹{location?.state?.id}`)
+        await ApiGet(`dealer/product/${location?.state?.id}`)
             .then((res) => {
                 console.log(res);
                 setData(res?.data?.data)
@@ -404,7 +404,7 @@ const Add_Product = () => {
             });
     }, [])
     useEffect(async() => {
-        await ApiGet(`dealer/subCategory/category/₹{categoryID}`)
+        await ApiGet(`dealer/subCategory/category/${categoryID}`)
             .then((res) => {
                 console.log(res);
                 setSubCategory(res?.data?.data)
