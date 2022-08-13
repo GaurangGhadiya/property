@@ -30,6 +30,9 @@ const Header = (props) => {
   const navigate = useNavigate()
   const [loginData, setLoginData] = React.useState(getUserData())
   //user
+  console.log('====================================');
+  console.log("loginData",loginData);
+  console.log('====================================');
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -61,23 +64,33 @@ const Header = (props) => {
       <Divider />
       <List>
           <ListItem key={1} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            {loginData?.userType === "User" && <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/shopping.png'} />
               Shopping
-            </ListItemButton>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            </ListItemButton>}
+            {loginData?.userType === "User" && <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/sell.png'} />
               Sell
-            </ListItemButton>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            </ListItemButton>}
+           {loginData.userType &&  <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/help.png'} />
-              Help
-            </ListItemButton>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+              Contact Us
+            </ListItemButton>}
+            {loginData?.userType === "User" && <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/message.png'} />
-            </ListItemButton>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+              Message
+            </ListItemButton>}
+            {loginData?.userType === "User" && <ListItemButton sx={{ textAlign: 'center' }}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/cart.png'} />
+            </ListItemButton>}
+            {loginData?.userType === "Dealer" && <>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+            Blog
+            </ListItemButton>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate("/add-product", {
+                                                    state: { accessories:[]}
+                                                })}>
+            Add Product
             </ListItemButton>
             <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate("/dealer-product-list")}>
               Product
@@ -85,6 +98,7 @@ const Header = (props) => {
             <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate("/dealer-profile")}>
               Profile
             </ListItemButton>
+            </>}
             <ListItemButton className='login_btn py-2' sx={{ textAlign: 'center' }} onClick={handleOpen}>
               <img className='me-2' src={process.env.PUBLIC_URL + '/Images/Icons/login.png'} />
               User Login 
@@ -141,52 +155,62 @@ const Header = (props) => {
                 </Link>
               </Typography>
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-                <Button key={1} sx={{ color: "black" }}>
+                {loginData?.userType === "User" && <Button key={1} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/shopping.png"}
                   />
                   Shopping
-                </Button>
-                <Button key={2} sx={{ color: "black" }}>
+                </Button>}
+                {loginData?.userType === "User" && <Button key={2} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/sell.png"}
                   />
                   Sell
-                </Button>
-                <Button key={3} sx={{ color: "black" }}>
+                </Button>}
+                {loginData.userType && <Button key={3} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/help.png"}
                   />
-                  Help
-                </Button>
-                <Button key={4} sx={{ color: "black" }}>
+                  Contact Us
+                </Button>}
+                {loginData?.userType === "User" && <Button key={4} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/message.png"}
                   />
                   Message
-                </Button>
-                <Button key={5} sx={{ color: "black" }}>
+                </Button>}
+                {loginData?.userType === "User" && <Button key={5} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/like.png"}
                   />
+                </Button>}
+                {loginData?.userType === "Dealer" && <>
+                <Button key={9} sx={{ color: "black" }}>
+                 Blog
+                </Button>
+                <Button key={8} sx={{ color: "black" }}  onClick={() => navigate("/add-product", {
+                                                    state: { accessories:[]}
+                                                })}>
+                 Add Product
                 </Button>
                 <Button key={6} sx={{ color: "black" }}  onClick={() => navigate("/dealer-product-list")}>
                   Product
                 </Button>
                 <Button key={7} sx={{ color: "black" }}  onClick={() => navigate("/dealer-profile")}>
                   Profile
-                </Button>
-                <Button key={8} sx={{ color: "black" }}>
+                </Button></>
+                }
+                {loginData?.userType === "User" && <Button key={8} sx={{ color: "black" }}>
                   <img
                     className="me-2"
                     src={process.env.PUBLIC_URL + "/Images/Icons/cart.png"}
                   />
-                </Button>
+                </Button>}
                 {loginData?.name ? (
                   <>
                     <p className="text-black p-0 m-0 mt-2">

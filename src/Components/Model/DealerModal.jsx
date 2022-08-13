@@ -15,6 +15,7 @@ import {
   TextField,
 } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
+import { useNavigate } from "react-router";
 import Tab from "@mui/material/Tab";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -30,7 +31,7 @@ import {
 import { auth } from "../../userFirebase";
 import { dealerauth } from "../../dealerFirebase";
 import { ErrorToast, SuccessToast } from "../Toast";
-import { ApiPostNoAuth } from "../../Api/Api";
+import { ApiPostNoAuth, getUserData } from "../../Api/Api";
 import GoogleLogin from "react-google-login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // import { GoogleLogin } from "@react-oauth/google";
@@ -82,7 +83,9 @@ function a11yProps(index) {
 }
 
 const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
+  const navigate = useNavigate()
   const [value, setValue] = React.useState(0);
+  const [loginData, setLoginData] = React.useState(getUserData())
   const [join, setJoin] = useState("User");
   const [joinLogin, setJoinLogin] = useState("User");
   const [toggle, setToggle] = useState(0);
@@ -93,7 +96,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
     password: "",
     confirmPassword: "",
     number: "",
-    otherContacted : false,
+    otherContacted: false,
   });
   const [signIn, setSignIn] = useState({
     email: "",
@@ -106,7 +109,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       setSignUp({ ...signUp, [name]: e.target.checked });
     } else {
       setSignUp({ ...signUp, [name]: value });
-    } 
+    }
   };
   const handleSignIn = (e) => {
     const { name, value } = e.target;
@@ -150,42 +153,47 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
   const userSignIn = () => {
     // console.log("signUp", signUp);
     if (signIn.email && signIn.password) {
-        const body = {
-          emailOrMobile: signIn.email,
-          password: signIn.password,
-        };
-        ApiPostNoAuth("/dealer/login" , body).then((res) => {
-          setSignIn({});
-          SuccessToast(res?.data?.message);
-          localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-          handleClose();  
-        window.location.pathname = "/";
-          }).catch(e => {
-                        ErrorToast(e?.data?.message);
+      const body = {
+        emailOrMobile: signIn.email,
+        password: signIn.password,
+      };
+      ApiPostNoAuth("/dealer/login", body).then((res) => {
+        console.log("res", res);
+        setSignIn({});
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+        handleClose();
+        if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
+          window.location.pathname = "/";
+        } else {
+          window.location.pathname = "/dealer-profile"
+        }
+      }).catch(e => {
+        ErrorToast(e?.data?.message);
 
-          });
-    //   signInWithEmailAndPassword(
-    //     joinLogin === "User" ? auth : dealerauth,
-    //     signIn.email,
-    //     signIn.password
-    //   )
-    //     .then(async (res) => {
-    //       console.log(res);
-    //       // const user = res?.user
-    //       //    await updateProfile(user, {displayName :signUp?.name})
-    //       handleClose();
-    //       SuccessToast("Sign In sucessFull!");
-    //     })
-        // .catch((e) => {
-        //   //  console.log("www",e);
-        //   ErrorToast(
-        //     e.message === "Firebase: Error (auth/user-not-found)."
-        //       ? "You are not registerd. Please register yourself! "
-        //       : e.message === "Firebase: Error (auth/wrong-password)."
-        //       ? "Email and Password are not matched!"
-        //       : "Something want wrong!"
-        //   );
-        // });
+      });
+      //   signInWithEmailAndPassword(
+      //     joinLogin === "User" ? auth : dealerauth,
+      //     signIn.email,
+      //     signIn.password
+      //   )
+      //     .then(async (res) => {
+      //       console.log(res);
+      //       // const user = res?.user
+      //       //    await updateProfile(user, {displayName :signUp?.name})
+      //       handleClose();
+      //       SuccessToast("Sign In sucessFull!");
+      //     })
+      // .catch((e) => {
+      //   //  console.log("www",e);
+      //   ErrorToast(
+      //     e.message === "Firebase: Error (auth/user-not-found)."
+      //       ? "You are not registerd. Please register yourself! "
+      //       : e.message === "Firebase: Error (auth/wrong-password)."
+      //       ? "Email and Password are not matched!"
+      //       : "Something want wrong!"
+      //   );
+      // });
     } else {
       ErrorToast("All Fields are Requried!");
     }
@@ -256,7 +264,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
           localStorage.setItem("userData", JSON.stringify(res?.data?.data));
           setToggle(0);
           handleClose();
-          window.location.pathname = "/";
+          // window.location.pathname = "/"; 
         })
         .catch((e) => {
           ErrorToast(e?.data?.message);
@@ -287,11 +295,15 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       deviceToken: "123",
     };
     ApiPostNoAuth("dealer/google_login", body).then(res => {
-      console.log("es",res);
-       SuccessToast(res?.data?.message);
-       localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-       handleClose();
-       window.location.pathname = "/";
+      console.log("es", res);
+      SuccessToast(res?.data?.message);
+      localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+      handleClose();
+      if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
+        window.location.pathname = "/";
+      } else {
+        window.location.pathname = "/dealer-profile"
+      }
     }).catch(e => {
       console.log(e);
       ErrorToast(e?.data?.message);
@@ -310,20 +322,24 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       });
   };
 
-  const responseFacebook = async(response) => {
+  const responseFacebook = async (response) => {
     console.log(response);
     const body = {
       accessToken: response?.accessToken,
       deviceToken: "123",
     };
-   await ApiPostNoAuth("dealer/facebook_login", body).then(res => {
-        console.log("res",res);
-        SuccessToast(res?.data?.message);
-        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-        handleClose();
+    await ApiPostNoAuth("dealer/facebook_login", body).then(res => {
+      console.log("res", res);
+      SuccessToast(res?.data?.message);
+      localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+      handleClose();
+      if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
         window.location.pathname = "/";
+      } else {
+        window.location.pathname = "/dealer-profile"
+      }
     }).catch(e => {
-                        ErrorToast(e?.data?.message);
+      ErrorToast(e?.data?.message);
     });
   };
   const fbLogin = () => {

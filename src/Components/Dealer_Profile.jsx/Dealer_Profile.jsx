@@ -46,6 +46,7 @@ const Dealer_Profile = () => {
         })
     }
     useEffect(() => {
+        // setOpen(true)
         ApiGet("dealer/get_profile")
         .then((res) => {
             console.log(res);
