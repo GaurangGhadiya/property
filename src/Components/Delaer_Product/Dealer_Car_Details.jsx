@@ -27,6 +27,7 @@ const Dealer_Car_Details = ({data,image}) => {
   const navigate = useNavigate()
   const [item, setItem] = useState(image ? image[0] : [`₹{process.env.PUBLIC_URL + "/Images/car.png"}`])
   const [value, setValue] = React.useState(0);
+  // ==============Tab Change===================//
   const handleChange = (event, newValue) => {
     setValue(newValue);
 };

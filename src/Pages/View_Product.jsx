@@ -23,7 +23,7 @@ const View_Product = () => {
   const [data, setData] = useState({})
   const { id } = useParams()
   const location = useLocation()
-    console.log("id",id);
+    // ==============Product Details API===================//
     useEffect(() => {
       window.scroll(0,0)
       ApiGet(`dealer/product/${id}`)

@@ -17,7 +17,7 @@ const style = {
   overflowY: "scroll"
 };
 const Dealer_Edit_Profile = ({image, setImage,open, handleClose, data, sourcingInfo, companyInfo, handleChange, handleChange2 ,handleChange3}) => {
-
+// ==============store Profile Image===================//
   const onImageChange = (e) => {
     console.log(e.target.files);
     let file = e.target.files[0];
@@ -25,6 +25,7 @@ const Dealer_Edit_Profile = ({image, setImage,open, handleClose, data, sourcingI
     file.fileURL = fileURL;
     setImage((post) => [file]);
   };
+  // ==============Image Uploaded API===================//
   const thumbnailapi = async () => {
     const formData = new FormData();
 
@@ -45,6 +46,7 @@ const Dealer_Edit_Profile = ({image, setImage,open, handleClose, data, sourcingI
       return thub;
     }
   };
+  // ==============update Profile API===================//
   const updateProfile = async () => {
     let image = await thumbnailapi();
     const body = {

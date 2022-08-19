@@ -83,16 +83,19 @@ const Add_Product = () => {
     const [richValue2, setrichValue2] = useState(RichTextEditor.createEmptyValue());
     const [pipData2, setpipData2] = useState({description: "<p><br></p>"});
     const [errors, setError] = useState({});
+    // ======Store Description Value ============ //
     const onChange = (value) => {
         setrichValue(value);
         value.toString("html");
         setpipData({ ...pipData, description: value.toString("html") });
     };
+    // ======Store company Value ============ //
     const onChange2 = (value) => {
         setrichValue2(value);
         value.toString("html");
         setpipData2({ ...pipData2, description: value.toString("html") });
     };
+    // ======Store protection Value ============ //
     const changeCheccbox = (e) => {
         const { name, checked } = e.target
         setProtection({
@@ -100,16 +103,7 @@ const Add_Product = () => {
             [name]: checked
         })
     }
-    const changeShareCheccbox = (e) => {
-        const { name, checked } = e.target
-        setShare({
-            ...share,
-            [name]: checked
-        })
-    }
-    const handleTabChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    // ======Store Product Value ============ //
     const handleChange = (e) => {
         const { name, value } = e.target
         setData({
@@ -118,6 +112,7 @@ const Add_Product = () => {
         })
     }
     console.log("richValue", richValue);
+    // ======Store image Value ============ //
     const onImageChange = (e) => {
         console.log(e.target.files);
         let file = e.target.files[0];
@@ -126,11 +121,11 @@ const Add_Product = () => {
         file.fileURL = fileURL;
         setImage((post) => [...post, file]);
     };
+    // ======delete Image ============ //
     const deleteImage = (e) => {
         setImage(image.filter(y => y != e))
     }
-    console.log("pipData2", pipData2.description);
-    console.log("pipData", pipData.description);
+    // ======Image Upload API ============ //
     const imagearrayapi = async () => {
         let image1 = [];
         for (let i = 0; i < image.length; i++) {
@@ -152,6 +147,7 @@ const Add_Product = () => {
         }
         return image1;
     };
+     // ===== Form Validation ============ //
     const validateForm = () => {
         console.log("valid");
         let errors = {};
@@ -229,6 +225,7 @@ const Add_Product = () => {
 
         return formIsValid;
     };
+     // ======submit Product & add product API ============ //
     const submitData = async () => {
         
         window.scroll(0,0)
@@ -306,6 +303,7 @@ const Add_Product = () => {
                 });
         }
     }
+    // ======update Product & update product API ============ //
     const submitUpdateData = async () => {
         window.scroll(0,0)
         if(validateForm()){
@@ -349,7 +347,7 @@ const Add_Product = () => {
             });
         }
     }
-    console.log("accessories",accessories);
+     // ======product get bt id API ============ //
     useEffect(async() => {
         await ApiGet(`dealer/product/${location?.state?.id}`)
             .then((res) => {
@@ -385,6 +383,7 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [])
+     // ======category API & body type API ============ //
     useEffect(async() => {
         await ApiGet("dealer/category")
         .then((res) => {
@@ -403,6 +402,7 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [])
+     // ======subcategory API ============ //
     useEffect(async() => {
         await ApiGet(`dealer/subCategory/category/${categoryID}`)
             .then((res) => {
@@ -413,21 +413,18 @@ const Add_Product = () => {
                 console.log(err);
             });
     }, [categoryID])
+    // ======submit accessories ============ //
     const onFinish = (values) => {
         console.log(values);
         setAccessories(values)
     };
-    console.log('====================================');
-    console.log("order",data);
-    console.log('====================================');
-    //Create form fields based off how many items are in the order
+     // ======Update accessories============ //
     const itemInputs = order.items.map((item) => {
         return {
             name: item.name,
             price: item.price
         };
     });
-    console.log("itemInputs",itemInputs);
     return (
         <div className='Add_Product'>
             <div className='header_breadcrumb'>

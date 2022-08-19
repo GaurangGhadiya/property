@@ -34,26 +34,24 @@ const Header = (props) => {
   console.log("loginData",loginData);
   console.log('====================================');
   const [open, setOpen] = React.useState(false);
+  // ==============user modal open===================//
   const handleOpen = () => setOpen(true);
+  // ==============user modal close===================//
   const handleClose = () => setOpen(false);
   // Dealer
   const [open2, setOpen2] = React.useState(false);
+  // / ==============deler modal open===================//
   const handleOpen2 = () => setOpen2(true);
+  // / ==============deler modal close===================//
   const handleClose2 = () => setOpen2(false);
 
   console.log("header", isAuth);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+// / ============== MObile view Drawer Open===================//
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  // const logout = () => {
-  //   console.log("44654");
-  //   localStorage.clear();
-  //   window.location.reload(false);
-    
-  // }
+  // / ============== MObile view Drawer===================//
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Link to="/">

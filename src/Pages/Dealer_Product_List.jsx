@@ -37,11 +37,14 @@ const Dealer_Product_List = () => {
     const [searching, setsearching] = useState("");
     const [deleteID, setdeleteID] = useState("")
     const [open, setOpen] = React.useState(false);
+    // ======Modal Open ============ //
     const handleOpen = (e) => {
         setOpen(true)
         setdeleteID(e?._id)
     };
+    // ======Modal Close============ //
     const handleClose = () => setOpen(false);
+    // ======Get All Product API============ //
     const fetchData = (a, c) => {
         const body = {
             page: a,
@@ -59,19 +62,23 @@ const Dealer_Product_List = () => {
                 console.log(err);
             });
     }
+    // ======Search value store ============ //
     const handlesearch = (e) => {
         console.log(e.target.value);
         setsearching(e.target.value);
         fetchData(1, e.target.value);
     };
+    // ======pagination value store ============ //
     const handleChange = (e, i) => {
         console.log(i);
         fetchData(i, searching);
     };
+    // ======APi Calling with fillter ============ //
     useEffect(() => {
         fetchData(1, searching);
        
     }, [])
+    // ======Delete product API ============ //
     const deteleProduct = () => {
         ApiDelete(`/dealer/product/${deleteID}`)
             .then((res) => {

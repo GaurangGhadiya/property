@@ -20,10 +20,13 @@ const Dealer_Profile = () => {
     const [companyInfo, setCompanyInfo] = useState({})
     const [sourcingInfo, setSourcingInfo] = useState({})
     const [open, setOpen] = React.useState(false);
+    // ======modal Open ============ //
     const handleOpen = (e) => {
         setOpen(true)
     };
+    // ======modal Close============ //
     const handleClose = () => setOpen(false);
+    // ==============store personal Information===================//
     const handleChange = (e) => {
         const{name,value} = e.target
         setData({
@@ -31,6 +34,7 @@ const Dealer_Profile = () => {
             [name]:value
         })
     }
+    // ==============store Company Information & ===================//
     const handleChange2 = (e) => {
         const{name,value} = e.target
         setCompanyInfo({
@@ -38,6 +42,7 @@ const Dealer_Profile = () => {
             [name]:value
         })
     }
+    // ==============store Sourcing===================//
     const handleChange3 = (e) => {
         const{name,value} = e.target
         setSourcingInfo({
@@ -45,6 +50,7 @@ const Dealer_Profile = () => {
             [name]:value
         })
     }
+    // ======Get Profile API ============ //
     useEffect(() => {
         // setOpen(true)
         ApiGet("dealer/get_profile")
