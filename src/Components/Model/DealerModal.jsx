@@ -55,6 +55,7 @@ const style = {
   p: 4,
 };
 
+// ==============Tabs===================//
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -83,9 +84,9 @@ function a11yProps(index) {
 }
 
 const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
-  const [loginData, setLoginData] = React.useState(getUserData())
+  const [loginData, setLoginData] = React.useState(getUserData());
   const [join, setJoin] = useState("User");
   const [joinLogin, setJoinLogin] = useState("User");
   const [toggle, setToggle] = useState(0);
@@ -103,6 +104,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
     password: "",
   });
 
+  // ==============Sign Up===================//
   const handleSignUp = (e) => {
     const { name, value } = e.target;
     if (name == "otherContacted") {
@@ -111,93 +113,12 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       setSignUp({ ...signUp, [name]: value });
     }
   };
+
   const handleSignIn = (e) => {
     const { name, value } = e.target;
     setSignIn({ ...signIn, [name]: value });
   };
 
-  const userRegister = () => {
-    console.log("signUp", signUp);
-    if (signUp.password !== signUp?.confirmPassword) {
-      ErrorToast("Password are not matched!");
-    } else if (signUp?.number?.length != 10) {
-      ErrorToast("Phone number should be 10 digits");
-    } else if (signUp?.pincode?.length != 6) {
-      ErrorToast("Pincode should be 6 digits");
-    } else if (
-      signUp.email &&
-      signUp.password &&
-      signUp?.name &&
-      signUp?.number &&
-      signUp.password === signUp?.confirmPassword &&
-      signUp?.city &&
-      signUp?.state &&
-      signUp?.pincode
-    ) {
-      createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
-        .then(async (res) => {
-          console.log(res);
-          const user = res?.user;
-          await updateProfile(user, { displayName: signUp?.name });
-          handleClose();
-          SuccessToast("Sign Up sucessFull!");
-        })
-        .catch((e) => {
-          console.log(e);
-          ErrorToast("something want wrong");
-        });
-    } else {
-      ErrorToast("All Fields are Requried!");
-    }
-  };
-  const userSignIn = () => {
-    // console.log("signUp", signUp);
-    if (signIn.email && signIn.password) {
-      const body = {
-        emailOrMobile: signIn.email,
-        password: signIn.password,
-      };
-      ApiPostNoAuth("/dealer/login", body).then((res) => {
-        console.log("res", res);
-        setSignIn({});
-        SuccessToast(res?.data?.message);
-        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-        handleClose();
-        if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
-          window.location.pathname = "/";
-        } else {
-          window.location.pathname = "/dealer-profile"
-        }
-      }).catch(e => {
-        ErrorToast(e?.data?.message);
-
-      });
-      //   signInWithEmailAndPassword(
-      //     joinLogin === "User" ? auth : dealerauth,
-      //     signIn.email,
-      //     signIn.password
-      //   )
-      //     .then(async (res) => {
-      //       console.log(res);
-      //       // const user = res?.user
-      //       //    await updateProfile(user, {displayName :signUp?.name})
-      //       handleClose();
-      //       SuccessToast("Sign In sucessFull!");
-      //     })
-      // .catch((e) => {
-      //   //  console.log("www",e);
-      //   ErrorToast(
-      //     e.message === "Firebase: Error (auth/user-not-found)."
-      //       ? "You are not registerd. Please register yourself! "
-      //       : e.message === "Firebase: Error (auth/wrong-password)."
-      //       ? "Email and Password are not matched!"
-      //       : "Something want wrong!"
-      //   );
-      // });
-    } else {
-      ErrorToast("All Fields are Requried!");
-    }
-  };
   const handleChange2 = (newValue) => {
     setValue2(newValue);
   };
@@ -213,6 +134,8 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
     console.log("eee", e.target.value);
     setJoinLogin(e.target.value);
   };
+
+  // ==============Dealer Signup===================//
   const DelarOpen = () => {
     console.log("signUp", signUp, value2);
     if (signUp.password !== signUp?.confirmPassword) {
@@ -264,29 +187,17 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
           localStorage.setItem("userData", JSON.stringify(res?.data?.data));
           setToggle(0);
           handleClose();
-          // window.location.pathname = "/"; 
+          // window.location.pathname = "/";
         })
         .catch((e) => {
           ErrorToast(e?.data?.message);
         });
-      //   createUserWithEmailAndPassword(dealerauth, signUp.email, signUp.password)
-      //     .then(async (res) => {
-      //       console.log("delear sign up", res);
-      //       const user = res?.user;
-      //       await updateProfile(user, { displayName: signUp?.name });
-
-      //       //   handleClose();
-      //       SuccessToast("Dealer Sign Up sucessFull!");
-      //     })
-      //     .catch((e) => {
-      //       console.log(e);
-      //       ErrorToast("Something want wrong");
-      //     });
     } else {
       ErrorToast("All Fields are Requried!");
     }
   };
 
+  // ==============Google Login===================//
   const responseGoogle = (response) => {
     console.log(response);
     const body = {
@@ -294,63 +205,86 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
       idToken: response?.tokenObj?.id_token,
       deviceToken: "123",
     };
-    ApiPostNoAuth("dealer/google_login", body).then(res => {
-      console.log("es", res);
-      SuccessToast(res?.data?.message);
-      localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-      handleClose();
-      if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
-        window.location.pathname = "/";
-      } else {
-        window.location.pathname = "/dealer-profile"
-      }
-    }).catch(e => {
-      console.log(e);
-      ErrorToast(e?.data?.message);
-
-    });
-  };
-  const googleLogin = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(joinLogin === "User" ? auth : dealerauth, provider)
+    ApiPostNoAuth("dealer/google_login", body)
       .then((res) => {
-        console.log("google login", res);
+        console.log("es", res);
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
         handleClose();
+        if (
+          res?.data?.data?.phoneNumber !== null &&
+          res?.data?.data?.companyNama !== null &&
+          res?.data?.data?.registeredAddress !== null
+        ) {
+          window.location.pathname = "/";
+        } else {
+          window.location.pathname = "/dealer-profile";
+        }
       })
       .catch((e) => {
         console.log(e);
+        ErrorToast(e?.data?.message);
       });
   };
 
+  // ==============User SignIn===================//
+  const userSignIn = () => {
+    // console.log("signUp", signUp);
+    if (signIn.email && signIn.password) {
+      const body = {
+        emailOrMobile: signIn.email,
+        password: signIn.password,
+      };
+      ApiPostNoAuth("/dealer/login", body)
+        .then((res) => {
+          console.log("res", res);
+          setSignIn({});
+          SuccessToast(res?.data?.message);
+          localStorage.setItem("userData", JSON.stringify(res?.data?.data));
+          handleClose();
+          if (
+            res?.data?.data?.phoneNumber !== null &&
+            res?.data?.data?.companyNama !== null &&
+            res?.data?.data?.registeredAddress !== null
+          ) {
+            window.location.pathname = "/";
+          } else {
+            window.location.pathname = "/dealer-profile";
+          }
+        })
+        .catch((e) => {
+          ErrorToast(e?.data?.message);
+        });
+    } else {
+      ErrorToast("All Fields are Requried!");
+    }
+  };
+
+  // ==============Facebook Login===================//
   const responseFacebook = async (response) => {
     console.log(response);
     const body = {
       accessToken: response?.accessToken,
       deviceToken: "123",
     };
-    await ApiPostNoAuth("dealer/facebook_login", body).then(res => {
-      console.log("res", res);
-      SuccessToast(res?.data?.message);
-      localStorage.setItem("userData", JSON.stringify(res?.data?.data));
-      handleClose();
-      if (res?.data?.data?.phoneNumber !== null && res?.data?.data?.companyNama !== null && res?.data?.data?.registeredAddress !== null) {
-        window.location.pathname = "/";
-      } else {
-        window.location.pathname = "/dealer-profile"
-      }
-    }).catch(e => {
-      ErrorToast(e?.data?.message);
-    });
-  };
-  const fbLogin = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(dealerauth, provider)
+    await ApiPostNoAuth("dealer/facebook_login", body)
       .then((res) => {
-        console.log("fb login", res);
+        console.log("res", res);
+        SuccessToast(res?.data?.message);
+        localStorage.setItem("userData", JSON.stringify(res?.data?.data));
         handleClose();
+        if (
+          res?.data?.data?.phoneNumber !== null &&
+          res?.data?.data?.companyNama !== null &&
+          res?.data?.data?.registeredAddress !== null
+        ) {
+          window.location.pathname = "/";
+        } else {
+          window.location.pathname = "/dealer-profile";
+        }
       })
       .catch((e) => {
-        console.log(e);
+        ErrorToast(e?.data?.message);
       });
   };
 

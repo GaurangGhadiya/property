@@ -22,57 +22,62 @@ import Cart from './Pages/Cart';
 
 
 function App() {
-  const [isAuth, setIsAuth] = useState({})
+  const [isAuth, setIsAuth] = useState({});
 
-  const start = () =>{
+  const start = () => {
     gapi.client.init({
       clientId: process.env.REACT_APP_GOOGLE_LOGIN,
       scope: "",
     });
-  }
+  };
 
   useEffect(() => {
-gapi.load('client:auth2',start)
- auth.onAuthStateChanged(user =>{
-  if(user){
-    localStorage.setItem("userData", JSON.stringify(user))
-    setIsAuth(user)
-  }
-  console.log(user);
- })
+    // ==============Get data from firebase===================//
+    gapi.load("client:auth2", start);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        localStorage.setItem("userData", JSON.stringify(user));
+        setIsAuth(user);
+      }
+      console.log(user);
+    });
 
- dealerauth.onAuthStateChanged((user) => {
-   if (user) {
-     localStorage.setItem("userData", JSON.stringify(user));
-     setIsAuth(user);
-   }
-   console.log(user);
- });
-  }, [])
+    dealerauth.onAuthStateChanged((user) => {
+      if (user) {
+        localStorage.setItem("userData", JSON.stringify(user));
+        setIsAuth(user);
+      }
+      console.log(user);
+    });
+  }, []);
 
-    const logout = () => {
-      // auth.signOut();
-      // dealerauth.signOut();
-      localStorage.clear();
-      window.location.pathname = "/";
-    };
-  
+  // ==============Logout user===================//
+  const logout = () => {
+    // auth.signOut();
+    // dealerauth.signOut();
+    localStorage.clear();
+    window.location.pathname = "/";
+  };
+
   return (
     <>
       <Header isAuth={isAuth} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route element={<ProtectedRoutes />}>
-        <Route path="/product-detail" element={<Product_Detail />} />
-        <Route path="/dealer-product-list" element={<Dealer_Product_List />} />
-        <Route path="/user-product-list" element={<User_Product_List />} />
-        <Route path="/add-product" element={<Add_Product />} />
-        <Route path="/view-product/:id" element={<View_Product />} />
-        <Route path="/dealer-profile" element={<Dealer_Profile />} />
-        <Route path="/cart" element={<Cart />} />
+          <Route path="/product-detail" element={<Product_Detail />} />
+          <Route
+            path="/dealer-product-list"
+            element={<Dealer_Product_List />}
+          />
+          <Route path="/user-product-list" element={<User_Product_List />} />
+          <Route path="/add-product" element={<Add_Product />} />
+          <Route path="/view-product/:id" element={<View_Product />} />
+          <Route path="/dealer-profile" element={<Dealer_Profile />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
-        <Footer />
+      <Footer />
       <Toaster position="top-right" reverseOrder={false} />
     </>
   );

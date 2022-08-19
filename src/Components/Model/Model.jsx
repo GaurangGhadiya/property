@@ -16,9 +16,6 @@ import {
 } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -51,6 +48,7 @@ const style = {
   p: 4,
 };
 
+// ==============Tab panel===================//
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -98,8 +96,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     password: "",
   });
 
-  let navigate = useNavigate();
-
+  // ==============Sign Up===================//
   const handleSignUp = (e) => {
     const { name, value } = e.target;
     if (name == "otherContacted") {
@@ -113,6 +110,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
     setSignIn({ ...signIn, [name]: value });
   };
 
+  // ==============User Register===================//
   const userRegister = () => {
     console.log("signUp", signUp);
     if (signUp.password !== signUp?.confirmPassword) {
@@ -150,19 +148,6 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
           localStorage.setItem("userData", JSON.stringify(res?.data?.data));
           handleClose();
           window.location.pathname = "/";
-          // navigate("")
-          // createUserWithEmailAndPassword(auth, signUp.email, signUp.password)
-          //   .then(async (res) => {
-          //     console.log(res);
-          //     const user = res?.user;
-          //     await updateProfile(user, { displayName: signUp?.name });
-          //     handleClose();
-          //     SuccessToast("Sign Up sucessFull!");
-          //   })
-          //   .catch((e) => {
-          //     console.log(e);
-          //     ErrorToast("something want wrong");
-          //   });
         })
         .catch((e) => {
           ErrorToast(e?.data?.message);
@@ -172,6 +157,8 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
       ErrorToast("All Fields are Requried!");
     }
   };
+
+  // ==============User SignIn===================//
   const userSignIn = () => {
     // console.log("signUp", signUp);
     if (signIn.email && signIn.password) {
@@ -187,28 +174,6 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
           localStorage.setItem("userData", JSON.stringify(res?.data?.data));
           handleClose();
           window.location.pathname = "/";
-          // signInWithEmailAndPassword(
-          //   joinLogin === "User" ? auth : dealerauth,
-          //   signIn.email,
-          //   signIn.password
-          // )
-          //   .then(async (res) => {
-          //     console.log(res);
-          //     // const user = res?.user
-          //     //    await updateProfile(user, {displayName :signUp?.name})
-          //     handleClose();
-          //     SuccessToast("Sign In sucessFull!");
-          //   })
-          //   .catch((e) => {
-          //     //  console.log("www",e);
-          //     ErrorToast(
-          //       e.message === "Firebase: Error (auth/user-not-found)."
-          //         ? "You are not registerd. Please register yourself! "
-          //         : e.message === "Firebase: Error (auth/wrong-password)."
-          //         ? "Email and Password are not matched!"
-          //         : "Something want wrong!"
-          //     );
-          //   });
         })
         .catch((e) => {
           ErrorToast(e?.data?.message);
@@ -218,57 +183,12 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
       ErrorToast("All Fields are Requried!");
     }
   };
-  const handleChange2 = (newValue) => {
-    setValue2(newValue);
-  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const joinus = (e) => {
-    console.log("eee", e.target.value);
-    setJoin(e.target.value);
-  };
-  const joinus2 = (e) => {
-    console.log("eee", e.target.value);
-    setJoinLogin(e.target.value);
-  };
-  const DelarOpen = () => {
-    if (signUp.password !== signUp?.confirmPassword) {
-      ErrorToast("Password are not matched!");
-    } else if (signUp?.number?.length != 10) {
-      ErrorToast("Phone number should be 10 digits");
-    } else if (signUp?.pincode?.length != 6) {
-      ErrorToast("Pincode should be 6 digits");
-    } else if (
-      signUp.email &&
-      signUp.password &&
-      signUp?.name &&
-      signUp?.number &&
-      signUp.password === signUp?.confirmPassword &&
-      signUp?.city &&
-      signUp?.state &&
-      signUp?.pincode
-    ) {
-      createUserWithEmailAndPassword(dealerauth, signUp.email, signUp.password)
-        .then(async (res) => {
-          console.log("delear sign up", res);
-          const user = res?.user;
-          await updateProfile(user, { displayName: signUp?.name });
-          setToggle(1);
 
-          //   handleClose();
-          SuccessToast("Dealer Sign Up sucessFull!");
-        })
-        .catch((e) => {
-          console.log(e);
-          ErrorToast("Something want wrong");
-        });
-    } else {
-      ErrorToast("All Fields are Requried!");
-    }
-  };
-
+  // ==============Google Login===================//
   const responseGoogle = (response) => {
     console.log(response);
     const body = {
@@ -290,18 +210,9 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
       });
   };
 
-  const googleLogin = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(joinLogin === "User" ? auth : dealerauth, provider)
-      .then((res) => {
-        console.log("google login", res);
-        handleClose();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
+
+  // ==============Facebook Login===================//
   const responseFacebook = async (response) => {
     console.log(response);
     const body = {
@@ -320,17 +231,7 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
         ErrorToast(e?.data?.message);
       });
   };
-  const fbLogin = () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(dealerauth, provider)
-      .then((res) => {
-        console.log("fb login", res);
-        handleClose();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+
 
   return (
     <div className="modal">
@@ -441,17 +342,18 @@ const Model = ({ open, setOpen, handleOpen, handleClose }) => {
                     cookiePolicy={"single_host_origin"}
                   />
                   <ReactFacebookLogin
-                  render={(renderProps) => {
-                    <Button className="" onClick={renderProps.onClick}>
-                      <img
-                        className="me-2"
-                        src={
-                          process.env.PUBLIC_URL + "/Images/facebook (1) 1.png"
-                        }
-                      />
-                      Continue with Facebook
-                    </Button>;
-                  }}
+                    render={(renderProps) => {
+                      <Button className="" onClick={renderProps.onClick}>
+                        <img
+                          className="me-2"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/Images/facebook (1) 1.png"
+                          }
+                        />
+                        Continue with Facebook
+                      </Button>;
+                    }}
                     appId="663969168653765"
                     autoLoad={false}
                     fields="name,email,picture"
