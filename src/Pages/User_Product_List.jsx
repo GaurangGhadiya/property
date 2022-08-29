@@ -1,5 +1,5 @@
 import { Button, Checkbox, Container, FormControlLabel, Grid, Link, Pagination, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiSearch } from 'react-icons/bi';
 import { MdOutlineMyLocation } from 'react-icons/md';
 import Breadcrumb from '../Components/Breadcrumbs/Breadcrumb';
@@ -20,6 +20,9 @@ const Export_country = ["United States", "Canada", "Italy", "Netherlands", "Belg
 const Supplier_country = ["United States", "Canada", "Italy", "Netherlands", "Belgium", "Germany", "Georgia", "Kenya"]
 const Product_Certification = ["E/E-MARK", "CE", "CCC", "ROHS", "CSA"]
 const User_Product_List = () => {
+    useEffect(() => {
+        window.scrollTo(0,0)
+      }, [])
     return (
         <div className='user_car_list'>
             <div className='header_breadcrumb'>
