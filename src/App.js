@@ -64,9 +64,9 @@ function App() {
       <Header isAuth={isAuth} logout={logout} />
       <Routes>
         <Route path="/" element={<Home />} />
+          <Route path="/user-product-list" element={<User_Product_List />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product-detail" element={<Product_Detail />} />
-          <Route path="/user-product-list" element={<User_Product_List />} />
           <Route
             path="/dealer-product-list"
             element={<Dealer_Product_List />}
