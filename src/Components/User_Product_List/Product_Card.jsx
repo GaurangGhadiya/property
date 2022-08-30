@@ -1,16 +1,16 @@
 import React from 'react'
 
-const Product_Card = () => {
+const Product_Card = ({data}) => {
     return (
         <div>
             <div class="card" >
-                <img src={process.env.PUBLIC_URL + '/Images/card_car.png'} class="card-img-top" alt="..." />
+                <img src={data?.image[0]} class="card-img-top h_350" alt="..." />
                 <img className='like_btn' src={process.env.PUBLIC_URL + '/Images/heart.svg'}  />
                 <div class="card-body">
-                    <p class="card-text">Raysince China supplier mini vehicle 2021 Hot sales smart electric cars.</p>
-                    <div className="d-flex justify-content-between">
+                    <p class="card-text">{data?.title}</p>
+                    <div className="d-flex justify-content-between flex-wrap">
                         <div className="price">
-                            <h4>₹12,000.00</h4>
+                            <h4>₹{data?.price}.00</h4>
                             <h6>1 Set (Min. Order)</h6>
                         </div>
                         <div className="bugde">

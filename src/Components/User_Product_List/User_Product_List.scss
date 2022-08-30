@@ -76,6 +76,7 @@
 .user_car_list .card {
     padding: 7px;
     position: relative;
+    height: 100%;
 }
 
 .user_car_list .card .like_btn {
@@ -95,7 +96,9 @@
 .user_car_list .card-body {
     padding: 1rem 0 0 0 !important;
 }
-
+.h_350{
+    height: 250px;
+}
 .user_car_list .card-text {
     font-weight: 400;
     font-size: 16px;

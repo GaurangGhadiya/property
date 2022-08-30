@@ -6,6 +6,9 @@ import "./Top_Car.scss"
 
 const Top_Car = ({data}) => {
     const navigate = useNavigate()
+    console.log('====================================');
+    console.log("datadatadatadata",data);
+    console.log('====================================');
     return (
         <div>
             {data?.product?.length !== 0 && <Container>
@@ -14,7 +17,7 @@ const Top_Car = ({data}) => {
                     <h1>{data?.name}</h1>
                     <div className="border_bottom"></div>
                     </div>
-                    <Button onClick={() => navigate("/user-product-list")}>View All</Button>
+                    <Button onClick={() => navigate("/user-product-list",{state:{id:data?._id}})}>View All</Button>
                 </div>
                 <Grid container spacing={2} className="cards">
                     {data?.product?.map(e => <Grid item sx={12} sm={6} md={3}><Card data={e}/></Grid>)}

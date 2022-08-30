@@ -7,6 +7,8 @@ import "../Components/User_Product_List/User_Product_List.scss"
 import { Slider } from 'antd';
 import 'antd/dist/antd.css';
 import Product_Card from '../Components/User_Product_List/Product_Card';
+import { ApiPostNoAuth } from '../Api/Api';
+import { useLocation } from 'react-router-dom';
 
 const breadcrumb = [
     <Link underline="hover" key="1" href="/">
@@ -20,9 +22,24 @@ const Export_country = ["United States", "Canada", "Italy", "Netherlands", "Belg
 const Supplier_country = ["United States", "Canada", "Italy", "Netherlands", "Belgium", "Germany", "Georgia", "Kenya"]
 const Product_Certification = ["E/E-MARK", "CE", "CCC", "ROHS", "CSA"]
 const User_Product_List = () => {
+    const location = useLocation()
+    const [data, setData] = useState()
     useEffect(() => {
-        window.scrollTo(0,0)
-      }, [])
+      window.scrollTo(0,0)
+      const body = {
+            page:1,
+            limit:10,
+            subCategoryId:location.state.id
+      }
+    ApiPostNoAuth("user/subCategory_wise_product",body)
+            .then((res) => {
+                console.log(res,"res");
+                setData(res?.data?.data?.product_data)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+  }, [])
     return (
         <div className='user_car_list'>
             <div className='header_breadcrumb'>
@@ -292,24 +309,7 @@ const User_Product_List = () => {
                             </div>
                     </Grid>
                     <Grid item container spacing={4} xs={12} sm={9} className="mt-0">
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
-                        <Grid item xs={12} sm={6} md={4}><Product_Card /></Grid>
+                        {data?.map(e => <Grid item xs={12} sm={6} md={4}><Product_Card data={e}/></Grid>)}
                         <Grid item xs={12} sm={12} md={12}>
                             <div className="product_pagination w-100 mt-0 ">
                                 <h6>Page 1 to 20</h6>
