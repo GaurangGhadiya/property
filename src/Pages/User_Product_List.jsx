@@ -29,7 +29,7 @@ const User_Product_List = () => {
       const body = {
             page:1,
             limit:10,
-            subCategoryId:location.state.id ?location.state.id : ""
+            subCategoryId:location?.state?.id ? location?.state?.id : ""
       }
     ApiPostNoAuth("user/subCategory_wise_product",body)
             .then((res) => {

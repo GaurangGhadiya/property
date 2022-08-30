@@ -66,11 +66,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/product-detail" element={<Product_Detail />} />
+          <Route path="/user-product-list" element={<User_Product_List />} />
           <Route
             path="/dealer-product-list"
             element={<Dealer_Product_List />}
           />
-          <Route path="/user-product-list" element={<User_Product_List />} />
           <Route path="/add-product" element={<Add_Product />} />
           <Route path="/view-product/:id" element={<View_Product />} />
           <Route path="/dealer-profile" element={<Dealer_Profile />} />
