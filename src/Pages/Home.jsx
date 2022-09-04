@@ -64,7 +64,7 @@ const Home = () => {
                       <div className='Card'>
                         <img className='' src={e?.image[0]} />
                         <h5>{e?.title}</h5>
-                        <span>5 km from downtown - 20 km from airport</span>
+                        {/* <span>5 km from downtown - 20 km from airport</span> */}
                       </div>
                     </Grid>}
                   </>
@@ -82,7 +82,7 @@ const Home = () => {
       <Top_Car data={data4} /> */}
       <Section />
       {/* <Top_Car data={data5} /> */}
-      <Our_Service />
+      {/* <Our_Service /> */}
       <Download_App />
     </>
   )

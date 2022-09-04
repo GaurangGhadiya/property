@@ -5,7 +5,7 @@ const Card = ({data}) => {
     <div className='Card'>
          <img className='' src={data?.image[0]} />
          <h5>{data?.title}</h5>
-         <span>5 km from downtown - 20 km from airport</span>
+         {/* <span>5 km from downtown - 20 km from airport</span> */}
     </div>
   )
 }
