@@ -24,21 +24,26 @@ const Product_Certification = ["E/E-MARK", "CE", "CCC", "ROHS", "CSA"]
 const User_Product_List = () => {
     const location = useLocation()
     const [data, setData] = useState()
+    const [search, setSearch] = useState(location?.state?.search ? location?.state?.search :"")
+    const getData = () => {
+        const body = {
+            search:search,
+                page:1,
+                limit:10,
+                subCategoryId:location?.state?.id ? location?.state?.id : ""
+          }
+        ApiPostNoAuth("user/subCategory_wise_product",body)
+                .then((res) => {
+                    console.log(res,"res");
+                    setData(res?.data?.data?.product_data)
+                })
+                .catch(async (err) => {
+                    console.log(err);
+                });
+    }
     useEffect(() => {
       window.scrollTo(0,0)
-      const body = {
-            page:1,
-            limit:10,
-            subCategoryId:location?.state?.id ? location?.state?.id : ""
-      }
-    ApiPostNoAuth("user/subCategory_wise_product",body)
-            .then((res) => {
-                console.log(res,"res");
-                setData(res?.data?.data?.product_data)
-            })
-            .catch(async (err) => {
-                console.log(err);
-            });
+      getData()
   }, [])
     return (
         <div className='user_car_list'>
@@ -53,12 +58,12 @@ const User_Product_List = () => {
                         <select name="" id="">
                             <option value="Category">Category</option>
                         </select>
-                        <TextField hiddenLabel id="outlined-basic" placeholder='Serach product' variant="outlined" />
+                        <TextField hiddenLabel id="outlined-basic" placeholder='Serach product' variant="outlined" value={search} onChange={(e) => setSearch(e?.target?.value)}/>
                         <div className="loc_icon">
                             <MdOutlineMyLocation />
                         </div>
                         <div className="ser_btn">
-                            <Button><BiSearch /> Search</Button>
+                            <Button onClick={getData}><BiSearch /> Search</Button>
                         </div>
                     </div>
                 </div>
