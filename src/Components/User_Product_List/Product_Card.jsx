@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Product_Card = ({data}) => {
     return (
         <div>
@@ -13,9 +12,9 @@ const Product_Card = ({data}) => {
                             <h4>₹{data?.price}.00</h4>
                             <h6>1 Set (Min. Order)</h6>
                         </div>
-                        <div className="bugde">
+                        {/* <div className="bugde">
                             <p>Sample Available</p>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="add_cart">
                         <button className='outline_btn'>
@@ -27,5 +26,4 @@ const Product_Card = ({data}) => {
         </div>
     )
 }
-
 export default Product_Card
