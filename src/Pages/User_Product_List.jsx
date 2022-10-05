@@ -99,8 +99,7 @@ const User_Product_List = () => {
             <Container>
                 <div className="mt-2">
                     <div className="phone">
-                        <select value={SubCategoryID} onChange={(y)
- => setSubCategoryID(y?.target.value)} id="">
+                        <select value={SubCategoryID} onChange={(y) => setSubCategoryID(y?.target.value)} id="">
                          
                             {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
                         </select>
