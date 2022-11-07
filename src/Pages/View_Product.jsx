@@ -29,10 +29,27 @@ const View_Product = () => {
       ApiGet(`dealer/product/${id}`)
           .then((res) => {
               console.log(res);
-              setData(res?.data?.data)
+              if(res?.data?.data?._id){
+
+                setData(res?.data?.data)
+              }
+             
+             
           })
           .catch(async (err) => {
               console.log(err);
+              ApiGet(`user/product/${id}`)
+              .then((res) => {
+                  console.log(res);
+                  if(res?.data?.data?._id){
+
+                    setData(res?.data?.data)
+                  }
+                  
+              }).catch(async (err) => {
+                console.log(err);
+            });
+            
           });
   }, [])
   return (

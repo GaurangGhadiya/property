@@ -62,7 +62,9 @@ const Home = () => {
                   <>
                     {i < 4 && <Grid item sx={12} sm={6} md={3}>
                       <div className='Card'>
-                        <img className='' src={e?.image[0]} />
+                        <img className='' src={e?.image[0]} onClick={() => navigate(`/view-product/${e?._id}`, {
+                                                    state: { id: e?._id,image:e?.image }
+                                                })}/>
                         <h5>{e?.title}</h5>
                         {/* <span>5 km from downtown - 20 km from airport</span> */}
                       </div>

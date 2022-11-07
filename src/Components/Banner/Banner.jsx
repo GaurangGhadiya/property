@@ -9,6 +9,14 @@ import { useNavigate } from 'react-router-dom';
 const Banner = () => {
   const navigate = useNavigate()
   const [search, setSearch] = useState("")
+
+  const handleSearch = () => {
+    navigate("/user-product-list",{
+      state:{
+        search:search
+      }
+     })
+  }
   return (
     <>
     <div className='home_banner'>
@@ -17,22 +25,20 @@ const Banner = () => {
           <h6>View price changes across cities, location & more</h6>
           <h1>Search for products & find verified sellers near you</h1>
           <div className="input_filed mt-2">
+              <form onSubmit={handleSearch}>
             <div className="phone">
-              <select name="" id="" className='text-black'>
+              {/* <select name="" id="" className='text-black'>
                 <option value="Category">Category</option>
-              </select>
-              <TextField hiddenLabel id="outlined-basic" placeholder='Serach product' variant="outlined" value={search} onChange={(e) => setSearch(e?.target?.value)}/>
+              </select> */}
+           <TextField hiddenLabel id="outlined-basic" placeholder='Search product' variant="outlined" value={search} onChange={(e) => setSearch(e?.target?.value)}/>
               <div className="loc_icon">
               <MdOutlineMyLocation />
               </div>
              <div className="ser_btn">
-             <Button onClick={() => navigate("/user-product-list",{
-              state:{
-                search:search
-              }
-             })}><BiSearch /> Search</Button>
+             <Button type="submit" ><BiSearch /> Search</Button>
              </div>
             </div>
+           </form>
           </div>
 
           <span>0% Brokerage, 100% Transparency</span>

@@ -37,7 +37,31 @@ const User_Product_List = () => {
     const priceChange = (e) => {
         getData(e)
     }
+    const getData2 = (e,p) => {
+        e?.preventDefault()
+        const body = {
+            search: search,
+            page: 1,
+            limit: 10,
+            subCategoryId: SubCategoryID ? SubCategoryID : location?.state?.id ? location?.state?.id : "",
+            bodyTypeId: bodyTypeID,
+            seating: seating,
+            fuel: fuel,
+            minPrice: p ? p[0] : "",
+            maxPrice: p ? p[1] : ""
+        }
+        ApiPostNoAuth("user/subCategory_wise_product", body)
+            .then((res) => {
+                console.log(res, "res");
+                setData(res?.data?.data?.product_data)
+                setDefalutValue(res?.data?.data?.maxMinPriceOfProduct)
+            })
+            .catch(async (err) => {
+                console.log(err);
+            });
+    }
     const getData = (p) => {
+    
         const body = {
             search: search,
             page: 1,
@@ -70,7 +94,7 @@ const User_Product_List = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         getData()
-    }, [bodyTypeID, seating, fuel])
+    },[])
     useEffect(async () => {
         await ApiGet(`/user/get_subCategory`)
             .then((res) => {
@@ -89,6 +113,14 @@ const User_Product_List = () => {
                 console.log(err);
             });
     }, [])
+
+    // const handleSearch = () => {
+    //     navigate("/user-product-list",{
+    //       state:{
+    //         search:search
+    //       }
+    //      })
+    //   }
     return (
         <div className='user_car_list'>
             <div className='header_breadcrumb'>
@@ -98,19 +130,21 @@ const User_Product_List = () => {
             </div>
             <Container>
                 <div className="mt-2">
-                    <div className="phone">
-                        <select value={SubCategoryID} onChange={(y) => setSubCategoryID(y?.target.value)} id="">
+                 <form onSubmit={getData2}>
+                 <div className="phone">
+                        {/* <select value={SubCategoryID} onChange={(y) => setSubCategoryID(y?.target.value)} id="">
                          
                             {subCategory.map(e => <option value={e?._id}>{e?.name}</option>)}
-                        </select>
-                        <TextField hiddenLabel id="outlined-basic" placeholder='Serach product' variant="outlined" value={search} onChange={(e) => setSearch(e?.target?.value)} />
+                        </select> */}
+                        <TextField hiddenLabel id="outlined-basic" placeholder='Search product' variant="outlined" value={search} onChange={(e) => setSearch(e?.target?.value)} />
                         <div className="loc_icon">
                             <MdOutlineMyLocation />
                         </div>
                         <div className="ser_btn">
-                            <Button onClick={getData}><BiSearch /> Search</Button>
+                            <Button type="submit"><BiSearch /> Search</Button>
                         </div>
                     </div>
+                 </form>
                 </div>
                 <Grid container spacing={4}>
                     <Grid item xs={12} sm={3}>
@@ -176,8 +210,15 @@ const User_Product_List = () => {
                                     </button>
                                 </h2>
                                 <div id="collapseeight" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <TextField hiddenLabel id="outlined-basic" placeholder='Search seating' variant="outlined" value={seating} onChange={(e) => setSeating(e?.target?.value)} />
+                                    <div class="accordion-body ">
+                                    <select value={seating}  name="seating" className='select1' onChange={(e) => setSeating(e?.target?.value)} id="">
+                                    <option value="">Select</option>
+                                    {/* {category.map(e => <option value={e?._id}>{e?.name}</option>)} */}
+                                    <option value={2}>{2}</option>
+                                    <option value={5}>{5}</option>
+                                    <option value={7}>{7}</option>
+                                </select>
+                                        {/* <TextField hiddenLabel id="outlined-basic" placeholder='Search seating' variant="outlined" value={seating} onChange={(e) => setSeating(e?.target?.value)} /> */}
                                     </div>
                                 </div>
                             </div>
@@ -188,11 +229,29 @@ const User_Product_List = () => {
                                     </button>
                                 </h2>
                                 <div id="collapseei" class="accordion-collapse collapse" aria-labelledby="headingThr" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <TextField hiddenLabel id="outlined-basic" placeholder='Search fuel' variant="outlined" value={fuel} 
-onChange={(e) => setFuel(e?.target?.value)} />
+                                    <div class="accordion-body ">
+                                    <select value={fuel}  name="fuel" className='select1' onChange={(e) => setFuel(e?.target?.value)} id="">
+                                    <option value="">Select</option>
+                                    {/* {category.map(e => <option value={e?._id}>{e?.name}</option>)} */}
+                               
+                                    <option value={"Petrol"}>Petrol</option>
+                                    <option value={"Diesel"}>Diesel</option>
+                                </select>
+                                        {/* <TextField hiddenLabel id="outlined-basic" placeholder='Search fuel' variant="outlined" value={fuel} 
+onChange={(e) => setFuel(e?.target?.value)} /> */}
                                     </div>
                                 </div>
+<div style={{display : "flex", justifyContent : "center", margin : "10px 0px 10px 0px"}}>
+<Button
+                      onClick={getData}
+                      className="login_btn"
+                      key={6}
+                      sx={{ color: "black" }}
+                    >
+                      
+                      Apply Filter
+                    </Button>
+</div>
                             </div>
                             {/* <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingThree">

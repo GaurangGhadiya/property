@@ -32,7 +32,7 @@ function a11yProps(index) {
     };
 }
 
-const Add_Product = () => {
+const       Add_Product = () => {
     const navigate = useNavigate()
     const [editData, setEditData] = useState({})
     const location = useLocation();
@@ -303,6 +303,8 @@ const Add_Product = () => {
                 });
         }
     }
+
+    console.log("data",data)
     // ======update Product & update product API ============ //
     const submitUpdateData = async () => {
         window.scroll(0,0)
@@ -668,7 +670,14 @@ const Add_Product = () => {
                             <Grid item sx={12} sm={12} md={3}>
                     <div className="input_filed">
                                 <label htmlFor="seating">Seating</label>
-                                <TextField
+                                <select value={data?.seating}  name="seating" onChange={handleChange} id="">
+                                    <option value="">Select</option>
+                                    {/* {category.map(e => <option value={e?._id}>{e?.name}</option>)} */}
+                                    <option value={2}>{2}</option>
+                                    <option value={5}>{5}</option>
+                                    <option value={7}>{7}</option>
+                                </select>
+                                {/* <TextField
                                     type="number"
                                     hiddenLabel
                                     id="Title"
@@ -676,13 +685,18 @@ const Add_Product = () => {
                                     name="seating"
                                     value={data?.seating}
                                     onChange={handleChange}
-                                />
+                                /> */}
                             </div>
                             </Grid>
                             <Grid item sx={12} sm={12} md={3}>
                     <div className="input_filed">
                                 <label htmlFor="fuel">Fuel Type</label>
-                                <TextField
+                                <select value={data?.fuel} name="fuel" onChange={handleChange} id="">
+                                    <option value="">Select</option>
+                                    <option value={"Petrol"}>Petrol</option>
+                                    <option value={"Diesel"}>Diesel</option>
+                                </select>
+                                {/* <TextField
                                     type="text"
                                     hiddenLabel
                                     id="Title"
@@ -690,7 +704,7 @@ const Add_Product = () => {
                                     name="fuel"
                                     value={data?.fuel}
                                     onChange={handleChange}
-                                />
+                                /> */}
                             </div>
                             </Grid>
                             <Grid item sx={12} sm={12} md={3}>

@@ -1,8 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 const Product_Card = ({data}) => {
+    const navigate = useNavigate()
     return (
         <div>
-            <div class="card" >
+            <div class="card" onClick={() => navigate(`/view-product/${data?._id}`, {
+                                                    state: { id: data?._id,image:data?.image }
+                                                })}>
                 <img src={data?.image[0]} class="card-img-top h_350" alt="..." />
                 <img className='like_btn' src={process.env.PUBLIC_URL + '/Images/heart.svg'}  />
                 <div class="card-body">

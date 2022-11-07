@@ -65,14 +65,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
           <Route path="/user-product-list" element={<User_Product_List />} />
-        <Route element={<ProtectedRoutes />}>
           <Route path="/product-detail" element={<Product_Detail />} />
+          <Route path="/view-product/:id" element={<View_Product />} />
+        <Route element={<ProtectedRoutes />}>
           <Route
             path="/dealer-product-list"
             element={<Dealer_Product_List />}
           />
           <Route path="/add-product" element={<Add_Product />} />
-          <Route path="/view-product/:id" element={<View_Product />} />
           <Route path="/dealer-profile" element={<Dealer_Profile />} />
           <Route path="/cart" element={<Cart />} />
         </Route>

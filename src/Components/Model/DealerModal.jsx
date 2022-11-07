@@ -364,7 +364,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                     //   useOneTap
                       />
                     </GoogleOAuthProvider> */}
-                    <GoogleLogin
+                    {/* <GoogleLogin
                       clientId={process.env.REACT_APP_GOOGLE_LOGIN}
                       buttonText="Login"
                       render={(renderProps) => (
@@ -372,10 +372,10 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                           onClick={renderProps.onClick}
                           disabled={renderProps.disabled}
                         >
-                          {/* <img
+                          <img
                           className="me-2"
                           src={process.env.PUBLIC_URL + "/Images/search 1.png"}
-                        /> */}
+                        />
                           <FcGoogle size={20} className="me-2" />
                           Continue with Google
                         </Button>
@@ -384,8 +384,8 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
-                    />
-                    <FacebookLogin
+                    /> */}
+                    {/* <FacebookLogin
                       appId="663969168653765"
                       autoLoad={false}
                       fields="name,email,picture"
@@ -396,7 +396,7 @@ const DealerModal = ({ open, setOpen, handleOpen, handleClose }) => {
                         <FaFacebook color="blue" size={20} className="me-2" />
                       }
                       textButton="Continue with Facebook"
-                    />
+                    /> */}
 
                     {/* <Button className="" onClick={fbLogin}>
                       <img
