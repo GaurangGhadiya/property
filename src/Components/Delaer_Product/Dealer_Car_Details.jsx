@@ -81,6 +81,12 @@ const Dealer_Car_Details = ({data,image}) => {
                     {data?.protection?.refundPolicy &&  <h6><img className='me-2' src={process.env.PUBLIC_URL + '/Images/Group 499.png'} />Refund Policy</h6>}
                   </td>
                 </tr>
+                <tr>
+                  <td>Fuel Type:</td>
+                  <td>
+                    {data?.protection?.fuel ?? "Petrol"}
+                    </td>
+                </tr>
                 {/* <tr>
                   <td>Share:</td>
                   <td className='share_icon'>
